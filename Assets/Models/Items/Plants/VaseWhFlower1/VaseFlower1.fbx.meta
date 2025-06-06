@@ -1,0 +1,262 @@
+fileFormatVersion: 2
+guid: 6ddd0d2d430e9154084b8a2e98a99b60
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable:
+  - first:
+      74: 947853169619996271
+    second: Object002_1|Box001|Take 001|BaseLayer
+  - first:
+      74: -3565088566086749266
+    second: Object002_1|Cube_1|Take 001|BaseLayer
+  - first:
+      74: -7333154551088618762
+    second: Object002_1|Cube_2|Take 001|BaseLayer
+  - first:
+      74: -7510424641731557466
+    second: Object002_1|Cube_3|Take 001|BaseLayer
+  - first:
+      74: 3331056424667483226
+    second: Object002_1|Cube|Take 001|BaseLayer
+  - first:
+      74: 3228888224997377646
+    second: Object002_1|flower_01_1|Take 001|BaseLayer
+  - first:
+      74: -5837882888656702264
+    second: Object002_1|Object002_1|Take 001|BaseLayer
+  - first:
+      74: -1495006357690971449
+    second: Object002_1|Pinkvase|Take 001|BaseLayer
+  - first:
+      74: -9095407896169800444
+    second: Object002_1|Plane001|Take 001|BaseLayer
+  - first:
+      74: 5852270378175955753
+    second: Object002_1|Sphere001|Take 001|BaseLayer
+  - first:
+      74: 6070877466848689720
+    second: Object002_1|Sweep_NURBS_1|Take 001|BaseLayer
+  - first:
+      74: 1804866251653111838
+    second: Object002_1|Tube001|Take 001|BaseLayer
+  - first:
+      74: 2507747364963180531
+    second: Object002_1|Tube002|Take 001|BaseLayer
+  - first:
+      74: 2937698526037931775
+    second: Sphere001|Box001|Take 001|BaseLayer
+  - first:
+      74: -7029413363889027423
+    second: Sphere001|Cube_1|Take 001|BaseLayer
+  - first:
+      74: 6778368233064807049
+    second: Sphere001|Cube_2|Take 001|BaseLayer
+  - first:
+      74: -1450001043634254305
+    second: Sphere001|Cube_3|Take 001|BaseLayer
+  - first:
+      74: -1175306847927618781
+    second: Sphere001|Cube|Take 001|BaseLayer
+  - first:
+      74: -7401512513811119875
+    second: Sphere001|flower_01_1|Take 001|BaseLayer
+  - first:
+      74: -1997363763785187541
+    second: Sphere001|Object002_1|Take 001|BaseLayer
+  - first:
+      74: 2079324776453397801
+    second: Sphere001|Pinkvase|Take 001|BaseLayer
+  - first:
+      74: 1688065826683001976
+    second: Sphere001|Plane001|Take 001|BaseLayer
+  - first:
+      74: 8735770135929394676
+    second: Sphere001|Sphere001|Take 001|BaseLayer
+  - first:
+      74: 7988119727804699553
+    second: Sphere001|Sweep_NURBS_1|Take 001|BaseLayer
+  - first:
+      74: 785919078085542371
+    second: Sphere001|Tube001|Take 001|BaseLayer
+  - first:
+      74: -7165512639689847209
+    second: Sphere001|Tube002|Take 001|BaseLayer
+  - first:
+      74: -8561399140060694111
+    second: Sweep_NURBS_1|Box001|Take 001|BaseLayer
+  - first:
+      74: 1624846903242642149
+    second: Sweep_NURBS_1|Cube_1|Take 001|BaseLayer
+  - first:
+      74: -2256050016831653320
+    second: Sweep_NURBS_1|Cube_2|Take 001|BaseLayer
+  - first:
+      74: -8522460057899488252
+    second: Sweep_NURBS_1|Cube_3|Take 001|BaseLayer
+  - first:
+      74: -4177050248325676967
+    second: Sweep_NURBS_1|Cube|Take 001|BaseLayer
+  - first:
+      74: 3438463224625324881
+    second: Sweep_NURBS_1|flower_01_1|Take 001|BaseLayer
+  - first:
+      74: -2861569659444865033
+    second: Sweep_NURBS_1|Object002_1|Take 001|BaseLayer
+  - first:
+      74: 5131782574426907577
+    second: Sweep_NURBS_1|Pinkvase|Take 001|BaseLayer
+  - first:
+      74: -8417313079836963713
+    second: Sweep_NURBS_1|Plane001|Take 001|BaseLayer
+  - first:
+      74: 4576384692283250361
+    second: Sweep_NURBS_1|Sphere001|Take 001|BaseLayer
+  - first:
+      74: -6288975326636971120
+    second: Sweep_NURBS_1|Sweep_NURBS_1|Take 001|BaseLayer
+  - first:
+      74: 3335636938823676348
+    second: Sweep_NURBS_1|Tube001|Take 001|BaseLayer
+  - first:
+      74: -3679223838726768678
+    second: Sweep_NURBS_1|Tube002|Take 001|BaseLayer
+  - first:
+      74: -4994955655370756090
+    second: flower_01_1|Box001|Take 001|BaseLayer
+  - first:
+      74: -2980167106597659981
+    second: flower_01_1|Cube_1|Take 001|BaseLayer
+  - first:
+      74: -5507963596070411575
+    second: flower_01_1|Cube_2|Take 001|BaseLayer
+  - first:
+      74: 3955328053133135567
+    second: flower_01_1|Cube_3|Take 001|BaseLayer
+  - first:
+      74: -1744301286304212016
+    second: flower_01_1|Cube|Take 001|BaseLayer
+  - first:
+      74: 5602606079446045006
+    second: flower_01_1|flower_01_1|Take 001|BaseLayer
+  - first:
+      74: 3209449669254863144
+    second: flower_01_1|Object002_1|Take 001|BaseLayer
+  - first:
+      74: 3315576558056689095
+    second: flower_01_1|Pinkvase|Take 001|BaseLayer
+  - first:
+      74: 2701435248107350236
+    second: flower_01_1|Plane001|Take 001|BaseLayer
+  - first:
+      74: -2879767231932718776
+    second: flower_01_1|Sphere001|Take 001|BaseLayer
+  - first:
+      74: 3334175958738686673
+    second: flower_01_1|Sweep_NURBS_1|Take 001|BaseLayer
+  - first:
+      74: 3060164505315083968
+    second: flower_01_1|Tube001|Take 001|BaseLayer
+  - first:
+      74: -2226567337062572079
+    second: flower_01_1|Tube002|Take 001|BaseLayer
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

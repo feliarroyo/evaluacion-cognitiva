@@ -1,0 +1,220 @@
+fileFormatVersion: 2
+guid: ed2ff34ce1b426e49b8f549760767b8f
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable:
+  - first:
+      74: -231691423127723038
+    second: Decorative set035.008|Box001|Take 001|BaseLayer
+  - first:
+      74: -5081566447015086337
+    second: Decorative set035.008|Cube_1|Take 001|BaseLayer
+  - first:
+      74: -3061540977537560838
+    second: Decorative set035.008|Cube_2|Take 001|BaseLayer
+  - first:
+      74: 5985106053846184717
+    second: Decorative set035.008|Cube_3|Take 001|BaseLayer
+  - first:
+      74: 3738890173182765770
+    second: Decorative set035.008|Cube|Take 001|BaseLayer
+  - first:
+      74: -8063497796619239372
+    second: Decorative set035.008|Decorative set035.008|Take 001|BaseLayer
+  - first:
+      74: -2910329888655342216
+    second: Decorative set035.008|Decorative set035.009|Take 001|BaseLayer
+  - first:
+      74: -8379385940052009147
+    second: Decorative set035.008|Decorative set035.012|Take 001|BaseLayer
+  - first:
+      74: 4796367736286664226
+    second: Decorative set035.008|Decorative set035.015|Take 001|BaseLayer
+  - first:
+      74: 373151355704551924
+    second: Decorative set035.008|Decorative set035.016|Take 001|BaseLayer
+  - first:
+      74: -885458190829265847
+    second: Decorative set035.008|Decorative set039.011|Take 001|BaseLayer
+  - first:
+      74: 4472859805973311999
+    second: Decorative set035.008|flower_01_1|Take 001|BaseLayer
+  - first:
+      74: -3910724431194362462
+    second: Decorative set035.008|Object002_1|Take 001|BaseLayer
+  - first:
+      74: 6306334252997660501
+    second: Decorative set035.008|Pinkvase|Take 001|BaseLayer
+  - first:
+      74: 426421104090888431
+    second: Decorative set035.008|Plane001|Take 001|BaseLayer
+  - first:
+      74: 1393571028593799216
+    second: Decorative set035.008|Sphere001|Take 001|BaseLayer
+  - first:
+      74: 3024267328492720481
+    second: Decorative set035.008|Sweep_NURBS_1|Take 001|BaseLayer
+  - first:
+      74: -2905210673938119112
+    second: Decorative set035.008|Tube001|Take 001|BaseLayer
+  - first:
+      74: -466358091293431456
+    second: Decorative set035.008|Tube002|Take 001|BaseLayer
+  - first:
+      74: 696522491339528688
+    second: Decorative set035.009|Box001|Take 001|BaseLayer
+  - first:
+      74: 2661950826616166831
+    second: Decorative set035.009|Cube_1|Take 001|BaseLayer
+  - first:
+      74: 4816992934756014872
+    second: Decorative set035.009|Cube_2|Take 001|BaseLayer
+  - first:
+      74: 2904939828562844730
+    second: Decorative set035.009|Cube_3|Take 001|BaseLayer
+  - first:
+      74: -1598606587692740102
+    second: Decorative set035.009|Cube|Take 001|BaseLayer
+  - first:
+      74: -7439630700029088494
+    second: Decorative set035.009|Decorative set035.008|Take 001|BaseLayer
+  - first:
+      74: 2581371074444746419
+    second: Decorative set035.009|Decorative set035.009|Take 001|BaseLayer
+  - first:
+      74: 502933295892890249
+    second: Decorative set035.009|Decorative set035.012|Take 001|BaseLayer
+  - first:
+      74: -5722664740781219326
+    second: Decorative set035.009|Decorative set035.015|Take 001|BaseLayer
+  - first:
+      74: 7705342925421385111
+    second: Decorative set035.009|Decorative set035.016|Take 001|BaseLayer
+  - first:
+      74: -4471741515172152961
+    second: Decorative set035.009|Decorative set039.011|Take 001|BaseLayer
+  - first:
+      74: -6660307580548715454
+    second: Decorative set035.009|flower_01_1|Take 001|BaseLayer
+  - first:
+      74: -6125403801826253502
+    second: Decorative set035.009|Object002_1|Take 001|BaseLayer
+  - first:
+      74: 8724731094546215234
+    second: Decorative set035.009|Pinkvase|Take 001|BaseLayer
+  - first:
+      74: -795463629316390348
+    second: Decorative set035.009|Plane001|Take 001|BaseLayer
+  - first:
+      74: -7809087174918750939
+    second: Decorative set035.009|Sphere001|Take 001|BaseLayer
+  - first:
+      74: -7225593130318065034
+    second: Decorative set035.009|Sweep_NURBS_1|Take 001|BaseLayer
+  - first:
+      74: 7488203800019827226
+    second: Decorative set035.009|Tube001|Take 001|BaseLayer
+  - first:
+      74: -506027238934870497
+    second: Decorative set035.009|Tube002|Take 001|BaseLayer
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
