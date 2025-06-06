@@ -1,0 +1,48 @@
+//--lux:mat:5--
+//--lux:shader:5:0--
+// KeyShot material file - KeyShot [64 bit] v6.0.264
+#define shader 1 texture_rgb {
+"project" 4,
+"filter" 0,
+"wrap" on,
+"bilinear" off,
+"modulate" on,
+"scale" 1,
+"texture_index" 0,
+"bias" -2,
+"texture" "C:/Users/Asus/Documents/KeyShot 6/Textures/Wood\wood_1.jpg",
+"default_color" 1 0.701961 0.439216,
+"color_scale" 1.48,
+"transform" 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1,
+"transform_obj_to_uv" 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1,
+"world_space" off,
+"shift_u" 0,
+"shift_v" 0,
+"scale_u" 1,
+"scale_v" 1,
+"angle" 0,
+"contrast" 1,
+"texture_depth" 1,
+"dpi" 200,
+"two_sided" on,
+"sync" off,
+"disabled" off,
+"texture_face" 0,
+}
+#define shader 2 lux_plastic {
+"diffuse" 1 0.701961 0.439216,
+"diffuse" ! 1,
+"alpha" 1,
+"specular" 1 1 1,
+"diffuse_transmission" 0 0 0,
+"specular_transmission" 0 0 0,
+"roughness" 0.08,
+"fresnel" on,
+"glossy_samples" 4,
+"ior" 1.9,
+}
+
+#define material "Oak #4" {
+surface 2
+id 1242
+}
