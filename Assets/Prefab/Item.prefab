@@ -98,6 +98,7 @@ MonoBehaviour:
   - spawnType: 17
     isValid: 0
   mainCamera: {fileID: 0}
+  pushBackItem: 0
 --- !u!114 &3537513201456950018
 MonoBehaviour:
   m_ObjectHideFlags: 0
