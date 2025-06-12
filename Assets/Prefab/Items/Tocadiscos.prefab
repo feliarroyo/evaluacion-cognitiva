@@ -807,9 +807,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: uiIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: cce469497cab9b841bd7cd7ac70f0395, type: 3}
+    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: itemName
       value: Tocadiscos
       objectReference: {fileID: 0}
+    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: uiIconNoBG
+      value: 
+      objectReference: {fileID: 21300000, guid: 088e89597cb5e7a479bf19900b1e2ba3, type: 3}
     - target: {fileID: 9171863585267457439, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Name
       value: Tocadiscos

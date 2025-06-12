@@ -135,7 +135,7 @@ PrefabInstance:
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: uiIcon
       value: 
-      objectReference: {fileID: 21300000, guid: c47271116124f9141a9366a22732f452, type: 3}
+      objectReference: {fileID: 21300000, guid: 187b3221ff63d5941b1c65371fb1cd5e, type: 3}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: itemName
       value: "L\xE1mpara"
@@ -147,7 +147,7 @@ PrefabInstance:
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: uiIconNoBG
       value: 
-      objectReference: {fileID: 21300000, guid: 5a7f96918dc6a3549b5c33e897f97240, type: 3}
+      objectReference: {fileID: 21300000, guid: 234ed8b1f66d8fe43bb9b07ee04ce574, type: 3}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: isLargeItem
       value: 1

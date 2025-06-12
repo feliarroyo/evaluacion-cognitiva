@@ -68,9 +68,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: uiIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: c342b43573c51784b89086d701e96a70, type: 3}
+    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: itemName
       value: Parlante
       objectReference: {fileID: 0}
+    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: uiIconNoBG
+      value: 
+      objectReference: {fileID: 21300000, guid: 07d2184cfdabb414d8bcd4d894484d92, type: 3}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Size.x
       value: 0.4023422

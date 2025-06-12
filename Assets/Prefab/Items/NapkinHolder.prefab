@@ -367,9 +367,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: uiIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 1d7122cb2ba303e4096780a30fcffe96, type: 3}
+    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: itemName
       value: Servilletero
       objectReference: {fileID: 0}
+    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: uiIconNoBG
+      value: 
+      objectReference: {fileID: 21300000, guid: e7126543c8658054a98e53b1d05b99cc, type: 3}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Size.x
       value: 0.044497732
