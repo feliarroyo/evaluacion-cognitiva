@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7720005943342317689}
   - component: {fileID: 5000298969028207058}
   - component: {fileID: 8548708964959504783}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4478559895718350925}
   - component: {fileID: 6427763178005872548}
   - component: {fileID: 461447337596860345}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 6828429289842441277}
   - component: {fileID: 344121825887298017}
   - component: {fileID: 1603291697138808282}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 6287477716925222807}
   - component: {fileID: 6067245525071694685}
   - component: {fileID: 1164103154645037751}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8608896531765737375}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: compass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,12 +383,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.042
+      value: 0.093
       objectReference: {fileID: 0}
     - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_LocalPosition.z
@@ -421,6 +433,10 @@ PrefabInstance:
     - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: itemName

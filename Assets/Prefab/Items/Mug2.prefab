@@ -13,11 +13,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a76de9c40dd5a574b9b247639b6884c1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.006903544
+      value: -0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a76de9c40dd5a574b9b247639b6884c1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.002
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a76de9c40dd5a574b9b247639b6884c1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -51,9 +51,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a76de9c40dd5a574b9b247639b6884c1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f66cd9339d32bbc43820d50db1b9471a, type: 2}
     - target: {fileID: 919132149155446097, guid: a76de9c40dd5a574b9b247639b6884c1, type: 3}
       propertyPath: m_Name
       value: Mug
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a76de9c40dd5a574b9b247639b6884c1, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a76de9c40dd5a574b9b247639b6884c1, type: 3}
@@ -69,12 +77,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.035
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.068
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_LocalPosition.z
@@ -108,13 +128,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: itemName
+      value: Taza
+      objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Size.x
-      value: 1.3592986
+      value: 1.3592987
       objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Size.y
-      value: 1.3125477
+      value: 1.3715655
       objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Size.z
@@ -126,11 +150,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Center.y
-      value: 0.93377256
+      value: -0.122615695
       objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Center.z
-      value: -0.03239584
+      value: -0.032395832
       objectReference: {fileID: 0}
     - target: {fileID: 9171863585267457439, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Name

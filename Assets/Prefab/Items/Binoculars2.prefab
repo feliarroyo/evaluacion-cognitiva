@@ -12,12 +12,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0369
+      value: 0.0398
       objectReference: {fileID: 0}
     - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_LocalPosition.z
@@ -51,13 +55,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: itemName
+      value: "Binoculares versi\xF3n 2"
+      objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Size.x
       value: 0.8084369
       objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Size.y
-      value: 0.29361057
+      value: 0.3437065
       objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Size.z
@@ -69,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Center.y
-      value: 0.0019954443
+      value: 0.0077757314
       objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Center.z
@@ -93,6 +101,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3388896013815896319}
     m_Modifications:
+    - target: {fileID: -8948818474184473046, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -103,7 +115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.144
+      value: -0.075
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -111,23 +123,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99930763
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.037206553
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -4.265
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -137,9 +149,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4675140425398329478, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -94905905299889384, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.123
+      objectReference: {fileID: 0}
+    - target: {fileID: -94905905299889384, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.053
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
       propertyPath: m_Name
       value: Binoculars2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402471912161109802, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5841959290376256976, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 108b5bf53a8cd4b4aa39108eefce3dd7, type: 3}
