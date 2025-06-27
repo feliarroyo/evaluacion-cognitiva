@@ -3,7 +3,62 @@ guid: b1f8124d0d390314189f7721a41a2a6d
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lense
+    second: {fileID: 2100000, guid: 8278b235422e502489f2c03bd212f8ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 225be1a071053bf46bd7b474329518a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 627f3523ee8f8bd49a2ceab9763ccc39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 04e9a31864ef1e249ad57edc235b49d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: ccf10f14db03aa340ad83d704faa0594, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: c2de89bc0982c9143ad7f23916b6f7b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.005
+    second: {fileID: 2100000, guid: dba277e55d610664db88df57d39abadd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: dcb07ae1053e2cf4ea0110457811d4d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ModeButton
+    second: {fileID: 2100000, guid: d16f8de28d7c71f4d9647bd20b4f7ecf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: OK Button
+    second: {fileID: 2100000, guid: 1874c53899ec2204392a4a7b0fd3eff5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sockets
+    second: {fileID: 2100000, guid: 6ced09ebf66c96e4daa0ea819426617b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -177,6 +177,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -7847222663393028337, guid: 85d5fc462634d8a4680101caf7d4eace, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7847222663393028337, guid: 85d5fc462634d8a4680101caf7d4eace, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7847222663393028337, guid: 85d5fc462634d8a4680101caf7d4eace, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: -7609145667655734672, guid: 85d5fc462634d8a4680101caf7d4eace, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -261,6 +273,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 573068507460960381, guid: 85d5fc462634d8a4680101caf7d4eace, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f99b18ea5c310744ba3e85d20b5428ef, type: 2}
     - target: {fileID: 919132149155446097, guid: 85d5fc462634d8a4680101caf7d4eace, type: 3}
       propertyPath: m_Name
       value: glasses
@@ -308,6 +324,10 @@ PrefabInstance:
     - target: {fileID: 6576952365784070785, guid: 85d5fc462634d8a4680101caf7d4eace, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6576952365784070785, guid: 85d5fc462634d8a4680101caf7d4eace, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7007985254458599931, guid: 85d5fc462634d8a4680101caf7d4eace, type: 3}
       propertyPath: m_Layer

@@ -152,11 +152,11 @@ PrefabInstance:
     - target: {fileID: -1104991134678946954, guid: 963f965b4f8184b49b1203d6ea53df60, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 07ed3454738c99c4384b8a60481e830a, type: 2}
+      objectReference: {fileID: 2100000, guid: deeaceab5c76bb24194f38d7a05f9839, type: 2}
     - target: {fileID: -338849847057631049, guid: 963f965b4f8184b49b1203d6ea53df60, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 07ed3454738c99c4384b8a60481e830a, type: 2}
+      objectReference: {fileID: 2100000, guid: deeaceab5c76bb24194f38d7a05f9839, type: 2}
     - target: {fileID: 919132149155446097, guid: 963f965b4f8184b49b1203d6ea53df60, type: 3}
       propertyPath: m_Name
       value: balanceBoard
@@ -172,7 +172,7 @@ PrefabInstance:
     - target: {fileID: 1753218145157099143, guid: 963f965b4f8184b49b1203d6ea53df60, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 07ed3454738c99c4384b8a60481e830a, type: 2}
+      objectReference: {fileID: 2100000, guid: deeaceab5c76bb24194f38d7a05f9839, type: 2}
     - target: {fileID: 4706580215815193200, guid: 963f965b4f8184b49b1203d6ea53df60, type: 3}
       propertyPath: m_Layer
       value: 8
