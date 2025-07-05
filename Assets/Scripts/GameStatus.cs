@@ -40,7 +40,7 @@ public class GameStatus : MonoBehaviour
     public List<GameObject> lights;
 
     public GameObject invisibleWall;
-
+    private const float lightIntensity = 0.71f;
     
     // Start is called before the first frame update
     void Start()
@@ -191,7 +191,7 @@ public class GameStatus : MonoBehaviour
 
     private static void TurnLightsOn(GameObject lights){
          lights.SetActive(true);
-         RenderSettings.ambientLight = new Color(0.2039216f,0.2039216f,0.2039216f);
+         RenderSettings.ambientLight = new Color(lightIntensity,lightIntensity,lightIntensity);
     }
 
     // private IEnumerator FadeInLight(GameObject lights, float duration)

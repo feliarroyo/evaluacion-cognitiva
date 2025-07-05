@@ -85,9 +85,9 @@ public class ItemSpawning : MonoBehaviour
     /// <summary>
     /// Instantiate the key and decoy items in the defined spawn points.
     /// </summary>
-    /// <param name="keyItemList">List of items that should be retrieved by the user.</param>
-    /// <param name="decoyItemList">List of items that are added in the environment.</param>
-    public void InstantiateItems(Dictionary<string, GameObject> keyItemList, Dictionary<string, GameObject> decoyItemList)
+    /// <param name="hallItemList">List of items that should be retrieved by the user.</param>
+    /// <param name="livingItemList">List of items that are added in the environment.</param>
+    public void InstantiateItems(Dictionary<string, GameObject> hallItemList, Dictionary<string, GameObject> livingItemList)
     {
         List<GameObject> itemsToMemorize = new();
         List<GameObject> itemsInEnvironment = new();
@@ -96,25 +96,25 @@ public class ItemSpawning : MonoBehaviour
         List<ItemSpawn> availableSpawnPoints_Search = new(itemSpawnPoints_Search);
 
         // Place items of memorize phase in their positions
-        List<GameObject> goList = keyItemList.Values.ToList();
-        int shelfItemNumber = goList.Count(item => !item.GetComponent<HeldItem>().validSpawnTypes[(int)SpawnType.rack].isValid);
-        Debug.Log("Shelf item number: " + shelfItemNumber);
-        itemsToMemorize.AddRange(PlaceItemsInHallSpawnpoint(goList, availableSpawnPoints_Start, spawnsEnabledInHall[shelfItemNumber]));
+        List<GameObject> goList = hallItemList.Values.ToList();
+        //int shelfItemNumber = goList.Count(item => !item.GetComponent<HeldItem>().validSpawnTypes[(int)SpawnType.rack].isValid);
+        //Debug.Log("Shelf item number: " + shelfItemNumber);
+        //itemsToMemorize.AddRange(PlaceItemsInHallSpawnpoint(goList, availableSpawnPoints_Start, spawnsEnabledInHall[shelfItemNumber]));
 
-
-        foreach (string s in keyItemList.Keys)
+        foreach (string s in hallItemList.Keys)
         {
+            // Add to living
             Debug.Log("FOR DE KEY: " + s);
-            ItemSpawn getSpawnPoint = availableSpawnPoints_Search.FirstOrDefault(sp => sp.spawnName == s);
+            ItemSpawn getSpawnPoint = availableSpawnPoints_Start.FirstOrDefault(sp => sp.spawnName == s);
             if (getSpawnPoint != null)
-                PlaceItemInSpecificSpawnpoint(keyItemList[s], getSpawnPoint, true);
+                itemsToMemorize.Add(PlaceItemInSpecificSpawnpoint(hallItemList[s], getSpawnPoint, false, true));
         }
-        foreach (string s in decoyItemList.Keys)
+        foreach (string s in livingItemList.Keys)
         {
             Debug.Log("FOR DE DECOY: " + s);
             ItemSpawn getSpawnPoint = availableSpawnPoints_Search.FirstOrDefault(sp => sp.spawnName == s);
             if (getSpawnPoint != null)
-                PlaceItemInSpecificSpawnpoint(decoyItemList[s], getSpawnPoint, true);
+                PlaceItemInSpecificSpawnpoint(livingItemList[s], getSpawnPoint, true, false);
         }
 
         GameStatus.itemsInEnvironment = itemsInEnvironment;
@@ -309,11 +309,14 @@ public class ItemSpawning : MonoBehaviour
     /// <param name="isKeyItem">Whether the item should be marked as retrieved or not.</param>
     /// <param name="isEnvironmentItem">Whether the item is placed in the search environment or not.</param>
     /// <returns>The GameObject representing the item added.</returns>
-    public GameObject PlaceItemInSpecificSpawnpoint(GameObject item, ItemSpawn spawnPoint, bool isEnvironmentItem)
+    public GameObject PlaceItemInSpecificSpawnpoint(GameObject item, ItemSpawn spawnPoint, bool isEnvironmentItem, bool isHallItem)
     {
         HeldItem heldItem = item.GetComponent<HeldItem>();
         heldItem.isEnvironmentItem = isEnvironmentItem;
         GameObject go = Instantiate(item, spawnPoint.transform);
+        if (isHallItem){
+            GameStatus.keyItems.Add(heldItem);
+        }
         Debug.Log(go.name + " fue colocado en " + spawnPoint.name);
         return go;
     }

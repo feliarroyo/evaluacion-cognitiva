@@ -20,8 +20,8 @@ public class LevelConfig{
     public string id;
     public int memorizeTime;
     public int searchTime;
-    public List<SpawnInfo> searchObjects;
-    public List<SpawnInfo> distractingObjects;
+    public List<SpawnInfo> searchObjects; // Hall (Key only)
+    public List<SpawnInfo> distractingObjects; // Living (Key + Decoy)
 }
 
 [System.Serializable]
