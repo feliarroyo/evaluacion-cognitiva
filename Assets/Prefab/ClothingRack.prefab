@@ -59,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1765012528191082554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.029, y: 0, z: -0}
+  m_LocalPosition: {x: 0.08, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnName: 
   allowLargeItems: 0
   isLevel1: 0
   isLevel2: 0
@@ -144,8 +145,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2362672108937681060}
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0.035, y: 0.0214, z: -0.418}
-  m_LocalScale: {x: 0.026884394, y: 0.29999995, z: 0.21127047}
+  m_LocalPosition: {x: 0.0464, y: 0.0214, z: -0.418}
+  m_LocalScale: {x: 0.026884394, y: 0.29999995, z: 0.24585544}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 649299629261577540}
@@ -258,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnName: 
   allowLargeItems: 0
   isLevel1: 0
   isLevel2: 0
@@ -306,6 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnName: 
   allowLargeItems: 0
   isLevel1: 0
   isLevel2: 0
@@ -485,6 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnName: 
   allowLargeItems: 0
   isLevel1: 0
   isLevel2: 0
@@ -613,8 +617,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5797999545465809675}
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0.035, y: -0.268, z: -0.418}
-  m_LocalScale: {x: 0.026884394, y: 0.29999995, z: 0.21127047}
+  m_LocalPosition: {x: 0.0464, y: -0.268, z: -0.418}
+  m_LocalScale: {x: 0.026884394, y: 0.29999995, z: 0.24585544}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 649299629261577540}

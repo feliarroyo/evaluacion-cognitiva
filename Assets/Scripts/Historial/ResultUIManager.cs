@@ -23,8 +23,8 @@ public class ResultUIManager : MonoBehaviour
         foreach (var keyItem in result.keyImageName)
         {
             GameObject newResult = Instantiate(resultPrefab,resultKeyContent);
-            UnityEngine.UI.Image itemImage = newResult.transform.Find("BGItem/Item").GetComponent<UnityEngine.UI.Image>();
-            UnityEngine.UI.Image itemBG = newResult.transform.Find("BGItem").GetComponent<UnityEngine.UI.Image>();
+            Image itemImage = newResult.transform.Find("BGItem/Item").GetComponent<Image>();
+            Image itemBG = newResult.transform.Find("BGItem").GetComponent<Image>();
             itemBG.color = new Color(0.847f, 0.831f, 0.654f);
           //  Sprite loadedSprite = Resources.Load<Sprite>(keyItem);
           //  itemImage.sprite = loadedSprite;

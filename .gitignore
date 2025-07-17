@@ -80,3 +80,24 @@ crashlytics-build.properties
 /.vscode
 /Assembly-CSharp-Editor.csproj
 /Assembly-CSharp.csproj
+*.zip
+Assets/Models/Lv2 Items/Cronometro/Countdown.zip.meta
+Assets/Models/Lv2 Items/Mandolin/Mandolin_01.zip.meta
+Assets/Models/Lv2 Items/uploads_files_3154882_Textures.zip.meta
+Assets/Models/Lv2 Items/Globos terraqueos nuevos/O/MAPS.zip.meta
+Assets/Models/Lv2 Items/Sombreros nuevos/AA/source/Hat2.zip.meta
+Assets/Models/Lv2 Items/uploads_files_214141_3d-model.fbx.zip.meta
+Assets/Models/Lv2 Items/Sombreros nuevos/AA/female-beach-hat.zip.meta
+Assets/Models/Lv2 Items/Sombreros nuevos/AH/source/Headwear3.zip.meta
+Assets/Models/Lv2 Items/Sombreros nuevos/AG/gaucho-hat-chapeu-gaucho.zip.meta
+Assets/Models/Lv2 Items/Lente de camara/uploads_files_6196618_Textures.zip.meta
+Assets/Models/Lv2 Items/Cronometro/Countdown/uploads_files_5619461_countdownTimer_Textures.zip.meta
+Assets/Models/Lv2 Items/Mandolin/MandolinBKit.fbx_Gibson_F-4_Mandolin_1914/schwarz plastik 178_Normal.jpg.meta
+*.7z
+Assets/Models/Lv2 Items/uploads_files_4118361_textures(1).7z.meta
+*.rar
+Assets/Models/Lv2 Items/Microfono/uploads_files_157159_Shure_OBJ.rar.meta
+Assets/Models/Lv2 Items/Globos terraqueos nuevos/G/uploads_files_3886865_textures.rar.meta
+Assets/Models/Lv2 Items/Vaso descartable con sorbete/uploads_files_2766709_textures.rar.meta
+Assets/Models/Lv2 Items/Globos terraqueos nuevos/F/uploads_files_4459924_EARTH&MOON_TEXTURES.rar.meta
+Assets/Models/Lv2 Items/Acoustic Guitar/uploads_files_2823326_textures.rar.meta
