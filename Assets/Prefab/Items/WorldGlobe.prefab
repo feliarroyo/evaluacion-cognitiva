@@ -25,11 +25,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.021
+      value: -0.01
       objectReference: {fileID: 0}
     - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.101
+      value: 0.112
       objectReference: {fileID: 0}
     - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_LocalPosition.z
@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: uiIcon
       value: 
-      objectReference: {fileID: 21300000, guid: 5a1a15877f08b424a8e44385dda468fc, type: 3}
+      objectReference: {fileID: 21300000, guid: 1e809d1f870ccf04e9fe361fe3f1d840, type: 3}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: itemName
       value: "Globo terr\xE1queo"
@@ -78,7 +78,7 @@ PrefabInstance:
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: uiIconNoBG
       value: 
-      objectReference: {fileID: 21300000, guid: edac81b0dabb398419a00bdcf5b1ab01, type: 3}
+      objectReference: {fileID: 21300000, guid: c79750da094646e4b92120a88d720331, type: 3}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: validSpawnTypes.Array.data[0].isValid
       value: 1

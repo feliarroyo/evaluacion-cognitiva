@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: uiIcon
       value: 
-      objectReference: {fileID: 21300000, guid: a3b98e71c92747645a3463d8ae7389cf, type: 3}
+      objectReference: {fileID: 21300000, guid: ff2fba65ce588ca4da09ee4c3d875720, type: 3}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: itemName
       value: Sombrero
@@ -78,34 +78,34 @@ PrefabInstance:
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: uiIconNoBG
       value: 
-      objectReference: {fileID: 21300000, guid: 8a2f1349e11f8b243abf23a8afaff2b4, type: 3}
+      objectReference: {fileID: 21300000, guid: fc5fa5ad700f7054f80c345c52dbdada, type: 3}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: validSpawnTypes.Array.data[17].isValid
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Size.x
-      value: 0.5391584
+      value: 0.4450692
       objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Size.y
-      value: 0.14833064
+      value: 0.1786279
       objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Size.z
-      value: 0.53962153
+      value: 0.47288463
       objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Center.x
-      value: 0.0008638203
+      value: -0.013890613
       objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Center.y
-      value: 0.0724319
+      value: 0.05728327
       objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Center.z
-      value: -0.00030305982
+      value: 0.0018744259
       objectReference: {fileID: 0}
     - target: {fileID: 9171863585267457439, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Name
