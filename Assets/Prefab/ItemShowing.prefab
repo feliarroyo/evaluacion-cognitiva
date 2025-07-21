@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnName: 
+  spawnName: hall8
   allowLargeItems: 1
   isLevel1: 0
   isLevel2: 0
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnName: hall5
+  spawnName: hall6
   allowLargeItems: 1
   isLevel1: 0
   isLevel2: 0
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnName: 
+  spawnName: hall4
   allowLargeItems: 1
   isLevel1: 0
   isLevel2: 0
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnName: 
+  spawnName: hall3
   allowLargeItems: 1
   isLevel1: 0
   isLevel2: 0
@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnName: 
+  spawnName: hall11
   allowLargeItems: 1
   isLevel1: 0
   isLevel2: 0
@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnName: 
+  spawnName: hall2
   allowLargeItems: 1
   isLevel1: 0
   isLevel2: 0
@@ -505,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnName: 
+  spawnName: hall1
   allowLargeItems: 1
   isLevel1: 0
   isLevel2: 0
@@ -770,11 +770,13 @@ MonoBehaviour:
   - {fileID: 8019694021203094440}
   - {fileID: 8684665237242172920}
   - {fileID: 2666780786500687530}
+  - {fileID: 2679830429100106117}
   - {fileID: 2488154232236347964}
   - {fileID: 7112134319152746225}
   - {fileID: 7694390984294747793}
   - {fileID: 944700271269372939}
   - {fileID: 3948428720675503290}
+  - {fileID: 5455467032016039894}
   - {fileID: 4781717275601522524}
   - {fileID: 4633357979190270910}
   - {fileID: 3572760134080867916}
@@ -923,7 +925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnName: 
+  spawnName: hall10
   allowLargeItems: 1
   isLevel1: 0
   isLevel2: 0
@@ -972,7 +974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnName: 
+  spawnName: hall7
   allowLargeItems: 1
   isLevel1: 0
   isLevel2: 0
@@ -1119,7 +1121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnName: hall10
+  spawnName: hall12
   allowLargeItems: 1
   isLevel1: 0
   isLevel2: 0
@@ -1168,7 +1170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnName: 
+  spawnName: hall5
   allowLargeItems: 1
   isLevel1: 0
   isLevel2: 0
@@ -1250,7 +1252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnName: 
+  spawnName: hall9
   allowLargeItems: 1
   isLevel1: 0
   isLevel2: 0

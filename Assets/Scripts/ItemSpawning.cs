@@ -114,7 +114,7 @@ public class ItemSpawning : MonoBehaviour
             Debug.Log("FOR DE DECOY: " + s);
             ItemSpawn getSpawnPoint = availableSpawnPoints_Search.FirstOrDefault(sp => sp.spawnName == s);
             if (getSpawnPoint != null)
-                PlaceItemInSpecificSpawnpoint(livingItemList[s], getSpawnPoint, true, false);
+                itemsInEnvironment.Add(PlaceItemInSpecificSpawnpoint(livingItemList[s], getSpawnPoint, true, false));
         }
 
         GameStatus.itemsInEnvironment = itemsInEnvironment;
