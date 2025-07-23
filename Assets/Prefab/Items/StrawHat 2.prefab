@@ -189,6 +189,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: 30bedd080ed29cc4eb39340c98d91787, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -3542852092398272455, guid: 30bedd080ed29cc4eb39340c98d91787, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -99.518
