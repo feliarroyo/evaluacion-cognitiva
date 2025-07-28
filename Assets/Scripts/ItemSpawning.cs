@@ -8,6 +8,7 @@ public class ItemSpawning : MonoBehaviour
 {
     public List<ItemSpawn> itemSpawnPoints_Start = new();
     public List<ItemSpawn> itemSpawnPoints_Search = new();
+    public List<ItemSpawn> itemSpawnPoints_Preevaluation = new();
     private readonly List<ItemSpawn> smallSearchSpawns = new();
     private readonly List<ItemSpawn> largeSearchSpawns = new();
     public GameConfig gc;
@@ -57,11 +58,11 @@ public class ItemSpawning : MonoBehaviour
         HouseDistributionManage();
         if (GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Start)
         {
-            InstantiateItems(gc.GenerateTutorialKeyItems(), gc.GenerateTutorialDecoyItems());
+            InstantiateItemsTutorialPreevaluation(gc.GenerateTutorialKeyItems(), gc.GenerateTutorialDecoyItems());
         }
         else if (Settings.currentDifficulty == Settings.Difficulty.Preevaluación)
         {
-            InstantiateItems(gc.GenerateRandomKeyItems(), gc.GenerateRandomDecoyItems());
+            InstantiateItemsTutorialPreevaluation(gc.preevaluationKeyItemList, gc.preevaluationDecoyItemList);
         }
         else if (GameStatus.currentPhase == GameStatus.GamePhase.Waiting)
         {
@@ -180,13 +181,15 @@ public class ItemSpawning : MonoBehaviour
     /// </summary>
     /// <param name="keyItemList">List of items that should be retrieved by the user.</param>
     /// <param name="decoyItemList">List of items that are added in the environment.</param>
-    public void InstantiateItems(List<GameObject> keyItemList, List<GameObject> decoyItemList)
+    public void InstantiateItemsTutorialPreevaluation(List<GameObject> keyItemList, List<GameObject> decoyItemList)
     {
         List<GameObject> itemsToMemorize = new();
         List<GameObject> itemsInEnvironment = new();
         // Create list of spawn points available
-        List<ItemSpawn> availableSpawnPoints_Start = new(itemSpawnPoints_Start);
-        GenerateSpawnPoints(new(itemSpawnPoints_Search));
+        List<ItemSpawn> availableSpawnPoints_Start = new List<ItemSpawn> { itemSpawnPoints_Start[2], itemSpawnPoints_Start[9] };
+        GenerateSpawnPoints(new(itemSpawnPoints_Preevaluation));
+        Debug.Log(availableSpawnPoints_Start);
+        Debug.Log(itemSpawnPoints_Preevaluation);
         // Place items of memorize phase in their positions
         foreach (GameObject item in keyItemList)
         {
@@ -267,17 +270,17 @@ public class ItemSpawning : MonoBehaviour
 
             // Choose only from valid spawn points when spawning in the room, filtering the rest
             List<ItemSpawn> compatibleSpawnPoints = availableSpawnPoints;
-            if (isEnvironmentItem)
-            {
-                compatibleSpawnPoints = availableSpawnPoints.Where(spawn => heldItem.validSpawnTypes[(int)spawn.spawnType].isValid
-                && (!heldItem.isLargeItem || spawn.allowLargeItems)).ToList();
-            }
-            else
-            {
-                // Separate between rack and non-rack spawns for hall               
-                compatibleSpawnPoints = heldItem.validSpawnTypes[(int)SpawnType.rack].isValid ?
-                availableSpawnPoints.Where(spawn => spawn.spawnType == SpawnType.rack).ToList() : availableSpawnPoints.Where(spawn => !(spawn.spawnType == SpawnType.rack)).ToList();
-            }
+            // if (isEnvironmentItem)
+            // {
+            //     compatibleSpawnPoints = availableSpawnPoints.Where(spawn => heldItem.validSpawnTypes[(int)spawn.spawnType].isValid
+            //     && (!heldItem.isLargeItem || spawn.allowLargeItems)).ToList();
+            // }
+            // else
+            // {
+            //     // Separate between rack and non-rack spawns for hall               
+            //     compatibleSpawnPoints = heldItem.validSpawnTypes[(int)SpawnType.rack].isValid ?
+            //     availableSpawnPoints.Where(spawn => spawn.spawnType == SpawnType.rack).ToList() : availableSpawnPoints.Where(spawn => !(spawn.spawnType == SpawnType.rack)).ToList();
+            // }
             Logging.DebugLog("#Spawns compatibles " + compatibleSpawnPoints.Count + " para " + item.name);
             // foreach(var spawn in compatibleSpawnPoints){
             //     Debug.Log(spawn.name + " es compatible para " + item.name);

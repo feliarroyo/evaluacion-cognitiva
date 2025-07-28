@@ -12,6 +12,9 @@ public class GameConfig : MonoBehaviour
     public List<GameObject> decoyItemList = new List<GameObject>(); // Contains items to fill out room
     public List<GameObject> tutorialKeyItemList = new List<GameObject>(); // Contains items used in pre-evaluation
     public List<GameObject> tutorialDecoyItemList = new List<GameObject>(); // Contains items used in pre-evaluation
+    public List<GameObject> preevaluationKeyItemList = new List<GameObject>(); // Contains items used in pre-evaluation
+    public List<GameObject> preevaluationDecoyItemList = new List<GameObject>(); // Contains items used in pre-evaluation
+    
     public static int memorizeTime = 15, searchTime = 18;
     // public static int keyItemQuantity, decoyItemQuantity;
     public static Dictionary<string, string> keyItems, decoyItems;
@@ -69,7 +72,7 @@ public static void SetDifficultyParameters()
         switch (Settings.currentDifficulty)
         {
             case Settings.Difficulty.Preevaluación:
-                memorizeTime = 0;
+                memorizeTime = 10;
                 searchTime = 0;
                 break;
             case Settings.Difficulty.Bajo:
