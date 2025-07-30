@@ -84,8 +84,6 @@ public class GameStatus : MonoBehaviour
                 instance.StartCoroutine(instance.TurnLightsOff(instance.lights[0], 0f, false));
                 // if (Timer.timerOn)
                 //     Timer.StopTimer();
-                PlayerMovement.allowPlayerMovement = true;
-                TouchController.allowCameraMovement = true;
                 if (HeldItem.currentlyHeldItem != null) {
                     HeldItem.ReturnItem();
                 }
@@ -99,13 +97,14 @@ public class GameStatus : MonoBehaviour
                 instance.lights[1].SetActive(false);
                 TurnLightsOn(instance.lights[2]);
                 //instance.StartCoroutine(instance.FadeInLight(instance.searchLight, 0f));
+                Timer.StartTimer(60);
                 break;
             case GamePhase.Tutorial_Search:
                 savedItems.Clear();
                 keyItems.Clear();
+                SceneManager.LoadScene("MainMenu");
                 break;
             case GamePhase.Tutorial_SearchOver:
-                SceneManager.LoadScene("MainMenu");
                 break;
             case GamePhase.Waiting:
                 TurnLightsOn(instance.lights[0]);

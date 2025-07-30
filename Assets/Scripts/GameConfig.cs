@@ -73,7 +73,7 @@ public static void SetDifficultyParameters()
         {
             case Settings.Difficulty.Preevaluación:
                 memorizeTime = 10;
-                searchTime = 0;
+                searchTime = 60;
                 break;
             case Settings.Difficulty.Bajo:
                 difficultyId = "lowLevel";

@@ -878,9 +878,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mission: {fileID: 8625114934282940545}
   houseDoor: {fileID: 0}
+  tvDoor: {fileID: 0}
   player: {fileID: 8806503348486958743}
   roomIndicators: {fileID: 0}
   preevaluationElements: {fileID: 0}
+  handle: {fileID: 0}
+  items: []
 --- !u!1 &5605478886370069681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1807,6 +1810,7 @@ GameObject:
   - component: {fileID: 7747519757498006158}
   - component: {fileID: 7657227927382231040}
   - component: {fileID: 2380538411153269700}
+  - component: {fileID: 7632706850587702489}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -1942,6 +1946,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onMouseDownSceneLoad: 
   loadingPanel: {fileID: 0}
+--- !u!114 &7632706850587702489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8185491630017801607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfac0d5ad479d24bbf8792ce309e839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8246761920643026197
 GameObject:
   m_ObjectHideFlags: 0
@@ -2220,6 +2236,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   orientation: {fileID: 8700067999511558763}
+  horizontalInput: 0
+  verticalInput: 0
   joystick: {fileID: 7119546160923636445}
 --- !u!114 &7116916336915481333
 MonoBehaviour:

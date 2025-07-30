@@ -44,7 +44,8 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
         //  SnapObjectBack(transform.position + Vector3.back * 0.05f);
 
         // Shoot raycast to position item over surface, unless it's a rack item
-        if (pushBackItem){
+        if (pushBackItem)
+        {
             SnapObjectBack(transform.position + Vector3.back * 0.05f);
         }
         if (!validSpawnTypes[(int)ItemSpawning.SpawnType.rack].isValid)
@@ -52,14 +53,15 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
             SnapObjectDown(transform.position + Vector3.up * 0.05f);
         }
         // Caso de prueba libros, después generalizar de algún modo
-        if (itemName == "Libro The Art of Netting"){
+        if (itemName == "Libro The Art of Netting")
+        {
             SnapObjectLeft(transform.position + Vector3.left * 0.05f);
         }
         originalPosition = transform.position;
         originalRotation = transform.rotation;
     }
 
-public void SnapObjectLeft(Vector3 coord)
+    public void SnapObjectLeft(Vector3 coord)
     {
         try
         {
@@ -111,7 +113,7 @@ public void SnapObjectLeft(Vector3 coord)
             if (Physics.Raycast(coord, Vector3.forward, out RaycastHit hit, Mathf.Infinity, groundLayer))
             {
                 float objectWidth = GetComponent<Collider>().bounds.extents.z;
-                transform.position = new Vector3(coord.x, coord.y, hit.point.z - (objectWidth/2));
+                transform.position = new Vector3(coord.x, coord.y, hit.point.z - (objectWidth / 2));
                 originalPosition = transform.position;
                 originalRotation = transform.rotation;
             }
@@ -147,7 +149,15 @@ public void SnapObjectLeft(Vector3 coord)
 #endif
         if (isHeld)
         { // Allow rotation controls
-            if (Input.GetMouseButton(0))
+            if (GameStatus.currentPhase < GameStatus.GamePhase.Waiting) //TUTORIAL
+            {
+                float rotX = TutorialManager.rotationX * ROTATION_STRENGTH;
+                float rotY = TutorialManager.rotationY * ROTATION_STRENGTH;
+                Quaternion horizontalRotation = Quaternion.AngleAxis(-rotX, mainCamera.transform.up);
+                Quaternion verticalRotation = Quaternion.AngleAxis(rotY, mainCamera.transform.right);
+                gameObject.transform.rotation = horizontalRotation * verticalRotation * transform.rotation;
+            }
+            else if (Input.GetMouseButton(0))
             {
                 float rotX = GetRotationInputX() * ROTATION_STRENGTH;
                 float rotY = GetRotationInputY() * ROTATION_STRENGTH;

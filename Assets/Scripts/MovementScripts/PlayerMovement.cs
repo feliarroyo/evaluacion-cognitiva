@@ -11,8 +11,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
     public Transform orientation;
-    float horizontalInput;
-    float verticalInput;
+    public float horizontalInput;
+    public float verticalInput;
     Vector3 moveDirection;
     Rigidbody rb;
     public static bool allowPlayerMovement = true;

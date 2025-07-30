@@ -7,6 +7,6 @@ public class BackButtonManager : MonoBehaviour
 
     void Start()
     {
-        gameObject.SetActive(Settings.currentDifficulty == Settings.Difficulty.Preevaluación);
+        gameObject.SetActive(Settings.currentDifficulty == Settings.Difficulty.Preevaluación || GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Start);
     }
 }
