@@ -47,8 +47,13 @@ public class GameStatus : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        if (currentPhase == GamePhase.Tutorial_Start){
+        if (currentPhase == GamePhase.Tutorial_Start)
+        {
             instance.StartTutorial();
+        }
+        else
+        {
+            Interactable.allowAllInteractions = true;
         }
         Debug.Log(currentPhase);
     }

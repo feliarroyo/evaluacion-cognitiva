@@ -27,6 +27,8 @@ public class InteractableDetection : MonoBehaviour
             return;
         }
         if (other.gameObject.CompareTag("Interactable")) {
+            Debug.Log("OTHER ");
+            Debug.Log(other);
             other.gameObject.GetComponent<Interactable>().EnableInteraction(true);
             Debug.Log("TRIGGER ENTERING... " + gameObject);
         }
@@ -43,6 +45,8 @@ public class InteractableDetection : MonoBehaviour
             return;
         }
         if (other.gameObject.CompareTag("Interactable")) {
+            Debug.Log("OTHER ");
+            Debug.Log(other);
             other.gameObject.GetComponent<Interactable>().EnableInteraction(false);
         }
     }

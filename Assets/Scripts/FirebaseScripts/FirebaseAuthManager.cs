@@ -47,6 +47,8 @@ public class FirebaseAuthManager : MonoBehaviour
         //statusWindow.SetActive(false);
         
         auth = FirebaseAuth.DefaultInstance;
+        Debug.Log("auth ");
+        Debug.Log(auth);
 
 
         signInButton.onClick.AddListener(() => SignInWithEmailAndPassword());
