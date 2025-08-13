@@ -15,7 +15,7 @@ public class TutorialManager : MonoBehaviour
     public OpenDoor tvDoor;
     public GameObject player;
     public GameObject roomIndicators; // arrows showing the way to the search room.
-    public GameObject preevaluationElements;
+    public GameObject tutorialElements;
     public RectTransform handle;
     public List<HeldItem> items = new();
     public static float rotationX = 0.0f;
@@ -28,12 +28,11 @@ public class TutorialManager : MonoBehaviour
         }
         Debug.Log("La fase en este momento es : " + GameStatus.currentPhase);
         missionText = mission.GetComponentInChildren<TextMeshProUGUI>();
-        if (GameStatus.currentPhase != GameStatus.GamePhase.Tutorial_Start){
-            preevaluationElements.SetActive(false);
-            PlayerMovement.allowPlayerMovement = true;
-            TouchController.allowCameraMovement = true;
-        }
-        
+        // In the tutorial, certain objects must spawn, and user control is disabled
+        bool inTutorial = GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Start;
+        tutorialElements.SetActive(inTutorial);
+        PlayerMovement.allowPlayerMovement = !inTutorial;
+        TouchController.allowCameraMovement = !inTutorial;
     }
 
     private void StartMission(){

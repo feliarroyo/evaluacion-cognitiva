@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = System.Object;
 
 /// <summary>
 /// This behaviour is used for the opening of doors. It rotates the interactable gameObject on click.
@@ -20,6 +21,7 @@ public class OpenDoor : MonoBehaviour, IElementBehaviour
     public static List<OpenDoor> allDoors = new List<OpenDoor>();
     public char rotationAxis = 'y';
     public Quaternion testRotation;
+    public string id;
 
     void Start()
     {
@@ -102,6 +104,11 @@ public class OpenDoor : MonoBehaviour, IElementBehaviour
             return;
         }
         isOpen = !isOpen;
+        if (isOpen){
+            Logging.Log(Logging.EventType.ElementOpen, new[] {(Object) id});
+        }
+        else
+            Logging.Log(Logging.EventType.ElementClose, new[] {(Object) id});
         if (portal != null)
         {
             portal.open = isOpen;

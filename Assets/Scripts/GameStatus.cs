@@ -79,16 +79,14 @@ public class GameStatus : MonoBehaviour
     
     public static void SetNextPhase(){
         Debug.Log(currentPhase);
+        Logging.Log(Logging.EventType.PhaseEnd, new[] { currentPhase.ToString() });
         switch (currentPhase){
             case GamePhase.Tutorial_ReachApple:
                 TurnLightsOn(instance.lights[0]);
-                //instance.StartCoroutine(instance.FadeInLight(instance.memorizeLight, 0f));
                 Timer.StartTimer(10);
                 break;
             case GamePhase.Tutorial_Memorizing:
                 instance.StartCoroutine(instance.TurnLightsOff(instance.lights[0], 0f, false));
-                // if (Timer.timerOn)
-                //     Timer.StopTimer();
                 if (HeldItem.currentlyHeldItem != null) {
                     HeldItem.ReturnItem();
                 }
@@ -101,7 +99,6 @@ public class GameStatus : MonoBehaviour
             case GamePhase.Tutorial_BeforeSearch:
                 instance.lights[1].SetActive(false);
                 TurnLightsOn(instance.lights[2]);
-                //instance.StartCoroutine(instance.FadeInLight(instance.searchLight, 0f));
                 Timer.StartTimer(60);
                 break;
             case GamePhase.Tutorial_Search:
@@ -165,26 +162,22 @@ public class GameStatus : MonoBehaviour
                     instance.StartCoroutine(instance.TurnLightsOff(instance.lights[2], 1f, Settings.currentDifficulty != Settings.Difficulty.Preevaluación));  
                     Timer.StopTimer();
                     timeUsedSearching = Timer.spentTime;
+                    ExitWithoutSaving();
                 }else{
                     Timer.StopTimer();
                     timeUsedSearching = Timer.spentTime;
+                    Logging.LogEvent.SaveLogToFile();
                     SceneLoader.LoadScene("Results");
                 }
                 
                 break;
             case GamePhase.SearchOver:
                 if (Settings.currentDifficulty != Settings.Difficulty.Preevaluación){
+                    Logging.LogEvent.SaveLogToFile();
                     SceneLoader.LoadScene("Results");
                 }
-                else {
-                    keyItems.Clear();
-                    savedItems.Clear();
-                    SceneLoader.LoadScene("MainMenu");
-                }
-
                 return; // Final phase
         }
-        Logging.Log(Logging.EventType.PhaseEnd, new[] { currentPhase.ToString() });
         currentPhase++;
         Logging.Log(Logging.EventType.PhaseStart, new[] { currentPhase.ToString() });
     }
@@ -198,54 +191,38 @@ public class GameStatus : MonoBehaviour
          RenderSettings.ambientLight = new Color(lightIntensity,lightIntensity,lightIntensity);
     }
 
-    // private IEnumerator FadeInLight(GameObject lights, float duration)
-    // {
-    //     //float elapsedTime = 0f;
-    //     // float startIntensity = 0f;
-    //     //float targetIntensity = 3f;
-
-    //     // light.intensity = startIntensity;
-    //     lights.SetActive(true);
-    //     RenderSettings.ambientLight = new Color(152,152,152);
-
-    //     //while (elapsedTime < duration)
-    //     //{
-    //         //elapsedTime += Time.deltaTime;
-    //         //light.intensity = Mathf.Lerp(startIntensity, targetIntensity, elapsedTime / duration);
-    //         //yield return null;
-    //     //}
-
-    //     //light.intensity = targetIntensity;
-    //     yield return n
-    // }
-
-private IEnumerator TurnLightsOff(GameObject lights, float duration, bool searchPhase)
+/// <summary>
+/// 
+/// </summary>
+/// <param name="lights">Light object to set off</param>
+/// <param name="duration"></param>
+/// <param name="sendToResults"></param>
+/// <returns></returns>
+private IEnumerator TurnLightsOff(GameObject lights, float duration, bool sendToResults)
 {
     float elapsedTime = 0f;
-    //float startIntensity = light.intensity;
-    //float startRange = light.range;
-    //float startAngle = light.spotAngle;
-    
     lights.SetActive(false);
     RenderSettings.ambientLight = new Color(0.1019608f,0.1019608f,0.1019608f);
     
     while (elapsedTime < duration)
     {
         elapsedTime += Time.deltaTime;
-        // float t = elapsedTime / duration;
-        // light.intensity = Mathf.Lerp(startIntensity, 0f, t);
-        // light.range = Mathf.Lerp(startRange, 5f, t);
-        // light.spotAngle = Mathf.Lerp(startAngle, 15f, t);
         yield return null;
     }
 
-    //light.intensity = 0f;
-    //light.range = 5f;
-    //light.spotAngle = 15f;
-    
-    if(searchPhase)
+    if(sendToResults){
+        Logging.LogEvent.SaveLogToFile();
         SceneLoader.LoadScene("Results");
+    }
 }
 
+/// <summary>
+/// Quits the application while deleting items saved by the player.
+/// </summary>
+public static void ExitWithoutSaving(){
+    keyItems.Clear();
+    savedItems.Clear();
+    SceneLoader.LoadScene("MainMenu");
+}
 
 }

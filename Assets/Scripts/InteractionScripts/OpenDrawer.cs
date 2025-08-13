@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = System.Object;
 
 /// <summary>
 /// This behaviour is used for the opening and closing of drawers. 
@@ -23,6 +24,8 @@ public class OpenDrawer : MonoBehaviour, IElementBehaviour
     // Item Spawn movement
     public List<ItemSpawn> spawnsContained;
     private Dictionary<ItemSpawn, Vector3> itemOffsets; // Stores original item positions relative to drawer
+
+    public string id;
 
     // Start is called before the first frame update
     void Start()
@@ -82,8 +85,10 @@ public class OpenDrawer : MonoBehaviour, IElementBehaviour
     {
         if (!isOpen){
             opening = true;
+            Logging.Log(Logging.EventType.ElementOpen, new[] {(Object) id});
         }else{
             closing = true;
+            Logging.Log(Logging.EventType.ElementClose, new[] {(Object) id});
         }
     }
 }
