@@ -36,7 +36,7 @@ public class Timer : MonoBehaviour
                 timerText.text = MinuteNotation(0);
                 timerOn = false;
                 if ((GameStatus.currentPhase == GameStatus.GamePhase.Memorizing) 
-                    || (GameStatus.currentPhase == GameStatus.GamePhase.Search) || (GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Memorizing))
+                    || (GameStatus.currentPhase == GameStatus.GamePhase.Search) || (GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Memorizing) || (GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Search))
                     GameStatus.SetNextPhase();
             }
         }

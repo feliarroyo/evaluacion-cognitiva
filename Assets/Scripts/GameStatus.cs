@@ -83,7 +83,7 @@ public class GameStatus : MonoBehaviour
         switch (currentPhase){
             case GamePhase.Tutorial_ReachApple:
                 TurnLightsOn(instance.lights[0]);
-                Timer.StartTimer(10);
+                Timer.StartTimer(20);
                 break;
             case GamePhase.Tutorial_Memorizing:
                 instance.StartCoroutine(instance.TurnLightsOff(instance.lights[0], 0f, false));
@@ -104,7 +104,15 @@ public class GameStatus : MonoBehaviour
             case GamePhase.Tutorial_Search:
                 savedItems.Clear();
                 keyItems.Clear();
-                SceneManager.LoadScene("MainMenu");
+                OpenDoor.EnableInteractions(false);
+                OpenDrawer.EnableInteractions(false);
+                // Agregado para que no se vea el borde blanco cuando se apaga la luz
+                foreach (GameObject go in itemsInEnvironment){
+                    go.GetComponent<Outline>().enabled = false;
+                    go.GetComponent<Interactable>().stoppedInteraction = true;
+                }
+                instance.StartCoroutine(instance.TurnLightsOff(instance.lights[2], 1f, false));
+                Timer.StopTimer();
                 break;
             case GamePhase.Tutorial_SearchOver:
                 break;
