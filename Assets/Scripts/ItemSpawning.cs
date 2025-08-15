@@ -32,22 +32,23 @@ public class ItemSpawning : MonoBehaviour
     {
         aboveEntrance,
         insideEntrance,
-        aboveTVShelf,
+        //    aboveTVShelf,
         aboveTVFurniture,
         insideTVShelf,
-        insideTVDoor,
+        //    insideTVDoor,
         oppositeBookshelf,
         aboveLongFurniture,
-        insideLongFurnitureShelf,
-        insideLongFurnitureDoor,
-        insideLongFurnitureDrawer,
-        aboveOppositeDrawer,
+        //    insideLongFurnitureShelf,
+        //    insideLongFurnitureDoor,
+        //    insideLongFurnitureDrawer,
+        //    aboveOppositeDrawer,
         insideOppositeDrawer,
         couch,
         table,
         chair,
         sideTable,
-        rack
+        rack,
+        insideDoor
 
 
     }
@@ -187,6 +188,31 @@ public class ItemSpawning : MonoBehaviour
         List<GameObject> itemsInEnvironment = new();
         // Create list of spawn points available
         List<ItemSpawn> availableSpawnPoints_Start = new List<ItemSpawn> { itemSpawnPoints_Start[2], itemSpawnPoints_Start[9] };
+        
+        var requiredTypes = new List<SpawnType>
+        {
+            SpawnType.aboveEntrance,
+            SpawnType.table,
+            SpawnType.insideDoor,
+            SpawnType.insideOppositeDrawer,
+            SpawnType.aboveTVFurniture,
+            SpawnType.insideTVShelf,
+            SpawnType.oppositeBookshelf,
+            SpawnType.aboveLongFurniture
+        };
+
+        System.Random rng = new System.Random();
+        var results = requiredTypes
+            .Select(type =>
+            {
+                var options = itemSpawnPoints_Preevaluation.Where(sp => sp.spawnType == type).ToList();
+                return options.Count > 0 ? options[rng.Next(options.Count)] : null;
+            })
+            .Where(sp => sp != null)
+            .ToList();
+
+        itemSpawnPoints_Preevaluation = results;
+
         GenerateSpawnPoints(new(itemSpawnPoints_Preevaluation));
         Debug.Log(availableSpawnPoints_Start);
         Debug.Log(itemSpawnPoints_Preevaluation);
@@ -199,14 +225,11 @@ public class ItemSpawning : MonoBehaviour
         }
         List<ItemSpawn> largeSpawnsAvailable = largeSearchSpawns;
         List<ItemSpawn> normalSpawnsAvailable = smallSearchSpawns;
-        Debug.Log("Inicio LSA " + largeSpawnsAvailable.Count);
-        Debug.Log("Inicio NSA " + normalSpawnsAvailable.Count);
+
         SpawnItemsLargeFirst(new(keyItemList), ref largeSpawnsAvailable, ref normalSpawnsAvailable, itemsInEnvironment);
-        Debug.Log("Tras Key LSA " + largeSpawnsAvailable.Count);
-        Debug.Log("Tras Key NSA " + normalSpawnsAvailable.Count);
+
         SpawnItemsLargeFirst(new(decoyItemList), ref largeSpawnsAvailable, ref normalSpawnsAvailable, itemsInEnvironment, true);
-        Debug.Log("Tras Fin LSA " + largeSpawnsAvailable.Count);
-        Debug.Log("Tras Fin NSA " + normalSpawnsAvailable.Count);
+
         GameStatus.itemsInEnvironment = itemsInEnvironment;
         GameStatus.itemsToMemorize = itemsToMemorize;
     }
@@ -267,6 +290,12 @@ public class ItemSpawning : MonoBehaviour
         try
         {
             HeldItem heldItem = item.GetComponent<HeldItem>();
+            Logging.DebugLog("LISTA DE SPAWNS COMPATIBLES: " + availableSpawnPoints);
+            foreach (ItemSpawn spawn in availableSpawnPoints)
+            {
+                Logging.DebugLog(spawn.name);
+            }
+
 
             // Choose only from valid spawn points when spawning in the room, filtering the rest
             List<ItemSpawn> compatibleSpawnPoints = availableSpawnPoints;
