@@ -93,7 +93,7 @@ public class GameStatus : MonoBehaviour
         {
             case GamePhase.Tutorial_ReachApple:
                 TurnLightsOn(instance.lights[0]);
-                Timer.StartTimer(20);
+                Timer.StartTimer(25);
                 break;
             case GamePhase.Tutorial_Memorizing:
                 instance.StartCoroutine(instance.TurnLightsOff(instance.lights[0], 0f, false));
@@ -110,12 +110,14 @@ public class GameStatus : MonoBehaviour
                 break;
             case GamePhase.Tutorial_BeforeSearch:
                 instance.lights[1].SetActive(false);
+                SwapMaterial.SetMaterials(true);
                 TurnLightsOn(instance.lights[2]);
-                Timer.StartTimer(60);
+                Timer.StartTimer(100);
                 break;
             case GamePhase.Tutorial_Search:
                 savedItems.Clear();
                 keyItems.Clear();
+                SwapMaterial.SetMaterials(false);
                 OpenDoor.EnableInteractions(false);
                 OpenDrawer.EnableInteractions(false);
                 // Agregado para que no se vea el borde blanco cuando se apaga la luz
@@ -167,6 +169,7 @@ public class GameStatus : MonoBehaviour
                 break;
             case GamePhase.BeforeSearch:
                 instance.lights[1].SetActive(false);
+                SwapMaterial.SetMaterials(true);
                 TurnLightsOn(instance.lights[2]);
                 //instance.StartCoroutine(instance.FadeInLight(instance.searchLight, 0f));
                 savedItems.Clear();
@@ -181,6 +184,7 @@ public class GameStatus : MonoBehaviour
                 {
                     OpenDoor.EnableInteractions(false);
                     OpenDrawer.EnableInteractions(false);
+                    SwapMaterial.SetMaterials(false);
                     // Agregado para que no se vea el borde blanco cuando se apaga la luz
                     foreach (GameObject go in itemsInEnvironment)
                     {
@@ -196,15 +200,21 @@ public class GameStatus : MonoBehaviour
                 {
                     Timer.StopTimer();
                     timeUsedSearching = Timer.spentTime;
-                    Logging.LogEvent.SaveLogToFile();
-                    SceneLoader.LoadScene("Results");
+                    if (Settings.currentDifficulty == Settings.Difficulty.Preevaluación){
+                        ExitWithoutSaving();
+                    }
+                    else {
+                        Debug.Log("LOAD SCENE 3");
+                        Logging.LogEvent.SaveLogToFile();
+                        SceneLoader.LoadScene("Results");
+                    }
                 }
-
                 break;
             case GamePhase.SearchOver:
                 if (Settings.currentDifficulty != Settings.Difficulty.Preevaluación)
                 {
                     Logging.LogEvent.SaveLogToFile();
+                    Debug.Log("LOAD SCENE 2");
                     SceneLoader.LoadScene("Results");
                 }
                 return; // Final phase
@@ -246,6 +256,7 @@ public class GameStatus : MonoBehaviour
         if (sendToResults)
         {
             Logging.LogEvent.SaveLogToFile();
+            Debug.Log("LOAD SCENE 1");
             SceneLoader.LoadScene("Results");
         }
     }
@@ -267,7 +278,7 @@ private IEnumerator ShowPracticePopup()
     PlayerMovement.allowPlayerMovement = false;
     TouchController.allowCameraMovement = false;
 
-    yield return popups.ShowPopups("En esta sección de práctica puedes probar todo lo que viste en el tutorial");
+    yield return popups.ShowPopups("En esta sección de práctica puedes probar\ntodo lo que viste en el tutorial.");
 
     PlayerMovement.allowPlayerMovement = true;
     TouchController.allowCameraMovement = true;

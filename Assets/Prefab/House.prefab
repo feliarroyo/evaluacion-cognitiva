@@ -1392,6 +1392,7 @@ MonoBehaviour:
   spawnsContained:
   - {fileID: 0}
   - {fileID: 0}
+  id: 
 --- !u!65 &102768123836704087
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4899,6 +4900,7 @@ GameObject:
   - component: {fileID: 5729554462262569931}
   - component: {fileID: 4742611968917408688}
   - component: {fileID: 484883082123665911}
+  - component: {fileID: 590513103667102505}
   m_Layer: 0
   m_Name: Group_002
   m_TagString: Untagged
@@ -4971,6 +4973,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &590513103667102505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797684483572290380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c3fa608644d4a4993a2ac7fbbae37d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replaceID: 0
+  unlitMaterial: {fileID: 2100000, guid: 3f1fab7bece7e9040ae9a482476600f7, type: 2}
+  litMaterial: {fileID: 2100000, guid: e4cbf9403698aa845aeeeb72d78a66f0, type: 2}
 --- !u!1 &1819214652741919309
 GameObject:
   m_ObjectHideFlags: 0
@@ -5420,6 +5437,7 @@ MonoBehaviour:
   isOpen: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
+  id: 
 --- !u!65 &562947782619116262
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5522,6 +5540,7 @@ MonoBehaviour:
   isOpen: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
+  id: 
 --- !u!65 &2440292376116214063
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7315,6 +7334,7 @@ MonoBehaviour:
   spawnsContained:
   - {fileID: 0}
   - {fileID: 0}
+  id: 
 --- !u!65 &7228351784194482997
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8086,6 +8106,7 @@ MonoBehaviour:
   isOpen: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
+  id: 
 --- !u!65 &2655496108723625891
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9543,6 +9564,7 @@ MonoBehaviour:
   isOpen: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
+  id: 
 --- !u!65 &7735542857014772579
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16812,6 +16834,7 @@ MonoBehaviour:
   spawnsContained:
   - {fileID: 0}
   - {fileID: 0}
+  id: 
 --- !u!114 &6901938696670009996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17290,6 +17313,7 @@ MonoBehaviour:
   spawnsContained:
   - {fileID: 0}
   - {fileID: 0}
+  id: 
 --- !u!65 &7854136994934473696
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26988,6 +27012,7 @@ MonoBehaviour:
   isOpen: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
+  id: 
 --- !u!65 &3586898996660297917
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28401,6 +28426,7 @@ GameObject:
   - component: {fileID: 5612641606094581224}
   - component: {fileID: 7213096692865313080}
   - component: {fileID: 5881550616288163817}
+  - component: {fileID: 8505943135791695835}
   m_Layer: 0
   m_Name: Group_001
   m_TagString: Untagged
@@ -28452,7 +28478,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 6690828158493967455, guid: 111096ffec54e62458b5321561009340, type: 3}
-  - {fileID: 2100000, guid: 518fb6256ed56e84388c75d0b01ead8e, type: 2}
+  - {fileID: 2100000, guid: 2a91afe5a5b68d24e82a5ea47f36bb82, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28474,6 +28500,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8505943135791695835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153752475998866988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c3fa608644d4a4993a2ac7fbbae37d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replaceID: 1
+  unlitMaterial: {fileID: 2100000, guid: 2a91afe5a5b68d24e82a5ea47f36bb82, type: 2}
+  litMaterial: {fileID: 2100000, guid: cfc8cba03b4fd204e9a319a4d46d53a9, type: 2}
 --- !u!1 &7192787918455142332
 GameObject:
   m_ObjectHideFlags: 0
@@ -36243,6 +36284,7 @@ MonoBehaviour:
   isOpen: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
+  id: 
 --- !u!114 &8454084426897932519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36313,6 +36355,7 @@ MonoBehaviour:
   isOpen: 0
   rotationAxis: 120
   testRotation: {x: 0, y: 0, z: 0, w: 0}
+  id: 
 --- !u!114 &6952537319282864048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36401,6 +36444,7 @@ MonoBehaviour:
   isOpen: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
+  id: 
 --- !u!114 &1372993268987380617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36504,6 +36548,7 @@ MonoBehaviour:
   isOpen: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
+  id: 
 --- !u!1001 &1663391281557110017
 PrefabInstance:
   m_ObjectHideFlags: 0

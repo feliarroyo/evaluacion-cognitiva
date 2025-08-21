@@ -187,7 +187,7 @@ public class ItemSpawning : MonoBehaviour
         List<GameObject> itemsToMemorize = new();
         List<GameObject> itemsInEnvironment = new();
         // Create list of spawn points available
-        List<ItemSpawn> availableSpawnPoints_Start = new List<ItemSpawn> { itemSpawnPoints_Start[2], itemSpawnPoints_Start[9] };
+        List<ItemSpawn> availableSpawnPoints_Start = new() { itemSpawnPoints_Start[2], itemSpawnPoints_Start[9] };
         
         var requiredTypes = new List<SpawnType>
         {
@@ -201,7 +201,7 @@ public class ItemSpawning : MonoBehaviour
             SpawnType.aboveLongFurniture
         };
 
-        System.Random rng = new System.Random();
+        System.Random rng = new();
         var results = requiredTypes
             .Select(type =>
             {

@@ -10,9 +10,13 @@ public class TutorialManager : MonoBehaviour
 {
     public static TutorialManager instance;
     public GameObject mission;
-    private TextMeshProUGUI missionText;
+    // private TextMeshProUGUI missionText;
     public OpenDoor houseDoor;
-    public OpenDoor tvDoor;
+    public OpenDoor tvDoor1;
+    public OpenDoor tvDoor2;
+    public OpenDoor oppositeDoor1;
+    public OpenDoor oppositeDoor2;
+    public OpenDoor oppositeDoor3;
     public OpenDrawer houseDrawer;
     public GameObject player;
     public GameObject roomIndicators; // arrows showing the way to the search room.
@@ -21,14 +25,19 @@ public class TutorialManager : MonoBehaviour
     public List<HeldItem> items = new();
     public static float rotationX = 0.0f;
     public static float rotationY = 0.0f;
-    
+    const int DEFAULT_SPEED = 4;
+    const int SLOW_SPEED = 3;
+    const float LOOKDOWN_TIME = 1.4f;
+
     // Start is called before the first frame update
-    void Start(){
-        if (instance == null){
+    void Start()
+    {
+        if (instance == null)
+        {
             instance = this;
         }
         Debug.Log("La fase en este momento es : " + GameStatus.currentPhase);
-        missionText = mission.GetComponentInChildren<TextMeshProUGUI>();
+        // missionText = mission.GetComponentInChildren<TextMeshProUGUI>();
         // In the tutorial, certain objects must spawn, and user control is disabled
         bool inTutorial = GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Start;
         tutorialElements.SetActive(inTutorial);
@@ -36,35 +45,41 @@ public class TutorialManager : MonoBehaviour
         TouchController.allowCameraMovement = !inTutorial;
     }
 
-    private void StartMission(){
+    private void StartMission()
+    {
         //missionText.text = text;
         //mission.SetActive(true);
         Time.timeScale = 1;
     }
 
-    private void StopMission(){
+    private void StopMission()
+    {
         Time.timeScale = 0;
         mission.SetActive(false);
     }
 
-    private void DisablePlayerInput(){
+    private void DisablePlayerInput()
+    {
         TouchController.allowCameraMovement = false;
         PlayerMovement.allowPlayerMovement = false;
     }
-    private void MovePlayerVertical(bool isForwardMovement = true){
-        player.GetComponent<PlayerMovement>().verticalInput = isForwardMovement? 1f : -1f;
-        handle.transform.localPosition = new Vector3(0,isForwardMovement? 100 : -100,0);
+    private void MovePlayerVertical(bool isForwardMovement = true)
+    {
+        player.GetComponent<PlayerMovement>().verticalInput = isForwardMovement ? 1f : -1f;
+        handle.transform.localPosition = new Vector3(0, isForwardMovement ? 100 : -100, 0);
     }
 
-    private void MovePlayerHorizontal(bool isRightMovement = true){
-        player.GetComponent<PlayerMovement>().horizontalInput = isRightMovement? 1f : -1f;
-        handle.transform.localPosition = new Vector3(isRightMovement? 100 : -100,0,0);
+    private void MovePlayerHorizontal(bool isRightMovement = true)
+    {
+        player.GetComponent<PlayerMovement>().horizontalInput = isRightMovement ? 1f : -1f;
+        handle.transform.localPosition = new Vector3(isRightMovement ? 100 : -100, 0, 0);
     }
 
-    private void StopPlayerMovement() {
+    private void StopPlayerMovement()
+    {
         player.GetComponent<PlayerMovement>().verticalInput = 0;
         player.GetComponent<PlayerMovement>().horizontalInput = 0;
-        handle.transform.localPosition = new Vector3(0,0,0);
+        handle.transform.localPosition = new Vector3(0, 0, 0);
     }
 
     public void CameraMovement(float xAxis, float yAxis = 0)
@@ -78,123 +93,203 @@ public class TutorialManager : MonoBehaviour
         items[index].GetComponentInChildren<HeldItem>().ClickBehaviour(items[index].gameObject);
     }
 
-    public void ReturnItem()
+    private void StoreItem()
+    {
+        HeldItem.StoreItem();
+        Interactable.allowAllInteractions = false;
+    }
+
+    private void ReturnItem()
     {
         HeldItem.ReturnItem();
         Interactable.allowAllInteractions = false;
     }
 
-    public void DisableItemInteractions(List<HeldItem> items){
-        foreach (HeldItem hi in items){
+    public void DisableItemInteractions(List<HeldItem> items)
+    {
+        foreach (HeldItem hi in items)
+        {
             DisableInteractionOnItem(hi);
         }
     }
 
-    private void DisableInteractionOnItem(HeldItem it){
+    private void DisableInteractionOnItem(HeldItem it)
+    {
         it.gameObject.GetComponent<Outline>().enabled = false;
         it.gameObject.GetComponent<Interactable>().isInteractable = false;
         it.gameObject.GetComponent<Interactable>().stoppedInteraction = true;
     }
 
-    public IEnumerator TutorialSequence()
+    private IEnumerator ShowPopups(PopUpManager popups, string msg)
     {
-        Interactable.allowAllInteractions = false;
-        PopUpManager popups = PopUpManager.instance;
-        DisablePlayerInput();
         StopMission();
-        yield return popups.ShowPopups("En este tutorial, se describen los objetivos del usuario en la actividad.");
-        yield return popups.ShowPopups("Al comienzo del juego, vas a ver la fachada de una casa.");
-        yield return popups.ShowPopups("Deslizá el control izquierdo hacia arriba para dirigirte a la puerta de la casa.");
+        yield return popups.ShowPopups(msg);
         StartMission();
-        player.GetComponent<PlayerMovement>().moveSpeed = 3;
+    }
+
+    private IEnumerator ShowPopups(PopUpManager popups, string[] msg)
+    {
+        StopMission();
+        yield return popups.ShowPopups(msg);
+        StartMission();
+    }
+
+    /// <summary>
+    /// Walks from the starting point to the house, explaining how to move forward along the way.
+    /// </summary>
+    private IEnumerator WalkToHouse(PopUpManager popups)
+    {
+        yield return ShowPopups(popups, new string[] {
+            "En este tutorial, se describe\nel ambiente en el que se desarrolla el juego,\ny las tareas a ser realizadas en este ambiente.",
+            "Al comienzo del juego,\nse verá la fachada de una casa.",
+            "Se debe avanzar hacia la puerta de la casa,\ndeslizando el control izquierdo hacia arriba."
+        });
+
+        player.GetComponent<PlayerMovement>().moveSpeed = SLOW_SPEED;
         yield return new WaitForSeconds(1f);
         MovePlayerVertical();
         yield return new WaitUntil(() => houseDoor.GetComponent<Interactable>().isInteractable);
-        GameStatus.currentPhase = GameStatus.GamePhase.Tutorial_ReachApple;  
+        GameStatus.currentPhase = GameStatus.GamePhase.Tutorial_ReachApple;
         StopPlayerMovement();
-        player.GetComponent<PlayerMovement>().moveSpeed = 4;
+        player.GetComponent<PlayerMovement>().moveSpeed = DEFAULT_SPEED;
         yield return new WaitForSeconds(0.5f);
-        StopMission();
-        yield return popups.ShowPopups("Cuando la puerta tiene un borde blanco, podés abrirla tocando sobre ella.");
-        StartMission();
+    }
+
+    /// <summary>
+    /// Explain how to open doors, and enters inside the house.
+    /// </summary>
+    private IEnumerator EnterHouse(PopUpManager popups)
+    {
+        yield return ShowPopups(popups, "Cuando la puerta tenga un borde blanco,\nse debe abrirla tocando sobre ella.");
         yield return new WaitForSeconds(1f);
         houseDoor.ClickBehaviour(houseDoor.gameObject);
         yield return new WaitForSeconds(1.5f);
-        StopMission();
-        yield return popups.ShowPopups("Cuando se encienda la luz, verás objetos en los estantes de la pared del hall, y tendrás tiempo para observarlos.");
-        yield return popups.ShowPopups("Para que se encienda la luz, caminá hacia los objetos.");
-        StartMission();
+        yield return ShowPopups(popups, new string[] {
+            "Cuando se atraviese la puerta de la casa,\nse encenderá la luz del hall.\nEn ese momento, se verán objetos en los estantes del hall,\ny se tendrá un tiempo límite para observarlos.",
+            "Para que se encienda la luz del hall,\nse debe avanzar hacia los objetos en los estantes."
+        });
         MovePlayerVertical();
         yield return new WaitUntil(() => GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Memorizing);
-        StopMission();
         StopPlayerMovement();
-        yield return popups.ShowPopups("Al encenderse la luz comenzará a correr el tiempo, que se ve en el reloj de la pantalla.");
-        yield return popups.ShowPopups("Podés moverte en todas las direcciones usando el control de la izquierda.");
-        StartMission();
-        // Demostrar movimiento (derecha-izquierda-adelante-atras)
+    }
+    
+    /// <summary>
+    /// Starts memorizing phase, and demonstrates player movement.
+    /// </summary>
+    private IEnumerator PlayerMovementDemonstration(PopUpManager popups)
+    {
+        const float MOVE_TIME = 0.75f;
+        yield return ShowPopups(popups, new string[] {
+            "Al encenderse la luz del hall,\ncomenzará a correr el tiempo límite\npara observar los objetos,\nen el reloj que se muestra en la pantalla.",
+            "Es posible moverse en todas las direcciones del hall\n(adelante, atrás, izquierda y derecha),\ndeslizando el control izquierdo hacia la dirección deseada."
+        });
         yield return new WaitForSeconds(0.5f);
-        player.GetComponent<PlayerMovement>().moveSpeed = 3;
+        player.GetComponent<PlayerMovement>().moveSpeed = SLOW_SPEED;
         MovePlayerHorizontal(true);
         yield return new WaitForSeconds(0.4f);
         StopPlayerMovement();
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(MOVE_TIME);
         MovePlayerHorizontal(false);
         yield return new WaitForSeconds(0.4f);
         StopPlayerMovement();
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(MOVE_TIME);
         MovePlayerVertical(false);
         yield return new WaitForSeconds(0.4f);
         StopPlayerMovement();
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(MOVE_TIME);
         MovePlayerVertical(true);
         yield return new WaitForSeconds(0.4f);
         StopPlayerMovement();
-        yield return new WaitForSeconds(0.75f);
-        player.GetComponent<PlayerMovement>().moveSpeed = 4;
-        StopMission();
-        yield return popups.ShowPopups("Podés mirar hacia cualquier dirección deslizando sobre la pantalla.");
-        // Demostrar cámara (ej. cuadrado)
-        StartMission();
-        CameraMovement(5f);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(MOVE_TIME);
+        player.GetComponent<PlayerMovement>().moveSpeed = DEFAULT_SPEED;
+    }
+    
+    /// <summary>
+    /// Shows how to move the camera in every direction.
+    /// </summary>
+    private IEnumerator CameraDemonstration(PopUpManager popups)
+    {
+        const float WAIT_SPEED = 0.5f;
+        yield return ShowPopups(popups, "Es posible mirar hacia todas las direcciones del hall\n(arriba, abajo, izquierda y derecha)\ndeslizando sobre la pantalla en la dirección deseada.");
+        CameraMovement(5f); // mirada hacia la derecha
+        yield return new WaitForSeconds(WAIT_SPEED);
         CameraMovement(0f);
+        yield return new WaitForSeconds(WAIT_SPEED);
+        CameraMovement(-5f);  // vuelta
+        yield return new WaitForSeconds(WAIT_SPEED);
+        CameraMovement(0f);  // vuelta
+        yield return new WaitForSeconds(WAIT_SPEED);
+        CameraMovement(0f, -5f); // mirada hacia abajo
+        yield return new WaitForSeconds(WAIT_SPEED);
+        CameraMovement(0f, 0f);
+        yield return new WaitForSeconds(WAIT_SPEED);
+        CameraMovement(0f, 5f); // vuelta
+        yield return new WaitForSeconds(WAIT_SPEED);
+        CameraMovement(0f, 0f);
+        yield return new WaitForSeconds(WAIT_SPEED);
+        CameraMovement(-5f); // mirada hacia la izquierda
+        yield return new WaitForSeconds(WAIT_SPEED);
+        CameraMovement(0f);
+        yield return new WaitForSeconds(WAIT_SPEED);
+        CameraMovement(5f);  // vuelta
+        yield return new WaitForSeconds(WAIT_SPEED);
+        CameraMovement(0f);  // vuelta
+        yield return new WaitForSeconds(WAIT_SPEED);
+        CameraMovement(0f, 5f); // mirada hacia arriba
+        yield return new WaitForSeconds(WAIT_SPEED);
+        CameraMovement(0f, 0f);
+        yield return new WaitForSeconds(WAIT_SPEED);
+        CameraMovement(0f, -5f); // vuelta
+        yield return new WaitForSeconds(WAIT_SPEED);
+        CameraMovement(0f, 0f);
+        yield return new WaitForSeconds(WAIT_SPEED);
+    }
+
+    /// <summary>
+    /// Shows how to rotate and leave an item.
+    /// </summary>
+    private IEnumerator ItemRotationDemonstration(PopUpManager popups)
+    {
+        const float WAIT_SPEED = 1f;
+        const int ITEMID_CAMERA = 0;
+        yield return ShowPopups(popups, new string[] {
+            "Se debe observar los objetos en el hall,\ny tratar de memorizarlos,\nantes de que se acabe el tiempo límite.",
+            "Cuando un objeto tenga un borde blanco,\nes posible observarlo con más detalle,\ntocando sobre el objeto."
+        });
         yield return new WaitForSeconds(1f);
-        CameraMovement(-5f);
+        GetItem(ITEMID_CAMERA);
         yield return new WaitForSeconds(1f);
-        CameraMovement(0f,-5f);
-        yield return new WaitForSeconds(1f);
-        CameraMovement(0f,0f);
-        yield return new WaitForSeconds(1f);
-        CameraMovement(0f,5f);
-        yield return new WaitForSeconds(1f);
-        CameraMovement(0f,0f);
-        yield return new WaitForSeconds(1f);
-        StopMission();
-        yield return popups.ShowPopups("Observá los objetos con atención, y tratá de memorizarlos.");
-        yield return popups.ShowPopups("Para verlos con más detalle, podés presionarlos.");
-        StartMission();
-        yield return new WaitForSeconds(1f);
-        GetItem(0);
-        yield return new WaitForSeconds(1f);
-        StopMission();
-        yield return popups.ShowPopups("Podés deslizar sobre el objeto para rotarlo.");
-        StartMission();
-        yield return new WaitForSeconds(1f);
+        yield return ShowPopups(popups, "Es posible girar un objeto en distintas direcciones\n(izquierda, derecha, arriba y abajo),\ndeslizando sobre el objeto en la dirección deseada.");
+        yield return new WaitForSeconds(WAIT_SPEED);
         rotationX = -0.75f;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(WAIT_SPEED);
         rotationX = 0f;
-        yield return new WaitForSeconds(0.5f);
-        StopMission();
-        yield return popups.ShowPopups("Para dejar el objeto donde estaba, presiona el botón rojo.");
-        StartMission();
+        yield return new WaitForSeconds(WAIT_SPEED);
+        rotationX = 0.75f;
+        yield return new WaitForSeconds(WAIT_SPEED);
+        rotationX = 0;
+        yield return new WaitForSeconds(WAIT_SPEED);
+        rotationY = -0.75f;
+        yield return new WaitForSeconds(WAIT_SPEED);
+        rotationY = 0f;
+        yield return new WaitForSeconds(WAIT_SPEED);
+        rotationY = 0.75f;
+        yield return new WaitForSeconds(WAIT_SPEED);
+        rotationY = 0f;
+        yield return ShowPopups(popups, "Para que el objeto vuelva a su lugar en el estante,\nse debe presionar el botón rojo que se muestra en la pantalla.");
         yield return new WaitForSeconds(0.5f);
         ReturnItem();
+    }
+
+    /// <summary>
+    /// Once the memorizing phase ends, goes through the hallway and into the living.
+    /// </summary>
+    private IEnumerator GoThroughHallway(PopUpManager popups)
+    {
         yield return new WaitUntil(() => GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_BeforeSearch);
-        DisableItemInteractions(new List<HeldItem>() {items[0], items[1]});
+        DisableItemInteractions(new List<HeldItem>() { items[0], items[1] });
         yield return new WaitForSeconds(0.5f);
-        StopMission();
-        yield return popups.ShowPopups("Cuando el tiempo se termine y la luz se apague, dirigite hacia el pasillo para continuar.");
-        StartMission();
+        yield return ShowPopups(popups, "Cuando el tiempo límite termine,\nla luz del hall se apagará,\ny se deberá avanzar hacia el pasillo de la casa.");
         yield return new WaitForSeconds(1f);
         CameraMovement(5f);
         yield return new WaitForSeconds(1f);
@@ -206,27 +301,38 @@ public class TutorialManager : MonoBehaviour
         CameraMovement(-5f);
         yield return new WaitForSeconds(1f);
         CameraMovement(0f);
-        StopMission();
-        yield return popups.ShowPopups("Avanzá por el pasillo hasta la entrada de la sala del living.");
-        StartMission();
-        yield return new WaitForSeconds(0.5f);
+        yield return ShowPopups(popups, "Se debe avanzar por el pasillo de la casa\nhacia la entrada de la sala de living.");
+        player.GetComponent<PlayerMovement>().moveSpeed = SLOW_SPEED;
+        yield return new WaitForSeconds(0.6f);
         MovePlayerVertical();
-        yield return new WaitForSeconds(1.4f);
-        StopPlayerMovement();
         yield return new WaitForSeconds(2f);
-        StopMission();
-        // Cuando pases la entrada, la luz se encenderá. Tendrás un tiempo para recorrer la sala y observar los objetos en ella.
-        yield return popups.ShowPopups("Observá los objetos del living con atención, y tratá de reconocer aquellos que estaban en el hall.");
-        StartMission();
+        StopPlayerMovement();
+        player.GetComponent<PlayerMovement>().moveSpeed = DEFAULT_SPEED;
+        yield return new WaitForSeconds(2f);
+    }
+
+    /// <summary>
+    /// Goes into the living room.
+    /// </summary>
+    private IEnumerator EnterLiving(PopUpManager popups)
+    {
+        yield return ShowPopups(popups, "Cuando se atraviese la entrada de la sala de living,\nla luz de la sala se encenderá.\nA partir de ese momento, se deberá recorrer la sala,\nobservar los objetos distribuídos en ella,\ny seleccionar a los objetos que estaban en el hall.");
+        yield return new WaitForSeconds(1f);
         MovePlayerVertical();
         yield return new WaitForSeconds(0.3f);
         StopPlayerMovement();
-        StopMission();
-        yield return popups.ShowPopups("Recorré el living y observá los objetos con atención. Tratá de reconocer aquellos objetos que estaban en el hall.");
-        StartMission();
+        yield return ShowPopups(popups, "Al encenderse la luz de la sala,\ncomenzará a correr el tiempo límite\npara recorrer la sala y seleccionar los objetos,\nen el reloj que se muestra en la pantalla.");
         MovePlayerHorizontal(false);
         yield return new WaitForSeconds(0.2f);
         StopPlayerMovement();
+    }
+
+    /// <summary>
+    /// Looks at the entrance furniture, and manipulates the item above it.
+    /// </summary>
+    private IEnumerator ItemInteractionDemonstration(PopUpManager popups)
+    {
+        const int ITEMID_ENTRANCEITEM = 2;
         yield return new WaitForSeconds(1f);
         MovePlayerVertical();
         yield return new WaitForSeconds(0.5f);
@@ -234,373 +340,288 @@ public class TutorialManager : MonoBehaviour
         CameraMovement(5f, -2.5f);
         yield return new WaitForSeconds(1.2f);
         CameraMovement(0f);
-        StopMission();
-        yield return popups.ShowPopups("Para verlos con más detalle, podés presionarlos.");
-        StartMission();
+        yield return ShowPopups(popups, "Cuando un objeto tenga un borde blanco,\nes posible observarlo con más detalle,\ntocando sobre el objeto.");
         yield return new WaitForSeconds(1f);
-        GetItem(2);
+        GetItem(ITEMID_ENTRANCEITEM);
         yield return new WaitForSeconds(1f);
-        StopMission();
-        yield return popups.ShowPopups("Podés deslizar sobre el objeto para rotarlo.");
-        StartMission();
+        yield return ShowPopups(popups, "Es posible girar un objeto que está siendo observado,\nen distintas direcciones (izquierda, derecha, arriba y abajo),\ndeslizando sobre el objeto en la dirección deseada.");
         yield return new WaitForSeconds(1f);
         rotationX = -0.75f;
         yield return new WaitForSeconds(1f);
         rotationX = 0f;
         yield return new WaitForSeconds(0.5f);
-        StopMission();
-        yield return popups.ShowPopups("Para dejar el objeto donde estaba, presiona el botón rojo.");
-        StartMission();
+        yield return ShowPopups(popups, "Para que el objeto que está siendo observado vuelva a su lugar,\nse debe tocar el botón rojo que se muestra en la pantalla.");
         yield return new WaitForSeconds(1.5f);
         ReturnItem();
         yield return new WaitForSeconds(2f);
-        GetItem(2);
+        GetItem(ITEMID_ENTRANCEITEM);
         yield return new WaitForSeconds(1f);
-        StopMission();
-        yield return popups.ShowPopups("Mientras observás un objeto, puedes presionarlo de nuevo para elegirlo, si creés que estaba en el hall.");
-        StartMission();
+        yield return ShowPopups(popups, "Para seleccionar el objeto que está siendo observado,\nse debe tocar nuevamente sobre el objeto.");
         yield return new WaitForSeconds(1f);
-        HeldItem.StoreItem();
-        Interactable.allowAllInteractions = false;
-        StopMission();
-        yield return popups.ShowPopups("Los objetos recogidos se muestran en la pantalla, arriba a la derecha.");
-        StartMission();
+        StoreItem();
+        yield return ShowPopups(popups, "Los objetos seleccionados se muestran\nen la parte superior derecha de la pantalla.");
         yield return new WaitForSeconds(1f);
-        CameraMovement(-5f,2.5f); // volver a mirar al frente
+        CameraMovement(-5f, 2.5f); // volver a mirar al frente
         yield return new WaitForSeconds(1.2f);
         CameraMovement(0f);
+    }
+
+    /// <summary>
+    /// Goes to the corner with the rack, and looks at the entire room from there.
+    /// </summary>
+    private IEnumerator LookFromCorner(PopUpManager popups)
+    {
+        player.GetComponent<PlayerMovement>().moveSpeed = SLOW_SPEED;
         MovePlayerVertical();
-        yield return new WaitForSeconds(0.325f);
+        yield return new WaitForSeconds(0.45f); // probar 0.4 -> 0.45
         StopPlayerMovement();
+        // Mostrar vista de la sala
         CameraMovement(-5f);
+        yield return new WaitForSeconds(2.4f);
+        CameraMovement(0f);
+        yield return new WaitForSeconds(1.5f);
+        CameraMovement(5f);
         yield return new WaitForSeconds(1.2f);
         CameraMovement(0f);
+        yield return new WaitForSeconds(1f);
+    }
+
+    /// <summary>
+    /// Moves from the rack corner to the drawers in the opposite corner.
+    /// </summary>
+    private IEnumerator GoToOppositeCorner(PopUpManager popups){
         MovePlayerVertical();
-        yield return new WaitForSeconds(0.65f); // moverse al cajon
+        yield return new WaitForSeconds(0.8f); // por ahi un poco mas
         MovePlayerHorizontal(false);
         yield return new WaitForSeconds(0.2f);
+    }
+
+    /// <summary>
+    /// Opens the first drawer, and manipulates the item within it.
+    /// </summary>
+    private IEnumerator DrawersDemonstration(PopUpManager popups){
+        const int ITEMID_DRAWERITEM = 3;
         StopPlayerMovement();
-        CameraMovement(0f,-2f);
-        yield return new WaitForSeconds(1.4f);
+        CameraMovement(0f, -2f);
+        yield return new WaitForSeconds(LOOKDOWN_TIME);
         CameraMovement(0f);
-        StopMission();
-        yield return popups.ShowPopups("Cuando un cajón tiene un borde blanco, podés abrirlo tocando sobre él.");
-        StartMission();
+        yield return ShowPopups(popups, "Cuando un cajón de algún mueble tenga un borde blanco,\nse podrá abrirlo tocando sobre él.");
         yield return new WaitForSeconds(1f);
         houseDrawer.ClickBehaviour(houseDrawer.gameObject);
         yield return new WaitForSeconds(2f);
-        GetItem(3);
+        GetItem(ITEMID_DRAWERITEM);
         yield return new WaitForSeconds(1f);
-        HeldItem.ReturnItem();
+        ReturnItem();
         yield return new WaitForSeconds(1f);
         houseDrawer.ClickBehaviour(houseDrawer.gameObject);
+        
         yield return new WaitForSeconds(2f);
-        CameraMovement(0f,2f);
-        yield return new WaitForSeconds(1.4f);
-        CameraMovement(-5f);
-        yield return new WaitForSeconds(1.1f);
-        CameraMovement(0f);
-        MovePlayerVertical();
+    }
+
+    private IEnumerator GoThroughOpposite(PopUpManager popups){
+        const int ITEMID_OPPITEM = 8;
+        const int ITEMID_SHELFITEM = 9;
+        
+        // ir al centro
+        MovePlayerHorizontal(false);
+        yield return new WaitForSeconds(0.45f);
+        StopPlayerMovement();
         yield return new WaitForSeconds(0.5f);
-        StopPlayerMovement();
-        CameraMovement(-5f);
-        yield return new WaitForSeconds(1.3f);
-        CameraMovement(0f, 0f);
+        // abrir y cerrar puertas
+        yield return ShowPopups(popups, "Cuando una puerta de algún mueble tenga un borde blanco,\nse podrá abrirla tocando sobre ella.");
         yield return new WaitForSeconds(1f);
-        GetItem(4);
+        oppositeDoor1.ClickBehaviour(oppositeDoor1.gameObject);
+        yield return new WaitForSeconds(1f);
+        oppositeDoor2.ClickBehaviour(oppositeDoor2.gameObject);
+        yield return new WaitForSeconds(1f);
+        oppositeDoor3.ClickBehaviour(oppositeDoor3.gameObject);
+        yield return new WaitForSeconds(1f);
+        oppositeDoor1.ClickBehaviour(oppositeDoor1.gameObject);
+        yield return new WaitForSeconds(1f);
+        oppositeDoor2.ClickBehaviour(oppositeDoor2.gameObject);
+        yield return new WaitForSeconds(1f);
+        oppositeDoor3.ClickBehaviour(oppositeDoor3.gameObject);
+        yield return new WaitForSeconds(1f);
+        
+        // mirar objeto de mueble
+        GetItem(ITEMID_OPPITEM);
         yield return new WaitForSeconds(1f);
         rotationX = -0.75f;
         yield return new WaitForSeconds(1f);
         rotationX = 0f;
-        yield return new WaitForSeconds(0.5f);
-        HeldItem.StoreItem();
-        Interactable.allowAllInteractions = false;
-        yield return new WaitForSeconds(1.2f);
-        MovePlayerVertical();
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(1.1f);
+        ReturnItem();
+        yield return new WaitForSeconds(1f);
+        
+        // ir hacia estanteria
+        MovePlayerHorizontal(false);
+        yield return new WaitForSeconds(0.38f); // probar 0.4 -> 0.38
+
+        // mirar objeto de estanteria
         StopPlayerMovement();
-        CameraMovement(5f,-2.5f);
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1f);
+        GetItem(ITEMID_SHELFITEM);
+        yield return new WaitForSeconds(1f);
+        rotationX = -0.75f;
+        yield return new WaitForSeconds(1f);
+        rotationX = 0f;
+        yield return new WaitForSeconds(1.1f);
+        ReturnItem();
+        yield return new WaitForSeconds(1f);
+        
+        // subir la mirada
+        CameraMovement(0f, 2f);
+        yield return new WaitForSeconds(LOOKDOWN_TIME);
         CameraMovement(0f);
-        StopMission();
-        yield return popups.ShowPopups("Cuando una puerta tiene un borde blanco, podés abrirla tocando sobre ella.");
-        StartMission();
+    }
+
+    private IEnumerator GoThroughTV(PopUpManager popups){
+        const int ITEMID_SHELFITEM = 4;
+        const int ITEMID_SIDEITEM = 7;
+        const int ITEMID_DOORITEM = 5;
+        const float SIDELOOK_TIME = 0.3f;
+        // Creo que sería bueno moverse hasta estar delante de la tv, y ahí mostrar como observar un objeto sobre la estanteria, y el objeto al lado de la tv.
+        // Luego, se puede abrir las dos puertas que están debajo de la tv.
+
+        // Girar hacia mueble de TV
+        CameraMovement(-5f);
+        yield return new WaitForSeconds(2.4f);
+        CameraMovement(0f, 0f);
         yield return new WaitForSeconds(1f);
-        tvDoor.ClickBehaviour(tvDoor.gameObject);
+        // Moverse al centro de la TV
+        MovePlayerVertical();
+        yield return new WaitForSeconds(0.55f); // probar 0.5 -> 0.55
+        StopPlayerMovement();
+        // Mirar la TV
+        CameraMovement(5f);
+        yield return new WaitForSeconds(1.3f);
+        CameraMovement(0f, 0f);
+        yield return new WaitForSeconds(0.5f);
+        // Mirar hacia la esquina, tomar item
+        CameraMovement(5f);
+        yield return new WaitForSeconds(SIDELOOK_TIME);
+        CameraMovement(0f);
+        GetItem(ITEMID_SHELFITEM);
         yield return new WaitForSeconds(1f);
-        GetItem(5);
+        // rotar y llevarse item
+        rotationX = -0.75f;
+        yield return new WaitForSeconds(1f);
+        rotationX = 0f;
+        yield return new WaitForSeconds(0.5f);
+        StoreItem();
+        yield return new WaitForSeconds(1.2f);
+        // devolver mirada al centro
+        CameraMovement(-5f);
+        yield return new WaitForSeconds(SIDELOOK_TIME);
+        CameraMovement(0f, 0f);
+        yield return new WaitForSeconds(0.5f);
+        // bajar mirada, manipular objeto a la izquierda
+        CameraMovement(-5f);
+        yield return new WaitForSeconds(SIDELOOK_TIME);
+        CameraMovement(0f, -2f);
+        yield return new WaitForSeconds(LOOKDOWN_TIME);
+        CameraMovement(0f,0f);
+        yield return new WaitForSeconds(1f);
+        GetItem(ITEMID_SIDEITEM);
+        yield return new WaitForSeconds(1f);
+        rotationY = 0.75f;
+        yield return new WaitForSeconds(1f);
+        rotationY = 0f;
+        yield return new WaitForSeconds(1f);
+        ReturnItem();
+        yield return new WaitForSeconds(1f);
+        // abrir puerta izquierda
+        tvDoor2.ClickBehaviour(tvDoor2.gameObject);
+        yield return new WaitForSeconds(2f);
+        tvDoor2.ClickBehaviour(tvDoor2.gameObject);
+        yield return new WaitForSeconds(2f);
+        // mirar a la derecha, abrir puerta derecha y manipular su objeto
+        CameraMovement(5f);
+        yield return new WaitForSeconds(SIDELOOK_TIME *2);
+        CameraMovement(0f);
+        yield return new WaitForSeconds(1f);
+        tvDoor1.ClickBehaviour(tvDoor1.gameObject);
+        yield return new WaitForSeconds(2f);
+        GetItem(ITEMID_DOORITEM);
         yield return new WaitForSeconds(1f);
         rotationX = 0.75f;
         yield return new WaitForSeconds(1f);
         rotationX = 0f;
         yield return new WaitForSeconds(1f);
-        HeldItem.StoreItem();
-        Interactable.allowAllInteractions = false;
+        StoreItem();
         yield return new WaitForSeconds(1f);
-        tvDoor.ClickBehaviour(tvDoor.gameObject);
-        CameraMovement(-5f,2.5f);
-        yield return new WaitForSeconds(1.2f);
-        CameraMovement(-5f,-2.5f);
-        yield return new WaitForSeconds(1.2f);
+        tvDoor1.ClickBehaviour(tvDoor1.gameObject);
+        yield return new WaitForSeconds(1f);
+        // levantar y centrar mirada
+        CameraMovement(0f, 2f);
+        yield return new WaitForSeconds(LOOKDOWN_TIME);
+        CameraMovement(-5f);
+        yield return new WaitForSeconds(SIDELOOK_TIME);
+        CameraMovement(0f,0f);
+        yield return new WaitForSeconds(1f);
+    }
+
+    private IEnumerator LookAtCenter(PopUpManager popups){
+        const int ITEMID_TABLEITEM = 6;
+        // girar camara al centro
+        CameraMovement(-5f);
+        yield return new WaitForSeconds(2f);
+        // bajar mirada
+        CameraMovement(0f, -2f);
+        yield return new WaitForSeconds(LOOKDOWN_TIME);
         CameraMovement(0f);
-        GetItem(6);
+        yield return new WaitForSeconds(1f);
+        // manipular item
+        GetItem(ITEMID_TABLEITEM);
         yield return new WaitForSeconds(1.2f);
-        HeldItem.ReturnItem();
-        Interactable.allowAllInteractions = false;
-        CameraMovement(0f,2.5f);
-        yield return new WaitForSeconds(1.2f);
+        ReturnItem();
+        yield return new WaitForSeconds(1f);
+        // subir mirada
+        CameraMovement(0f, 2f);
+        yield return new WaitForSeconds(LOOKDOWN_TIME);
         CameraMovement(0f);
         yield return new WaitForSeconds(2f);
+    }
+
+    private IEnumerator FinalLook(PopUpManager popups){
+        // mira a la izquierda
         CameraMovement(-5f);
         yield return new WaitForSeconds(1.5f);
         CameraMovement(0f);
         yield return new WaitForSeconds(1f);
+        // mira a la derecha, a la pared de entrada
         CameraMovement(5f);
         yield return new WaitForSeconds(2f);
         CameraMovement(0f);
         yield return new WaitForSeconds(1.5f);
-        CameraMovement(-5f);
-        yield return new WaitForSeconds(1f);
-        CameraMovement(0f);
-        yield return new WaitForSeconds(2f);
-        StopMission();
-        yield return popups.ShowPopups("Cuando el tiempo se acaba, se apagan las luces y el recorrido se da por finalizado.");
-        StartMission();
+        yield return ShowPopups(popups, "Cuando el tiempo límite termine,\nla luz de la sala se apagará,\ny el recorrido se dará por finalizado.");
         yield return new WaitUntil(() => GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_SearchOver);
         DisableItemInteractions(items);
-        StopMission();
-        yield return popups.ShowPopups("También se puede finalizar antes de tiempo saliendo de la sala.");
-        StartMission();
+        yield return ShowPopups(popups, "También es posible finalizar el recorrido\nantes de que termine el tiempo límite.\nPara hacer esto, dirigirse hacia la entrada de la sala.");
         yield return new WaitForSeconds(2f);
+    }
+    public IEnumerator TutorialSequence()
+    {
+        Interactable.allowAllInteractions = false;
+        PopUpManager popups = PopUpManager.instance;
+        DisablePlayerInput();
+        yield return WalkToHouse(popups);
+        yield return EnterHouse(popups);
+        yield return PlayerMovementDemonstration(popups);
+        yield return CameraDemonstration(popups);
+        yield return ItemRotationDemonstration(popups);
+        yield return GoThroughHallway(popups);
+        yield return EnterLiving(popups);
+        yield return ItemInteractionDemonstration(popups);
+        yield return LookFromCorner(popups);
+        yield return GoToOppositeCorner(popups);
+        yield return DrawersDemonstration(popups);
+        yield return GoThroughOpposite(popups);
+        yield return GoThroughTV(popups);
+        yield return LookAtCenter(popups);
+        yield return FinalLook(popups);
         SceneLoader.LoadScene("MainMenu");
         yield return null;
-
-
-        // CameraMovement(-2.5f, -1.5f); // mirar a la mesita
-        // yield return new WaitForSeconds(1.5f);
-        // CameraMovement(0f);
-        // MovePlayerVertical();
-        // yield return new WaitForSeconds(0.5f);
-        // StopPlayerMovement();
-        // yield return new WaitForSeconds(1f);
-        // GetItem(2);
-        // yield return new WaitForSeconds(1f);
-        // StopMission();
-        // yield return popups.ShowPopups("Mientras observás un objeto, puedes presionar el botón rojo para dejarlo.");
-        // StartMission();
-        // yield return new WaitForSeconds(0.5f);
-        // ReturnItem();
-        // yield return new WaitForSeconds(0.5f);
-        // CameraMovement(-2.5f);
-        // yield return new WaitForSeconds(3f);
-        // CameraMovement(0f);
-        // yield return new WaitForSeconds(0.5f);
-        // StopMission();
-        // yield return popups.ShowPopups("Las puertas y cajones pueden abrirse y cerrarse cuando estás cerca.");
-        // StartMission();
-        // yield return new WaitForSeconds(1f);
-        // tvDoor.ClickBehaviour(tvDoor.gameObject);
-        // yield return new WaitForSeconds(1f);
-        // GetItem(3);
-        // yield return new WaitForSeconds(1f);
-        // StopMission();
-        // yield return popups.ShowPopups("Mientras observás un objeto, puedes presionarlo de nuevo para elegirlo, si creés que estaba en el hall.");
-        // StartMission();
-        // yield return new WaitForSeconds(1f);
-        // rotationX = 0.75f;
-        // yield return new WaitForSeconds(1f);
-        // rotationX = 0f;
-        // yield return new WaitForSeconds(1f);
-        // HeldItem.StoreItem();
-        // Interactable.allowAllInteractions = false;
-        // yield return new WaitForSeconds(1f);
-        // yield return popups.ShowPopups("Los objetos recogidos se muestran en la pantalla, arriba a la derecha.");
-        // StartMission();
-        // yield return new WaitForSeconds(1f);
-        // tvDoor.ClickBehaviour(tvDoor.gameObject);
-        // yield return new WaitForSeconds(1f);
-        // CameraMovement(-5f, 1.5f);
-        // yield return new WaitForSeconds(1.1f);
-        // CameraMovement(0f, 1.5f);
-        // yield return new WaitForSeconds(0.4f);
-        // StopMission();
-        // yield return popups.ShowPopups("El juego termina cuando se acaba el tiempo o cuando se sale del living.");
-        // StartMission();
-        // CameraMovement(0f);
-        // yield return new WaitForSeconds(1f);
-        // MovePlayerVertical();
-        // yield return new WaitForSeconds(0.4f);
-        // StopPlayerMovement();
-        // CameraMovement(5f);
-        // yield return new WaitForSeconds(1f);
-        // CameraMovement(0f);
-        // MovePlayerVertical();
-        // yield return null;
-
-
-
-
-
-
-
-        // //StartMission("Mové la cámara para mirar detrás tuyo.");
-        // yield return new WaitUntil(() => player.transform.eulerAngles.y > 170 && player.transform.eulerAngles.y < 190); // AllowMovement -> Trigger darse vuelta
-        // // Camera control - Part 2
-        
-        // //StartMission("Mirá la manzana.");
-        // yield return new WaitUntil(() => player.transform.eulerAngles.y < 10 || player.transform.eulerAngles.y > 350); // AllowMovement -> Trigger darse vuelta
-        // // Grab item
-        // StopMission();
-        // yield return popups.ShowPopups(new string[] {
-        //     "Para interactuar con un elemento, acercate a él hasta que tenga un borde blanco, y presionalo."
-        // });
-        // StartMission("Acercate y tomá la manzana.");
-        // PlayerMovement.allowPlayerMovement = true;
-        // yield return new WaitUntil(() => HeldItem.currentlyHeldItem != null && !HeldItem.currentlyHeldItem.isMoving); // AllowMovement -> Trigger Tomar Manzana
-        // // Drop Item
-        // StopMission();
-        // yield return popups.ShowPopups(new string[] {
-        //     "Los objetos podés rotarlos deslizando en la pantalla.",
-        //     "Para dejar un objeto que estás sosteniendo, presioná el botón rojo."
-        // });
-        // StartMission("Dejá la manzana.");
-        // HeldItem tutorialItem = HeldItem.currentlyHeldItem;
-        // yield return new WaitUntil(() => HeldItem.currentlyHeldItem == null && !tutorialItem.isReturning); // AllowMovement -> Trigger Dejar Manzana
-        // // Open Door
-        // StopMission();
-        // yield return popups.ShowPopups(new string[] {
-        //     "Las puertas y los cajones de la casa se pueden abrir tocándolos."
-        // });
-        // StartMission("Abrí la puerta y entrá a la casa.");
-        // yield return new WaitUntil(() => houseDoor.isOpen && !houseDoor.IsDoorMoving()); // AllowMovement -> Trigger Abrir Puerta
-        // yield return new WaitUntil(() => GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Memorizing);
-        // yield return new WaitForSeconds(1.5f); // espera para las luces
-        // // Memorizing
-        // StopMission();
-        // yield return popups.ShowPopups(new string[] {
-        //     "Hay objetos en el mueble que debes memorizar, puedes interactuar con ellos.",
-        //     "Tendrás un tiempo limitado para hacerlo, que se puede ver en el reloj."
-        // });
-        // StartMission("Observá los objetos.");
-        // yield return new WaitUntil(() => Timer.IsTimeOver()); // AllowMovement -> Trigger Se Acaba el Tiempo
-        // yield return new WaitForSeconds(1.5f); // espera para las luces
-        // // Memorizing Over
-        // StopMission();
-        // yield return popups.ShowPopups(new string[] {
-        //     "Dirigite siguiendo las flechas del piso hasta la habitación que hay más adelante."
-        // });
-        // StartMission("Entrá en la habitación que hay adelante.");
-        // roomIndicators.SetActive(true);
-        // yield return new WaitUntil(() => GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Search); // AllowMovement -> Trigger Entra En Habitación
-        // yield return new WaitForSeconds(1.5f); // espera para las luces
-        // // Search
-        // StopMission();
-        // yield return popups.ShowPopups(new string[] {
-        //     "En ésta habitación, estarán los objetos que viste en el hall.",
-        //     "Cuando encuentres alguno podrás elegirlo tocándolo dos veces.",
-        //     "Buscá la manzana que se encuentra en la habitación y elegila."
-        // });
-        // StartMission("Encontrá la manzana y elegila.");
-        // roomIndicators.SetActive(false);
-        // yield return new WaitUntil(() => GameStatus.ContainsItem("Manzana")); // AllowMovement -> Trigger Guardar Manzana
-        // GameStatus.SetNextPhase();
-        // // Search Over / End Tutorial
-        // StopMission();
-        // yield return popups.ShowPopups(new string[] {
-        //     "Cuando creas que ya encontraste todos los objetos del Hall, salí de la habitación.",
-        //     "¡Has completado el tutorial! Podés seguir practicando en la sección Práctica, sin límites de tiempo.",
-        //     "Y cuando estés listo, podés jugar los diferentes niveles de dificultad desde el menú principal, en la sección Juego."
-        // });
-        // StartMission("Salí de la habitación para terminar el tutorial.");
     }
 
-    // public IEnumerator TutorialSequence()
-    // {
-    //     // Introduction / Player movement
-    //     StopMission();
-    //     TouchController.allowCameraMovement = false;
-    //     PopUpManager popups = PopUpManager.instance;
-    //     yield return popups.ShowPopups(new string[] {
-    //         "Para moverte, incliná el joystick que está a tu izquierda hacia la dirección deseada."
-    //     });
-    //     StartMission("Dirigite hacia la casa que está adelante.");
-    //     yield return new WaitUntil(() => GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_ReachApple); // Trigger Acercarse a Manzana        
-    //     // Camera control - Part 1
-    //     StopMission();
-    //     yield return popups.ShowPopups(new string[] {
-    //         "Para mover la cámara, deslizá en la pantalla hacia la dirección deseada."
-    //     });
-    //     TouchController.allowCameraMovement = true;
-    //     PlayerMovement.allowPlayerMovement = false;
-    //     StartMission("Mové la cámara para mirar detrás tuyo.");
-    //     yield return new WaitUntil(() => player.transform.eulerAngles.y > 170 && player.transform.eulerAngles.y < 190); // AllowMovement -> Trigger darse vuelta
-    //     // Camera control - Part 2
-    //     StopMission();
-    //     yield return popups.ShowPopups("Ahora, volvé a mirar hacía la casa.");
-    //     StartMission("Mirá la manzana.");
-    //     yield return new WaitUntil(() => player.transform.eulerAngles.y < 10 || player.transform.eulerAngles.y > 350); // AllowMovement -> Trigger darse vuelta
-    //     // Grab item
-    //     StopMission();
-    //     yield return popups.ShowPopups(new string[] {
-    //         "Para interactuar con un elemento, acercate a él hasta que tenga un borde blanco, y presionalo."
-    //     });
-    //     StartMission("Acercate y tomá la manzana.");
-    //     PlayerMovement.allowPlayerMovement = true;
-    //     yield return new WaitUntil(() => HeldItem.currentlyHeldItem != null && !HeldItem.currentlyHeldItem.isMoving); // AllowMovement -> Trigger Tomar Manzana
-    //     // Drop Item
-    //     StopMission();
-    //     yield return popups.ShowPopups(new string[] {
-    //         "Los objetos podés rotarlos deslizando en la pantalla.",
-    //         "Para dejar un objeto que estás sosteniendo, presioná el botón rojo."
-    //     });
-    //     StartMission("Dejá la manzana.");
-    //     HeldItem tutorialItem = HeldItem.currentlyHeldItem;
-    //     yield return new WaitUntil(() => HeldItem.currentlyHeldItem == null && !tutorialItem.isReturning); // AllowMovement -> Trigger Dejar Manzana
-    //     // Open Door
-    //     StopMission();
-    //     yield return popups.ShowPopups(new string[] {
-    //         "Las puertas y los cajones de la casa se pueden abrir tocándolos."
-    //     });
-    //     StartMission("Abrí la puerta y entrá a la casa.");
-    //     yield return new WaitUntil(() => houseDoor.isOpen && !houseDoor.IsDoorMoving()); // AllowMovement -> Trigger Abrir Puerta
-    //     yield return new WaitUntil(() => GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Memorizing);
-    //     yield return new WaitForSeconds(1.5f); // espera para las luces
-    //     // Memorizing
-    //     StopMission();
-    //     yield return popups.ShowPopups(new string[] {
-    //         "Hay objetos en el mueble que debes memorizar, puedes interactuar con ellos.",
-    //         "Tendrás un tiempo limitado para hacerlo, que se puede ver en el reloj."
-    //     });
-    //     StartMission("Observá los objetos.");
-    //     yield return new WaitUntil(() => Timer.IsTimeOver()); // AllowMovement -> Trigger Se Acaba el Tiempo
-    //     yield return new WaitForSeconds(1.5f); // espera para las luces
-    //     // Memorizing Over
-    //     StopMission();
-    //     yield return popups.ShowPopups(new string[] {
-    //         "Dirigite siguiendo las flechas del piso hasta la habitación que hay más adelante."
-    //     });
-    //     StartMission("Entrá en la habitación que hay adelante.");
-    //     roomIndicators.SetActive(true);
-    //     yield return new WaitUntil(() => GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Search); // AllowMovement -> Trigger Entra En Habitación
-    //     yield return new WaitForSeconds(1.5f); // espera para las luces
-    //     // Search
-    //     StopMission();
-    //     yield return popups.ShowPopups(new string[] {
-    //         "En ésta habitación, estarán los objetos que viste en el hall.",
-    //         "Cuando encuentres alguno podrás elegirlo tocándolo dos veces.",
-    //         "Buscá la manzana que se encuentra en la habitación y elegila."
-    //     });
-    //     StartMission("Encontrá la manzana y elegila.");
-    //     roomIndicators.SetActive(false);
-    //     yield return new WaitUntil(() => GameStatus.ContainsItem("Manzana")); // AllowMovement -> Trigger Guardar Manzana
-    //     GameStatus.SetNextPhase();
-    //     // Search Over / End Tutorial
-    //     StopMission();
-    //     yield return popups.ShowPopups(new string[] {
-    //         "Cuando creas que ya encontraste todos los objetos del Hall, salí de la habitación.",
-    //         "¡Has completado el tutorial! Podés seguir practicando en la sección Práctica, sin límites de tiempo.",
-    //         "Y cuando estés listo, podés jugar los diferentes niveles de dificultad desde el menú principal, en la sección Juego."
-    //     });
-    //     StartMission("Salí de la habitación para terminar el tutorial.");
-    // }
 }
