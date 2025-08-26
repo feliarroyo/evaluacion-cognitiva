@@ -89,19 +89,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: validSpawnTypes.Array.size
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
-      propertyPath: validSpawnTypes.Array.data[0].isValid
-      value: 0
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: validSpawnTypes.Array.data[1].isValid
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
-      propertyPath: validSpawnTypes.Array.data[2].isValid
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: validSpawnTypes.Array.data[3].isValid
@@ -114,14 +106,6 @@ PrefabInstance:
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: validSpawnTypes.Array.data[5].isValid
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
-      propertyPath: validSpawnTypes.Array.data[6].isValid
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
-      propertyPath: validSpawnTypes.Array.data[9].isValid
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: validSpawnTypes.Array.data[10].isValid
@@ -148,16 +132,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
-      propertyPath: validSpawnTypes.Array.data[9].spawnType
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: validSpawnTypes.Array.data[10].spawnType
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
-      propertyPath: validSpawnTypes.Array.data[11].spawnType
-      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: validSpawnTypes.Array.data[12].spawnType

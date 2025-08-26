@@ -75,6 +75,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -2720221069562527839, guid: 09be5cec9041c444884a1e7844001f6a, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7364796d991a458419816e0e986e8776, type: 2}
     - target: {fileID: 919132149155446097, guid: 09be5cec9041c444884a1e7844001f6a, type: 3}
       propertyPath: m_Name
       value: uploads_files_3788783_10003_Lamp
@@ -260,9 +264,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Small Lamp
       objectReference: {fileID: 0}
+    - target: {fileID: 9171863585267457439, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171863585267457439, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5025184851507084813, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
     - {fileID: 4488626660804734033, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+    - {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+    - {fileID: 3537513201456950018, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+    - {fileID: 4574607371264575160, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+    - {fileID: -4119005969281387276, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+    - {fileID: 6833707010551559107, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
 --- !u!4 &1906327422566395714 stripped
 Transform:

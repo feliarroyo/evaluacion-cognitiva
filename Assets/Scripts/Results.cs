@@ -69,7 +69,8 @@ public class Results : MonoBehaviour
         SaveResults(keyItemsNames, foundItemsNames);
     }
 
-    public void SaveResults(List<string> keyItemsNames, List<string> foundItemsNames){
+    public void SaveResults(List<string> keyItemsNames, List<string> foundItemsNames)
+    {
         DatabaseReference resultsRef = db.GetReference("results");
         resultsRef.GetValueAsync().ContinueWithOnMainThread(task =>
     {
@@ -148,7 +149,8 @@ public class Results : MonoBehaviour
                 { "searchTime", newResult.searchTime },
                 { "memTime", newResult.memorizeTime },
                 { "memObjects", newResult.keyImageName },
-                { "foundObjects", newResult.foundImageName }
+                { "foundObjects", newResult.foundImageName },
+                {"logging", Logging.LogEvent.GetJSONLog()}
             };
 
             // Si es un nuevo paciente, primero aseguramos que tenga idPatient
@@ -170,7 +172,7 @@ public class Results : MonoBehaviour
             });
         });
     });
-}
+    }
 
     // private async System.Threading.Tasks.Task<string> GetNextRecordId()
     // {

@@ -246,7 +246,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vase_14
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9171863585267457439, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171863585267457439, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+    - {fileID: 3537513201456950018, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+    - {fileID: 4574607371264575160, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+    - {fileID: -4119005969281387276, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+    - {fileID: 6833707010551559107, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
 --- !u!4 &29633909093258393 stripped
 Transform:

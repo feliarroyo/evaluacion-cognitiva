@@ -210,10 +210,6 @@ PrefabInstance:
       propertyPath: validSpawnTypes.Array.data[8].isValid
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
-      propertyPath: validSpawnTypes.Array.data[11].isValid
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6123504767808930790, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_Size.x
       value: 0.5702217

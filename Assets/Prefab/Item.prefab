@@ -87,16 +87,6 @@ MonoBehaviour:
     isValid: 0
   - spawnType: 12
     isValid: 0
-  - spawnType: 13
-    isValid: 0
-  - spawnType: 14
-    isValid: 0
-  - spawnType: 15
-    isValid: 0
-  - spawnType: 16
-    isValid: 0
-  - spawnType: 17
-    isValid: 0
   mainCamera: {fileID: 0}
   pushBackItem: 0
 --- !u!114 &3537513201456950018
