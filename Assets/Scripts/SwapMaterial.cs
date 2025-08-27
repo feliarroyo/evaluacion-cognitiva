@@ -12,7 +12,7 @@ public class SwapMaterial : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.GetComponent<Renderer>().material = unlitMaterial;
+        SetMaterial(false);
         swappedMaterials.Add(this);
     }
 
@@ -22,7 +22,10 @@ public class SwapMaterial : MonoBehaviour
         
     }
     public void SetMaterial(bool isLit){
-        gameObject.GetComponent<Renderer>().materials[replaceID] = isLit? litMaterial : unlitMaterial;
+            Renderer rend = gameObject.GetComponent<Renderer>();
+            Material[] mats = rend.materials;
+            mats[replaceID] = isLit ? litMaterial : unlitMaterial;
+            rend.materials = mats;
     }
 
     public static void SetMaterials(bool isLit){

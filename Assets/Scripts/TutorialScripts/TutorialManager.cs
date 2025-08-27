@@ -69,6 +69,15 @@ public class TutorialManager : MonoBehaviour
         handle.transform.localPosition = new Vector3(0, isForwardMovement ? 100 : -100, 0);
     }
 
+    private IEnumerator MovePlayerToTarget(Vector3 targetPosition, float stopDistance = 0.05f)
+{
+    MovePlayerVertical();
+    yield return new WaitUntil(() => 
+        Vector3.Distance(player.transform.position, targetPosition) <= stopDistance);
+
+    StopPlayerMovement();
+}
+
     private void MovePlayerHorizontal(bool isRightMovement = true)
     {
         player.GetComponent<PlayerMovement>().horizontalInput = isRightMovement ? 1f : -1f;
@@ -139,8 +148,8 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     private IEnumerator WalkToHouse(PopUpManager popups)
     {
-        yield return ShowPopups(popups, new string[] {
-            "En este tutorial, se describe\nel ambiente en el que se desarrolla el juego,\ny las tareas a ser realizadas en este ambiente.",
+        yield return ShowPopups(popups, new string[] { // #1-#3
+            "En este tutorial, se describen\nel ambiente en el que se desarrolla el juego,\ny las tareas a ser realizadas en este ambiente.",
             "Al comienzo del juego,\nse verá la fachada de una casa.",
             "Se debe avanzar hacia la puerta de la casa,\ndeslizando el control izquierdo hacia arriba."
         });
@@ -160,11 +169,11 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     private IEnumerator EnterHouse(PopUpManager popups)
     {
-        yield return ShowPopups(popups, "Cuando la puerta tenga un borde blanco,\nse debe abrirla tocando sobre ella.");
+        yield return ShowPopups(popups, "Cuando la puerta tenga un borde blanco,\nse debe abrirla tocando sobre ella."); // #4
         yield return new WaitForSeconds(1f);
         houseDoor.ClickBehaviour(houseDoor.gameObject);
         yield return new WaitForSeconds(1.5f);
-        yield return ShowPopups(popups, new string[] {
+        yield return ShowPopups(popups, new string[] { // #5-#6
             "Cuando se atraviese la puerta de la casa,\nse encenderá la luz del hall.\nEn ese momento, se verán objetos en los estantes del hall,\ny se tendrá un tiempo límite para observarlos.",
             "Para que se encienda la luz del hall,\nse debe avanzar hacia los objetos en los estantes."
         });
@@ -179,7 +188,7 @@ public class TutorialManager : MonoBehaviour
     private IEnumerator PlayerMovementDemonstration(PopUpManager popups)
     {
         const float MOVE_TIME = 0.75f;
-        yield return ShowPopups(popups, new string[] {
+        yield return ShowPopups(popups, new string[] {  // #7-#8
             "Al encenderse la luz del hall,\ncomenzará a correr el tiempo límite\npara observar los objetos,\nen el reloj que se muestra en la pantalla.",
             "Es posible moverse en todas las direcciones del hall\n(adelante, atrás, izquierda y derecha),\ndeslizando el control izquierdo hacia la dirección deseada."
         });
@@ -210,7 +219,7 @@ public class TutorialManager : MonoBehaviour
     private IEnumerator CameraDemonstration(PopUpManager popups)
     {
         const float WAIT_SPEED = 0.5f;
-        yield return ShowPopups(popups, "Es posible mirar hacia todas las direcciones del hall\n(arriba, abajo, izquierda y derecha)\ndeslizando sobre la pantalla en la dirección deseada.");
+        yield return ShowPopups(popups, "Es posible mirar hacia todas las direcciones del hall\n(arriba, abajo, izquierda y derecha)\ndeslizando sobre la pantalla en la dirección deseada.");  // #9
         CameraMovement(5f); // mirada hacia la derecha
         yield return new WaitForSeconds(WAIT_SPEED);
         CameraMovement(0f);
@@ -252,14 +261,14 @@ public class TutorialManager : MonoBehaviour
     {
         const float WAIT_SPEED = 1f;
         const int ITEMID_CAMERA = 0;
-        yield return ShowPopups(popups, new string[] {
+        yield return ShowPopups(popups, new string[] { // #10-#11
             "Se debe observar los objetos en el hall,\ny tratar de memorizarlos,\nantes de que se acabe el tiempo límite.",
             "Cuando un objeto tenga un borde blanco,\nes posible observarlo con más detalle,\ntocando sobre el objeto."
         });
         yield return new WaitForSeconds(1f);
         GetItem(ITEMID_CAMERA);
         yield return new WaitForSeconds(1f);
-        yield return ShowPopups(popups, "Es posible girar un objeto en distintas direcciones\n(izquierda, derecha, arriba y abajo),\ndeslizando sobre el objeto en la dirección deseada.");
+        yield return ShowPopups(popups, "Es posible girar un objeto en distintas direcciones\n(izquierda, derecha, arriba y abajo),\ndeslizando sobre el objeto en la dirección deseada."); // #12
         yield return new WaitForSeconds(WAIT_SPEED);
         rotationX = -0.75f;
         yield return new WaitForSeconds(WAIT_SPEED);
@@ -276,7 +285,7 @@ public class TutorialManager : MonoBehaviour
         rotationY = 0.75f;
         yield return new WaitForSeconds(WAIT_SPEED);
         rotationY = 0f;
-        yield return ShowPopups(popups, "Para que el objeto vuelva a su lugar en el estante,\nse debe presionar el botón rojo que se muestra en la pantalla.");
+        yield return ShowPopups(popups, "Para que el objeto vuelva a su lugar en el estante,\nse debe tocar el botón rojo que se muestra en la pantalla.");  // #13
         yield return new WaitForSeconds(0.5f);
         ReturnItem();
     }
@@ -289,24 +298,26 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_BeforeSearch);
         DisableItemInteractions(new List<HeldItem>() { items[0], items[1] });
         yield return new WaitForSeconds(0.5f);
-        yield return ShowPopups(popups, "Cuando el tiempo límite termine,\nla luz del hall se apagará,\ny se deberá avanzar hacia el pasillo de la casa.");
+        yield return ShowPopups(popups, "Cuando el tiempo límite termine,\nla luz del hall se apagará,\ny se deberá avanzar hacia el pasillo de la casa."); // #14
         yield return new WaitForSeconds(1f);
         CameraMovement(5f);
         yield return new WaitForSeconds(1f);
         CameraMovement(0f);
         yield return new WaitForSeconds(1f);
-        MovePlayerVertical();
-        yield return new WaitForSeconds(0.7f);
-        StopPlayerMovement();
+        yield return MovePlayerToTarget(new(-48.0513573f,1.49810004f,-102.521416f));
+        //MovePlayerVertical();
+        //yield return new WaitForSeconds(0.7f);
+        //StopPlayerMovement();
         CameraMovement(-5f);
         yield return new WaitForSeconds(1f);
         CameraMovement(0f);
-        yield return ShowPopups(popups, "Se debe avanzar por el pasillo de la casa\nhacia la entrada de la sala de living.");
+        yield return ShowPopups(popups, "Se debe avanzar por el pasillo de la casa\nhacia la entrada de la sala de living."); // #15
         player.GetComponent<PlayerMovement>().moveSpeed = SLOW_SPEED;
         yield return new WaitForSeconds(0.6f);
-        MovePlayerVertical();
-        yield return new WaitForSeconds(2f);
-        StopPlayerMovement();
+        yield return MovePlayerToTarget(new(-47.9446869f,1.49810004f,-91.1999969f));
+        //MovePlayerVertical();
+        //yield return new WaitForSeconds(2f);
+        //StopPlayerMovement();
         player.GetComponent<PlayerMovement>().moveSpeed = DEFAULT_SPEED;
         yield return new WaitForSeconds(2f);
     }
@@ -316,12 +327,13 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     private IEnumerator EnterLiving(PopUpManager popups)
     {
-        yield return ShowPopups(popups, "Cuando se atraviese la entrada de la sala de living,\nla luz de la sala se encenderá.\nA partir de ese momento, se deberá recorrer la sala,\nobservar los objetos distribuídos en ella,\ny seleccionar a los objetos que estaban en el hall.");
+        yield return ShowPopups(popups, "Cuando se atraviese la entrada de la sala de living,\nla luz de la sala se encenderá.\nA partir de ese momento, se deberá recorrer la sala,\nobservar los objetos distribuídos en ella,\ny seleccionar a los objetos que estaban en el hall."); // #16
         yield return new WaitForSeconds(1f);
         MovePlayerVertical();
         yield return new WaitForSeconds(0.3f);
         StopPlayerMovement();
-        yield return ShowPopups(popups, "Al encenderse la luz de la sala,\ncomenzará a correr el tiempo límite\npara recorrer la sala y seleccionar los objetos,\nen el reloj que se muestra en la pantalla.");
+        yield return ShowPopups(popups, "Al encenderse la luz de la sala,\ncomenzará a correr el tiempo límite\npara recorrer la sala y seleccionar los objetos,\nen el reloj que se muestra en la pantalla."); // #17
+        player.GetComponent<PlayerMovement>().moveSpeed = SLOW_SPEED;
         MovePlayerHorizontal(false);
         yield return new WaitForSeconds(0.2f);
         StopPlayerMovement();
@@ -340,26 +352,26 @@ public class TutorialManager : MonoBehaviour
         CameraMovement(5f, -2.5f);
         yield return new WaitForSeconds(1.2f);
         CameraMovement(0f);
-        yield return ShowPopups(popups, "Cuando un objeto tenga un borde blanco,\nes posible observarlo con más detalle,\ntocando sobre el objeto.");
+        yield return ShowPopups(popups, "Cuando un objeto tenga un borde blanco,\nes posible observarlo con más detalle,\ntocando sobre el objeto."); // #18
         yield return new WaitForSeconds(1f);
         GetItem(ITEMID_ENTRANCEITEM);
         yield return new WaitForSeconds(1f);
-        yield return ShowPopups(popups, "Es posible girar un objeto que está siendo observado,\nen distintas direcciones (izquierda, derecha, arriba y abajo),\ndeslizando sobre el objeto en la dirección deseada.");
+        yield return ShowPopups(popups, "Es posible girar un objeto que está siendo observado,\nen distintas direcciones (izquierda, derecha, arriba y abajo),\ndeslizando sobre el objeto en la dirección deseada."); // #19
         yield return new WaitForSeconds(1f);
         rotationX = -0.75f;
         yield return new WaitForSeconds(1f);
         rotationX = 0f;
         yield return new WaitForSeconds(0.5f);
-        yield return ShowPopups(popups, "Para que el objeto que está siendo observado vuelva a su lugar,\nse debe tocar el botón rojo que se muestra en la pantalla.");
+        yield return ShowPopups(popups, "Para que el objeto que está siendo observado vuelva a su lugar,\nse debe tocar el botón rojo que se muestra en la pantalla."); // #20
         yield return new WaitForSeconds(1.5f);
         ReturnItem();
         yield return new WaitForSeconds(2f);
         GetItem(ITEMID_ENTRANCEITEM);
         yield return new WaitForSeconds(1f);
-        yield return ShowPopups(popups, "Para seleccionar el objeto que está siendo observado,\nse debe tocar nuevamente sobre el objeto.");
+        yield return ShowPopups(popups, "Para seleccionar el objeto que está siendo observado,\nse debe tocar nuevamente sobre el objeto."); // #21
         yield return new WaitForSeconds(1f);
         StoreItem();
-        yield return ShowPopups(popups, "Los objetos seleccionados se muestran\nen la parte superior derecha de la pantalla.");
+        yield return ShowPopups(popups, "Los objetos seleccionados se muestran\nen la parte superior derecha de la pantalla."); // #22
         yield return new WaitForSeconds(1f);
         CameraMovement(-5f, 2.5f); // volver a mirar al frente
         yield return new WaitForSeconds(1.2f);
@@ -405,7 +417,7 @@ public class TutorialManager : MonoBehaviour
         CameraMovement(0f, -2f);
         yield return new WaitForSeconds(LOOKDOWN_TIME);
         CameraMovement(0f);
-        yield return ShowPopups(popups, "Cuando un cajón de algún mueble tenga un borde blanco,\nse podrá abrirlo tocando sobre él.");
+        yield return ShowPopups(popups, "Cuando un cajón de algún mueble tenga un borde blanco,\nse podrá abrirlo tocando sobre él."); // #23
         yield return new WaitForSeconds(1f);
         houseDrawer.ClickBehaviour(houseDrawer.gameObject);
         yield return new WaitForSeconds(2f);
@@ -428,7 +440,7 @@ public class TutorialManager : MonoBehaviour
         StopPlayerMovement();
         yield return new WaitForSeconds(0.5f);
         // abrir y cerrar puertas
-        yield return ShowPopups(popups, "Cuando una puerta de algún mueble tenga un borde blanco,\nse podrá abrirla tocando sobre ella.");
+        yield return ShowPopups(popups, "Cuando una puerta de algún mueble tenga un borde blanco,\nse podrá abrirla tocando sobre ella."); // #24
         yield return new WaitForSeconds(1f);
         oppositeDoor1.ClickBehaviour(oppositeDoor1.gameObject);
         yield return new WaitForSeconds(1f);
@@ -594,10 +606,10 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         CameraMovement(0f);
         yield return new WaitForSeconds(1.5f);
-        yield return ShowPopups(popups, "Cuando el tiempo límite termine,\nla luz de la sala se apagará,\ny el recorrido se dará por finalizado.");
+        yield return ShowPopups(popups, "Cuando el tiempo límite termine,\nla luz de la sala se apagará,\ny el recorrido se dará por finalizado."); // #25
         yield return new WaitUntil(() => GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_SearchOver);
         DisableItemInteractions(items);
-        yield return ShowPopups(popups, "También es posible finalizar el recorrido\nantes de que termine el tiempo límite.\nPara hacer esto, dirigirse hacia la entrada de la sala.");
+        yield return ShowPopups(popups, "También es posible finalizar el recorrido\nantes de que termine el tiempo límite.\nPara hacer esto, dirigirse hacia la entrada de la sala."); // #26
         yield return new WaitForSeconds(2f);
     }
     public IEnumerator TutorialSequence()

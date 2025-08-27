@@ -7,6 +7,7 @@ using Vector3 = UnityEngine.Vector3;
 using System;
 using Object = System.Object;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
