@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public static bool allowPlayerMovement = true;
     public Joystick joystick;
     private bool isMoving = false;
+    // public bool forceStop = false;
 
     // Start is called before the first frame update
     void Start()
@@ -74,7 +75,12 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void MovePlayer()
     {
-        moveDirection = Time.deltaTime * verticalInput * orientation.forward + Time.deltaTime * horizontalInput * orientation.right;
+        // if (forceStop)
+        // {
+        //     rb.velocity = Vector3.zero;
+        //     return;
+        // }
+        moveDirection = verticalInput * orientation.forward + horizontalInput * orientation.right;
         if (!isMoving && moveDirection != Vector3.zero){
             Logging.Log(Logging.EventType.PlayerMovementStart, new[] {(Object) gameObject.transform.position});
             isMoving = true;

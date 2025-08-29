@@ -17,7 +17,7 @@ public class OpenDoor : MonoBehaviour, IElementBehaviour
     private Quaternion currentRotation;
     private Quaternion openRotation;
     const float threshold = 0.01f; // Tolerance for stopping condition
-    private bool isMoving = false;
+    public bool isMoving = false;
     public static List<OpenDoor> allDoors = new List<OpenDoor>();
     public char rotationAxis = 'y';
     public Quaternion testRotation;

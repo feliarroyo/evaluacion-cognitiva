@@ -112,7 +112,7 @@ public class GameStatus : MonoBehaviour
                 instance.lights[1].SetActive(false);
                 SwapMaterial.SetMaterials(true);
                 TurnLightsOn(instance.lights[2]);
-                Timer.StartTimer(100);
+                Timer.StartTimer(125);
                 break;
             case GamePhase.Tutorial_Search:
                 savedItems.Clear();
