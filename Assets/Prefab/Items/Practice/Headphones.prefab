@@ -1,5 +1,196 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1839448853116282748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2217280021488229066}
+  m_Layer: 8
+  m_Name: HeadphonesH
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2217280021488229066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839448853116282748}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.35, z: 0.591}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1669198444943799747}
+  m_Father: {fileID: 7041286901233698861}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1198122810619138600
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2217280021488229066}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.39065182
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.91
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.28427792
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5706453
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.74193305
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.2145971
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.2790116
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -46.636
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -106.328
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 111.947
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_Name
+      value: HeadphonesH
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+--- !u!4 &1669198444943799747 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+  m_PrefabInstance: {fileID: 1198122810619138600}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1893358340605344564
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7041286901233698861}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_Name
+      value: HeadphonesJ
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3141101260113499581, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
 --- !u!1001 &6938541265819025871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4046165559994a142b667c729ca03407, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4046165559994a142b667c729ca03407, type: 3}
       propertyPath: m_LocalScale.x
@@ -761,11 +952,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 919132149155446097, guid: 4046165559994a142b667c729ca03407, type: 3}
       propertyPath: m_Name
-      value: Headphones
+      value: ModeloViejo
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4046165559994a142b667c729ca03407, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4046165559994a142b667c729ca03407, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1026310530687833158, guid: 4046165559994a142b667c729ca03407, type: 3}
       propertyPath: m_Materials.Array.data[0]
