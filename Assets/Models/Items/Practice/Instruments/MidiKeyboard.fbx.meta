@@ -3,7 +3,42 @@ guid: ce458ad5141cf4c4bbdc50f76bfba83d
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black Keys
+    second: {fileID: 2100000, guid: d196f42331701e94a8c69f51f6daacbc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black case
+    second: {fileID: 2100000, guid: d90818b6a8f62284290d0fbd85244d88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LED red
+    second: {fileID: 2100000, guid: 35c5df9f1f5bf3f4baf0edcaebcb1c9f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LED white
+    second: {fileID: 2100000, guid: 049394e9842b4da4cac9fb0af69f7806, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal Switch
+    second: {fileID: 2100000, guid: 8318afbd9f5ec1648a82d057c3f3e338, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red case
+    second: {fileID: 2100000, guid: d2ad53abbf072774bbbd4db5292b7891, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White keys
+    second: {fileID: 2100000, guid: 92a90222df5f5ff4f85983ab7384e04f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -32,7 +67,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1

@@ -99,9 +99,53 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4507900262165122138, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -4372189530834679465, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2815194613554758484, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2422315340263230684, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2254504247542753893, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -1554193974251969968, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
       propertyPath: m_Name
       value: HeadphonesH
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 952053669994591382, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988881256312858879, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159819195323411483, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399413773904568273, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad386ceab0353da4481b65b49cc5e7b0, type: 3}
@@ -177,17 +221,45 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -6600570728876557273, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -1265926375298581960, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
       propertyPath: m_Name
       value: HeadphonesJ
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3141101260113499581, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3141101260113499581, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5861825926726389856, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a2ccfbd59042b74989ecb893b01cd4b, type: 3}
@@ -198,6 +270,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4119005969281387276, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 143283569348643298, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: m_RootOrder
       value: 0
