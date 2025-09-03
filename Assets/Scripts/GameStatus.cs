@@ -87,7 +87,7 @@ public class GameStatus : MonoBehaviour
 
     public static void SetNextPhase()
     {
-        Debug.Log(currentPhase);
+        //Debug.Log(currentPhase);
         Logging.Log(Logging.EventType.PhaseEnd, new[] { currentPhase.ToString() });
         switch (currentPhase)
         {
@@ -112,7 +112,7 @@ public class GameStatus : MonoBehaviour
                 instance.lights[1].SetActive(false);
                 SwapMaterial.SetMaterials(true);
                 TurnLightsOn(instance.lights[2]);
-                Timer.StartTimer(125);
+                Timer.StartTimer(118);
                 break;
             case GamePhase.Tutorial_Search:
                 savedItems.Clear();

@@ -63,7 +63,7 @@ public class Interactable : MonoBehaviour
         {
             // Get the first hit UI element
             GameObject hitGameObject = raycastResults[0].gameObject;
-            Debug.Log("Clickeé en " + hitGameObject.name);
+            //Debug.Log("Clickeé en " + hitGameObject.name);
             return hitGameObject.name.Equals("RaycastPreventionCircle");
         }
         return false;

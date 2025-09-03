@@ -222,7 +222,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
     public IEnumerator BringItemToPlayer()
     {
         GetComponent<Collider>().enabled = false; // disable collision to avoid issues with items in the way
-        while (Vector3.Distance(transform.position, mainCamera.transform.TransformPoint(Vector3.forward * 1)) > 0.001f)
+        while (Vector3.Distance(transform.position, mainCamera.transform.TransformPoint(Vector3.forward * 1)) > 0.01f)
         {
             transform.position = Vector3.MoveTowards(transform.position, mainCamera.transform.TransformPoint(Vector3.forward), ITEM_TRAVEL_SPEED * Time.deltaTime);
             yield return null;

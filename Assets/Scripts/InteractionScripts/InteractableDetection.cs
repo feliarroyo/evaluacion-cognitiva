@@ -28,10 +28,10 @@ public class InteractableDetection : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Interactable") && GameStatus.currentPhase != GameStatus.GamePhase.Tutorial_BeforeSearch)
         { // to avoid showing silhouettes before entering
-            Debug.Log("OTHER ");
-            Debug.Log(other);
+            //Debug.Log("OTHER ");
+            //Debug.Log(other);
             other.gameObject.GetComponent<Interactable>().EnableInteraction(true);
-            Debug.Log("TRIGGER ENTERING... " + gameObject);
+            //Debug.Log("TRIGGER ENTERING... " + gameObject);
         }
     }
 

@@ -89,6 +89,9 @@ public class OpenDoor : MonoBehaviour, IElementBehaviour
         {
             transform.rotation = targetRotation; // Ensure it snaps to the exact target
             isMoving = false;
+            if (!isOpen){
+                GetComponent<Collider>().enabled = true;
+            }
         }
     }
 
@@ -105,6 +108,7 @@ public class OpenDoor : MonoBehaviour, IElementBehaviour
         }
         isOpen = !isOpen;
         if (isOpen){
+            GetComponent<Collider>().enabled = false;
             Logging.Log(Logging.EventType.ElementOpen, new[] {(Object) id});
         }
         else
