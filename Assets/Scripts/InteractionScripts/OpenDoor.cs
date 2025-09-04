@@ -108,7 +108,8 @@ public class OpenDoor : MonoBehaviour, IElementBehaviour
         }
         isOpen = !isOpen;
         if (isOpen){
-            GetComponent<Collider>().enabled = false;
+            if (GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Search)
+                GetComponent<Collider>().enabled = false;
             Logging.Log(Logging.EventType.ElementOpen, new[] {(Object) id});
         }
         else

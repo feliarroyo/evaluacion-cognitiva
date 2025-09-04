@@ -219,7 +219,7 @@ public class ItemSpawning : MonoBehaviour
             GameObject placedSpecial = PlaceItemInSpawnpoint(
                 specialBigItem, 
                 new List<ItemSpawn> { chosenSpecialSpawn }, 
-                false
+                true
             );
             itemsInEnvironment.Add(placedSpecial);
 

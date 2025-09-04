@@ -486,8 +486,8 @@ public class TutorialManager : MonoBehaviour
         yield return _waitForSeconds2;
         GetItem(ITEMID_DRAWERITEM);
         yield return _waitForSeconds1;
-        rotationX = -0.75f;
-        yield return _waitForSeconds1;
+        rotationX = -0.35f;
+        yield return new WaitForSeconds(0.4f);
         rotationX = 0f;
         yield return _waitForSeconds1;
         ReturnItem();
