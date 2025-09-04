@@ -186,20 +186,18 @@ public class ItemSpawning : MonoBehaviour
     public void InstantiateItemsTutorialPreevaluation(
     List<GameObject> keyItemList, 
     List<GameObject> decoyItemList, 
-    List<GameObject> specialBigItems // 👈 Lista de objetos especiales
+    List<GameObject> specialBigItems
 )
 {
     List<GameObject> itemsToMemorize = new();
     List<GameObject> itemsInEnvironment = new();
 
-    // Spawns de inicio fijos (igual que antes)
     List<ItemSpawn> availableSpawnPoints_Start = new() 
     { 
         itemSpawnPoints_Start[2], 
         itemSpawnPoints_Start[9] 
     };
 
-    // 1. Colocar los objetos especiales primero
     var specialSpawns = itemSpawnPoints_Preevaluation
         .Where(sp => sp.isSpecial)
         .ToList();
@@ -210,12 +208,10 @@ public class ItemSpawning : MonoBehaviour
 
         foreach (GameObject specialBigItem in specialBigItems)
         {
-            if (specialSpawns.Count == 0) break; // no hay más lugares especiales
+            if (specialSpawns.Count == 0) break;
 
-            // Elegir un spawn especial al azar
             ItemSpawn chosenSpecialSpawn = specialSpawns[rng.Next(specialSpawns.Count)];
 
-            // Instanciar objeto especial en el spawn elegido
             GameObject placedSpecial = PlaceItemInSpawnpoint(
                 specialBigItem, 
                 new List<ItemSpawn> { chosenSpecialSpawn }, 
@@ -223,7 +219,6 @@ public class ItemSpawning : MonoBehaviour
             );
             itemsInEnvironment.Add(placedSpecial);
 
-            // Remover TODOS los spawns de ese mismo tipo de la lista general
             itemSpawnPoints_Preevaluation.RemoveAll(sp => sp.spawnType == chosenSpecialSpawn.spawnType);
             specialSpawns.RemoveAll(sp => sp.spawnType == chosenSpecialSpawn.spawnType);
 
@@ -231,7 +226,6 @@ public class ItemSpawning : MonoBehaviour
         }
     }
 
-    // 2. Selección de los 8 sectores requeridos
     var requiredTypes = new List<SpawnType>
     {
         SpawnType.aboveEntrance,
@@ -260,7 +254,6 @@ public class ItemSpawning : MonoBehaviour
     Debug.Log(availableSpawnPoints_Start);
     Debug.Log(itemSpawnPoints_Preevaluation);
 
-    // 3. Colocar los items de memorización
     foreach (GameObject item in keyItemList)
     {
         GameStatus.keyItems.Add(item.GetComponent<HeldItem>());
@@ -268,7 +261,6 @@ public class ItemSpawning : MonoBehaviour
         Logging.DebugLog(item.name + " colocado exitosamente en la repisa");
     }
 
-    // 4. Colocar key items y decoys en los spawns elegidos
     List<ItemSpawn> largeSpawnsAvailable = largeSearchSpawns;
     List<ItemSpawn> normalSpawnsAvailable = smallSearchSpawns;
 

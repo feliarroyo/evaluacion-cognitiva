@@ -155,7 +155,7 @@ PrefabInstance:
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: uiIcon
       value: 
-      objectReference: {fileID: 21300000, guid: ed7e6134e048d6e4b846707b002351aa, type: 3}
+      objectReference: {fileID: 21300000, guid: 1fbcddcd0f9923a47a0e0cf9d36d49a9, type: 3}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: itemName
       value: Telefono Inalambrico
@@ -163,7 +163,7 @@ PrefabInstance:
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: uiIconNoBG
       value: 
-      objectReference: {fileID: 21300000, guid: b85aef75ea0c91141a2041dea42e8946, type: 3}
+      objectReference: {fileID: 21300000, guid: f840822b438617d4fbefd3a8fda20460, type: 3}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: isEnvironmentItem
       value: 0

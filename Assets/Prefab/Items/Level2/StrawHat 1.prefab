@@ -276,7 +276,7 @@ PrefabInstance:
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: uiIcon
       value: 
-      objectReference: {fileID: 21300000, guid: 36004acfe6bf1eb4a9edbf52121b54c6, type: 3}
+      objectReference: {fileID: 21300000, guid: 6f217a8bcd4470444bd2c6a8e9b271c7, type: 3}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: itemName
       value: Sombrero de gaucho

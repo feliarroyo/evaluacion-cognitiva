@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: uiIcon
       value: 
-      objectReference: {fileID: 21300000, guid: 702d780a152c7174a98db6edb29bca90, type: 3}
+      objectReference: {fileID: 21300000, guid: cd95536929f5bda4baaebb28a299b6fb, type: 3}
     - target: {fileID: 2453783947532910347, guid: 138c2e98fb2e8fc4592fc7c90be3b6ae, type: 3}
       propertyPath: itemName
       value: "Sombrero de playa peque\xF1o"
