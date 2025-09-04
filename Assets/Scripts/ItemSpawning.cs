@@ -12,6 +12,7 @@ public class ItemSpawning : MonoBehaviour
     private readonly List<ItemSpawn> smallSearchSpawns = new();
     private readonly List<ItemSpawn> largeSearchSpawns = new();
     public GameConfig gc;
+    public List<GameObject> specialItems;
     readonly Dictionary<int, List<int>> spawnsEnabledInHall =
     new Dictionary<int, List<int>>{
         {0, new() {}},
@@ -59,11 +60,11 @@ public class ItemSpawning : MonoBehaviour
         HouseDistributionManage();
         if (GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Start)
         {
-            InstantiateItemsTutorialPreevaluation(gc.GenerateTutorialKeyItems(), gc.GenerateTutorialDecoyItems());
+            InstantiateItemsTutorialPreevaluation(gc.GenerateTutorialKeyItems(), gc.GenerateTutorialDecoyItems(), null);
         }
         else if (Settings.currentDifficulty == Settings.Difficulty.Preevaluación)
         {
-            InstantiateItemsTutorialPreevaluation(gc.preevaluationKeyItemList, gc.preevaluationDecoyItemList);
+            InstantiateItemsTutorialPreevaluation(gc.preevaluationKeyItemList, gc.preevaluationDecoyItemList, specialItems);
         }
         else if (GameStatus.currentPhase == GameStatus.GamePhase.Waiting)
         {
@@ -182,57 +183,107 @@ public class ItemSpawning : MonoBehaviour
     /// </summary>
     /// <param name="keyItemList">List of items that should be retrieved by the user.</param>
     /// <param name="decoyItemList">List of items that are added in the environment.</param>
-    public void InstantiateItemsTutorialPreevaluation(List<GameObject> keyItemList, List<GameObject> decoyItemList)
+    public void InstantiateItemsTutorialPreevaluation(
+    List<GameObject> keyItemList, 
+    List<GameObject> decoyItemList, 
+    List<GameObject> specialBigItems // 👈 Lista de objetos especiales
+)
+{
+    List<GameObject> itemsToMemorize = new();
+    List<GameObject> itemsInEnvironment = new();
+
+    // Spawns de inicio fijos (igual que antes)
+    List<ItemSpawn> availableSpawnPoints_Start = new() 
+    { 
+        itemSpawnPoints_Start[2], 
+        itemSpawnPoints_Start[9] 
+    };
+
+    // 1. Colocar los objetos especiales primero
+    var specialSpawns = itemSpawnPoints_Preevaluation
+        .Where(sp => sp.isSpecial)
+        .ToList();
+
+    if (specialSpawns.Count > 0 && specialBigItems != null && specialBigItems.Count > 0)
     {
-        List<GameObject> itemsToMemorize = new();
-        List<GameObject> itemsInEnvironment = new();
-        // Create list of spawn points available
-        List<ItemSpawn> availableSpawnPoints_Start = new() { itemSpawnPoints_Start[2], itemSpawnPoints_Start[9] };
-        
-        var requiredTypes = new List<SpawnType>
-        {
-            SpawnType.aboveEntrance,
-            SpawnType.table,
-            SpawnType.insideDoor,
-            SpawnType.insideOppositeDrawer,
-            SpawnType.aboveTVFurniture,
-            SpawnType.insideTVShelf,
-            SpawnType.oppositeBookshelf,
-            SpawnType.aboveLongFurniture
-        };
-
         System.Random rng = new();
-        var results = requiredTypes
-            .Select(type =>
-            {
-                var options = itemSpawnPoints_Preevaluation.Where(sp => sp.spawnType == type).ToList();
-                return options.Count > 0 ? options[rng.Next(options.Count)] : null;
-            })
-            .Where(sp => sp != null)
-            .ToList();
 
-        itemSpawnPoints_Preevaluation = results;
-
-        GenerateSpawnPoints(new(itemSpawnPoints_Preevaluation));
-        Debug.Log(availableSpawnPoints_Start);
-        Debug.Log(itemSpawnPoints_Preevaluation);
-        // Place items of memorize phase in their positions
-        foreach (GameObject item in keyItemList)
+        foreach (GameObject specialBigItem in specialBigItems)
         {
-            GameStatus.keyItems.Add(item.GetComponent<HeldItem>());
-            itemsToMemorize.Add(PlaceItemInSpawnpoint(item, availableSpawnPoints_Start, false));
-            Logging.DebugLog(item.name + " colocado exitosamente en la repisa");
+            if (specialSpawns.Count == 0) break; // no hay más lugares especiales
+
+            // Elegir un spawn especial al azar
+            ItemSpawn chosenSpecialSpawn = specialSpawns[rng.Next(specialSpawns.Count)];
+
+            // Instanciar objeto especial en el spawn elegido
+            GameObject placedSpecial = PlaceItemInSpawnpoint(
+                specialBigItem, 
+                new List<ItemSpawn> { chosenSpecialSpawn }, 
+                false
+            );
+            itemsInEnvironment.Add(placedSpecial);
+
+            // Remover TODOS los spawns de ese mismo tipo de la lista general
+            itemSpawnPoints_Preevaluation.RemoveAll(sp => sp.spawnType == chosenSpecialSpawn.spawnType);
+            specialSpawns.RemoveAll(sp => sp.spawnType == chosenSpecialSpawn.spawnType);
+
+            Debug.Log($"Special object {specialBigItem.name} colocado en {chosenSpecialSpawn.spawnType} - {chosenSpecialSpawn.spawnName}");
         }
-        List<ItemSpawn> largeSpawnsAvailable = largeSearchSpawns;
-        List<ItemSpawn> normalSpawnsAvailable = smallSearchSpawns;
-
-        SpawnItemsLargeFirst(new(keyItemList), ref largeSpawnsAvailable, ref normalSpawnsAvailable, itemsInEnvironment);
-
-        SpawnItemsLargeFirst(new(decoyItemList), ref largeSpawnsAvailable, ref normalSpawnsAvailable, itemsInEnvironment, true);
-
-        GameStatus.itemsInEnvironment = itemsInEnvironment;
-        GameStatus.itemsToMemorize = itemsToMemorize;
     }
+
+    // 2. Selección de los 8 sectores requeridos
+    var requiredTypes = new List<SpawnType>
+    {
+        SpawnType.aboveEntrance,
+        SpawnType.table,
+        SpawnType.insideDoor,
+        SpawnType.insideOppositeDrawer,
+        SpawnType.aboveTVFurniture,
+        SpawnType.insideTVShelf,
+        SpawnType.oppositeBookshelf,
+        SpawnType.aboveLongFurniture
+    };
+
+    System.Random rngNormal = new();
+    var results = requiredTypes
+        .Select(type =>
+        {
+            var options = itemSpawnPoints_Preevaluation.Where(sp => sp.spawnType == type).ToList();
+            return options.Count > 0 ? options[rngNormal.Next(options.Count)] : null;
+        })
+        .Where(sp => sp != null)
+        .ToList();
+
+    itemSpawnPoints_Preevaluation = results;
+
+    GenerateSpawnPoints(new(itemSpawnPoints_Preevaluation));
+    Debug.Log(availableSpawnPoints_Start);
+    Debug.Log(itemSpawnPoints_Preevaluation);
+
+    // 3. Colocar los items de memorización
+    foreach (GameObject item in keyItemList)
+    {
+        GameStatus.keyItems.Add(item.GetComponent<HeldItem>());
+        itemsToMemorize.Add(PlaceItemInSpawnpoint(item, availableSpawnPoints_Start, false));
+        Logging.DebugLog(item.name + " colocado exitosamente en la repisa");
+    }
+
+    // 4. Colocar key items y decoys en los spawns elegidos
+    List<ItemSpawn> largeSpawnsAvailable = largeSearchSpawns;
+    List<ItemSpawn> normalSpawnsAvailable = smallSearchSpawns;
+
+    SpawnItemsLargeFirst(new(keyItemList), ref largeSpawnsAvailable, ref normalSpawnsAvailable, itemsInEnvironment);
+
+    SpawnItemsLargeFirst(new(decoyItemList), ref largeSpawnsAvailable, ref normalSpawnsAvailable, itemsInEnvironment, true);
+
+    // 5. Guardar referencias
+    GameStatus.itemsInEnvironment = itemsInEnvironment;
+    GameStatus.itemsToMemorize = itemsToMemorize;
+}
+
+
+
+
 
     public void SpawnItemsLargeFirst(List<GameObject> itemsToSpawn, ref List<ItemSpawn> largeSpawnsAvailable, ref List<ItemSpawn> normalSpawnsAvailable, List<GameObject> itemsInEnvironment, bool expandChoice = false)
     {
