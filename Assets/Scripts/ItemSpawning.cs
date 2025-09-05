@@ -12,7 +12,6 @@ public class ItemSpawning : MonoBehaviour
     private readonly List<ItemSpawn> smallSearchSpawns = new();
     private readonly List<ItemSpawn> largeSearchSpawns = new();
     public GameConfig gc;
-    public List<GameObject> specialItems;
     readonly Dictionary<int, List<int>> spawnsEnabledInHall =
     new Dictionary<int, List<int>>{
         {0, new() {}},
@@ -60,11 +59,11 @@ public class ItemSpawning : MonoBehaviour
         HouseDistributionManage();
         if (GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Start)
         {
-            InstantiateItemsTutorialPreevaluation(gc.GenerateTutorialKeyItems(), gc.GenerateTutorialDecoyItems(), null);
+            InstantiateItemsTutorialPreevaluation(gc.GenerateTutorialKeyItems(), gc.GenerateTutorialDecoyItems());
         }
         else if (Settings.currentDifficulty == Settings.Difficulty.Preevaluación)
         {
-            InstantiateItemsTutorialPreevaluation(gc.preevaluationKeyItemList, gc.preevaluationDecoyItemList, specialItems);
+            InstantiateItemsTutorialPreevaluation(gc.preevaluationKeyItemList, gc.preevaluationDecoyItemList);
         }
         else if (GameStatus.currentPhase == GameStatus.GamePhase.Waiting)
         {
@@ -173,108 +172,78 @@ public class ItemSpawning : MonoBehaviour
         GameStatus.itemsToMemorize = itemsToMemorize;
     }
 
-
-
-
-
-
     /// <summary>
     /// Instantiate the key and decoy items in the defined spawn points.
     /// </summary>
     /// <param name="keyItemList">List of items that should be retrieved by the user.</param>
     /// <param name="decoyItemList">List of items that are added in the environment.</param>
-    public void InstantiateItemsTutorialPreevaluation(
-    List<GameObject> keyItemList, 
-    List<GameObject> decoyItemList, 
-    List<GameObject> specialBigItems
-)
+public void InstantiateItemsTutorialPreevaluation(List<GameObject> keyItemList, List<GameObject> decoyItemList)
 {
     List<GameObject> itemsToMemorize = new();
     List<GameObject> itemsInEnvironment = new();
 
-    List<ItemSpawn> availableSpawnPoints_Start = new() 
-    { 
-        itemSpawnPoints_Start[2], 
-        itemSpawnPoints_Start[9] 
+    List<ItemSpawn> availableSpawnPoints_Start = new List<ItemSpawn> { itemSpawnPoints_Start[2], itemSpawnPoints_Start[9] };
+
+    Dictionary<string, SpawnType> itemToSpawn = new()
+    {
+        // KEY
+        { "Cafetera", SpawnType.table },
+        { "Cámara de fotos", SpawnType.aboveTVFurniture },
+
+        // DECOY
+        { "Auriculares", SpawnType.oppositeBookshelf },
+        { "Control remoto", SpawnType.insideDoor },
+        { "Telefono Inalambrico", SpawnType.insideTVShelf },
+        { "Cartera", SpawnType.aboveEntrance },
+        { "Teclado", SpawnType.aboveLongFurniture },
+        { "Cuaderno", SpawnType.insideOppositeDrawer }
     };
 
-    var specialSpawns = itemSpawnPoints_Preevaluation
-        .Where(sp => sp.isSpecial)
-        .ToList();
+    // Posiciono los objetos en el hall
+    PlaceItemInSpecificSpawnpoint(keyItemList[0],availableSpawnPoints_Start[0],true, true);
+    PlaceItemInSpecificSpawnpoint(keyItemList[1],availableSpawnPoints_Start[1],true, true);
 
-    if (specialSpawns.Count > 0 && specialBigItems != null && specialBigItems.Count > 0)
+    void PlaceFixedItem(GameObject item, bool isKey)
     {
-        System.Random rng = new();
+        string itemName = item.GetComponent<HeldItem>().itemName;
 
-        foreach (GameObject specialBigItem in specialBigItems)
+        if (itemToSpawn.TryGetValue(itemName, out SpawnType spawnType))
         {
-            if (specialSpawns.Count == 0) break;
+            ItemSpawn spawnPoint = itemSpawnPoints_Preevaluation.FirstOrDefault(sp => sp.spawnType == spawnType);
+            if (spawnPoint != null)
+            {
+                GameObject placedItem = PlaceItemInSpawnpoint(item, new List<ItemSpawn> { spawnPoint }, false);
+                itemsInEnvironment.Add(placedItem);
 
-            ItemSpawn chosenSpecialSpawn = specialSpawns[rng.Next(specialSpawns.Count)];
+                if (isKey)
+                {
+                    GameStatus.keyItems.Add(item.GetComponent<HeldItem>());
+                    itemsToMemorize.Add(placedItem);
+                }
 
-            GameObject placedSpecial = PlaceItemInSpawnpoint(
-                specialBigItem, 
-                new List<ItemSpawn> { chosenSpecialSpawn }, 
-                true
-            );
-            itemsInEnvironment.Add(placedSpecial);
-
-            itemSpawnPoints_Preevaluation.RemoveAll(sp => sp.spawnType == chosenSpecialSpawn.spawnType);
-            specialSpawns.RemoveAll(sp => sp.spawnType == chosenSpecialSpawn.spawnType);
-
-            Debug.Log($"Special object {specialBigItem.name} colocado en {chosenSpecialSpawn.spawnType} - {chosenSpecialSpawn.spawnName}");
+                itemSpawnPoints_Preevaluation.Remove(spawnPoint);
+                Logging.DebugLog($"{(isKey ? "Key" : "Decoy")} item {itemName} colocado en {spawnType} (Living)");
+            }
+            else
+            {
+                Debug.LogWarning($"No se encontró spawn para {itemName} con tipo {spawnType}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"No se encontró asignación fija para el item {itemName}");
         }
     }
 
-    var requiredTypes = new List<SpawnType>
-    {
-        SpawnType.aboveEntrance,
-        SpawnType.table,
-        SpawnType.insideDoor,
-        SpawnType.insideOppositeDrawer,
-        SpawnType.aboveTVFurniture,
-        SpawnType.insideTVShelf,
-        SpawnType.oppositeBookshelf,
-        SpawnType.aboveLongFurniture
-    };
+    foreach (GameObject keyItem in keyItemList)
+        PlaceFixedItem(keyItem, true);
 
-    System.Random rngNormal = new();
-    var results = requiredTypes
-        .Select(type =>
-        {
-            var options = itemSpawnPoints_Preevaluation.Where(sp => sp.spawnType == type).ToList();
-            return options.Count > 0 ? options[rngNormal.Next(options.Count)] : null;
-        })
-        .Where(sp => sp != null)
-        .ToList();
+    foreach (GameObject decoyItem in decoyItemList)
+        PlaceFixedItem(decoyItem, false);
 
-    itemSpawnPoints_Preevaluation = results;
-
-    GenerateSpawnPoints(new(itemSpawnPoints_Preevaluation));
-    Debug.Log(availableSpawnPoints_Start);
-    Debug.Log(itemSpawnPoints_Preevaluation);
-
-    foreach (GameObject item in keyItemList)
-    {
-        GameStatus.keyItems.Add(item.GetComponent<HeldItem>());
-        itemsToMemorize.Add(PlaceItemInSpawnpoint(item, availableSpawnPoints_Start, false));
-        Logging.DebugLog(item.name + " colocado exitosamente en la repisa");
-    }
-
-    List<ItemSpawn> largeSpawnsAvailable = largeSearchSpawns;
-    List<ItemSpawn> normalSpawnsAvailable = smallSearchSpawns;
-
-    SpawnItemsLargeFirst(new(keyItemList), ref largeSpawnsAvailable, ref normalSpawnsAvailable, itemsInEnvironment);
-
-    SpawnItemsLargeFirst(new(decoyItemList), ref largeSpawnsAvailable, ref normalSpawnsAvailable, itemsInEnvironment, true);
-
-    // 5. Guardar referencias
     GameStatus.itemsInEnvironment = itemsInEnvironment;
     GameStatus.itemsToMemorize = itemsToMemorize;
 }
-
-
-
 
 
     public void SpawnItemsLargeFirst(List<GameObject> itemsToSpawn, ref List<ItemSpawn> largeSpawnsAvailable, ref List<ItemSpawn> normalSpawnsAvailable, List<GameObject> itemsInEnvironment, bool expandChoice = false)

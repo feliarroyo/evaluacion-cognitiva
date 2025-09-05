@@ -9,7 +9,6 @@ public class ItemSpawn : MonoBehaviour
     public bool isLevel1;
     public bool isLevel2;
     public ItemSpawning.SpawnType spawnType;
-    public bool isSpecial;
     
     void OnDrawGizmos()
     {

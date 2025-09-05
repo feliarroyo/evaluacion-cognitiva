@@ -278,7 +278,7 @@ private IEnumerator ShowPracticePopup()
     PlayerMovement.allowPlayerMovement = false;
     TouchController.allowCameraMovement = false;
 
-    yield return popups.ShowPopups("En esta práctica, es posible recorrer el ambiente\nen el que se desarrolla el juego, y experimentar\nlas tareas a ser realizadas en este ambiente.");
+    yield return popups.ShowPopups("En esta práctica, es posible recorrer\n el ambiente en el que se desarrolla el juego,\n y experimentar las tareas descriptas en el tutorial.");
 
     PlayerMovement.allowPlayerMovement = true;
     TouchController.allowCameraMovement = true;

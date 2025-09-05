@@ -32,16 +32,17 @@ public class GameConfig : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            Debug.Log("GameConfig Awake ejecutado. Instancia creada.");
-        }
-        else
-        {
-            Destroy(gameObject); // Por si accidentalmente hay más de uno
-        }
+        instance = this;
+        // if (instance == null)
+        // {
+        //     instance = this;
+        //     DontDestroyOnLoad(gameObject);
+        //     Debug.Log("GameConfig Awake ejecutado. Instancia creada.");
+        // }
+        // else
+        // {
+        //     Destroy(gameObject); // Por si accidentalmente hay más de uno
+        // }
     }
     
     /// <summary>
