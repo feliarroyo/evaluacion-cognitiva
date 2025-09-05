@@ -9,6 +9,7 @@ public class ItemSpawning : MonoBehaviour
     public List<ItemSpawn> itemSpawnPoints_Start = new();
     public List<ItemSpawn> itemSpawnPoints_Search = new();
     public List<ItemSpawn> itemSpawnPoints_Preevaluation = new();
+    public List<ItemSpawn> itemSpawnPoints_PreevaluationStart = new();
     private readonly List<ItemSpawn> smallSearchSpawns = new();
     private readonly List<ItemSpawn> largeSearchSpawns = new();
     public GameConfig gc;
@@ -177,14 +178,14 @@ public class ItemSpawning : MonoBehaviour
     /// </summary>
     /// <param name="keyItemList">List of items that should be retrieved by the user.</param>
     /// <param name="decoyItemList">List of items that are added in the environment.</param>
-public void InstantiateItemsTutorialPreevaluation(List<GameObject> keyItemList, List<GameObject> decoyItemList)
-{
-    List<GameObject> itemsToMemorize = new();
-    List<GameObject> itemsInEnvironment = new();
+    public void InstantiateItemsTutorialPreevaluation(List<GameObject> keyItemList, List<GameObject> decoyItemList)
+    {
+        List<GameObject> itemsToMemorize = new();
+        List<GameObject> itemsInEnvironment = new();
 
-    List<ItemSpawn> availableSpawnPoints_Start = new List<ItemSpawn> { itemSpawnPoints_Start[2], itemSpawnPoints_Start[9] };
+        List<ItemSpawn> availableSpawnPoints_Start = new(itemSpawnPoints_PreevaluationStart);
 
-    Dictionary<string, SpawnType> itemToSpawn = new()
+        Dictionary<string, SpawnType> itemToSpawn = new()
     {
         // KEY
         { "Cafetera", SpawnType.table },
@@ -199,50 +200,51 @@ public void InstantiateItemsTutorialPreevaluation(List<GameObject> keyItemList, 
         { "Cuaderno", SpawnType.insideOppositeDrawer }
     };
 
-    // Posiciono los objetos en el hall
-    PlaceItemInSpecificSpawnpoint(keyItemList[0],availableSpawnPoints_Start[0],true, true);
-    PlaceItemInSpecificSpawnpoint(keyItemList[1],availableSpawnPoints_Start[1],true, true);
+        // Posiciono los objetos en el hall
+        itemsToMemorize.Add(PlaceItemInSpecificSpawnpoint(keyItemList[0], availableSpawnPoints_Start[0], false, true));
+        itemsToMemorize.Add(PlaceItemInSpecificSpawnpoint(keyItemList[1], availableSpawnPoints_Start[1], false, true));
 
-    void PlaceFixedItem(GameObject item, bool isKey)
-    {
-        string itemName = item.GetComponent<HeldItem>().itemName;
-
-        if (itemToSpawn.TryGetValue(itemName, out SpawnType spawnType))
+        void PlaceFixedItem(GameObject item, bool isKey)
         {
-            ItemSpawn spawnPoint = itemSpawnPoints_Preevaluation.FirstOrDefault(sp => sp.spawnType == spawnType);
-            if (spawnPoint != null)
+            string itemName = item.GetComponent<HeldItem>().itemName;
+
+            if (itemToSpawn.TryGetValue(itemName, out SpawnType spawnType))
             {
-                GameObject placedItem = PlaceItemInSpawnpoint(item, new List<ItemSpawn> { spawnPoint }, false);
-                itemsInEnvironment.Add(placedItem);
-
-                if (isKey)
+                ItemSpawn spawnPoint = itemSpawnPoints_Preevaluation.FirstOrDefault(sp => sp.spawnType == spawnType);
+                if (spawnPoint != null)
                 {
-                    GameStatus.keyItems.Add(item.GetComponent<HeldItem>());
-                    itemsToMemorize.Add(placedItem);
-                }
+                    GameObject placedItem = PlaceItemInSpawnpoint(item, new List<ItemSpawn> { spawnPoint }, true);
+                    itemsInEnvironment.Add(placedItem);
 
-                itemSpawnPoints_Preevaluation.Remove(spawnPoint);
-                Logging.DebugLog($"{(isKey ? "Key" : "Decoy")} item {itemName} colocado en {spawnType} (Living)");
+                    //  if (isKey)
+                    //  {
+                    //      GameStatus.keyItems.Add(item.GetComponent<HeldItem>());
+                    //      itemsToMemorize.Add(placedItem);
+                    //  }
+
+                    itemSpawnPoints_Preevaluation.Remove(spawnPoint);
+                    // Logging.DebugLog($"{(isKey ? "Key" : "Decoy")} item {itemName} colocado en {spawnType} (Living)");
+                }
+                else
+                {
+                    // Debug.LogWarning($"No se encontró spawn para {itemName} con tipo {spawnType}");
+                }
             }
             else
             {
-                Debug.LogWarning($"No se encontró spawn para {itemName} con tipo {spawnType}");
+                // Debug.LogWarning($"No se encontró asignación fija para el item {itemName}");
             }
         }
-        else
-        {
-            Debug.LogWarning($"No se encontró asignación fija para el item {itemName}");
-        }
-    }
 
-    foreach (GameObject keyItem in keyItemList)
-        PlaceFixedItem(keyItem, true);
+        foreach (GameObject keyItem in keyItemList)
+            PlaceFixedItem(keyItem, true);
 
-    foreach (GameObject decoyItem in decoyItemList)
-        PlaceFixedItem(decoyItem, false);
+        foreach (GameObject decoyItem in decoyItemList)
+            PlaceFixedItem(decoyItem, false);
 
-    GameStatus.itemsInEnvironment = itemsInEnvironment;
-    GameStatus.itemsToMemorize = itemsToMemorize;
+        GameStatus.itemsInEnvironment = itemsInEnvironment;
+        GameStatus.itemsToMemorize = itemsToMemorize;
+    
 }
 
 

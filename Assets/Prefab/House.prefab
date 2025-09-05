@@ -5435,6 +5435,7 @@ MonoBehaviour:
   canBeClosed: 1
   portal: {fileID: 0}
   isOpen: 0
+  isMoving: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
   id: 
@@ -5538,6 +5539,7 @@ MonoBehaviour:
   canBeClosed: 1
   portal: {fileID: 0}
   isOpen: 0
+  isMoving: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
   id: 
@@ -8104,6 +8106,7 @@ MonoBehaviour:
   canBeClosed: 1
   portal: {fileID: 0}
   isOpen: 0
+  isMoving: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
   id: 
@@ -9562,6 +9565,7 @@ MonoBehaviour:
   canBeClosed: 1
   portal: {fileID: 0}
   isOpen: 0
+  isMoving: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
   id: 
@@ -13866,7 +13870,6 @@ GameObject:
   - component: {fileID: 318662507498301950}
   - component: {fileID: 1890874685338627548}
   - component: {fileID: 8275205273626593360}
-  - component: {fileID: 4648692500804778018}
   m_Layer: 6
   m_Name: Mesh47
   m_TagString: Untagged
@@ -13939,20 +13942,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4648692500804778018
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4648692500804778021}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2616795000046063624, guid: d9e7d4dd08711a544941a21dc508eebb, type: 3}
 --- !u!1 &4682702930769256872
 GameObject:
   m_ObjectHideFlags: 0
@@ -17160,11 +17149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnName: 
+  spawnName: insideOppDrawer1L
   allowLargeItems: 0
   isLevel1: 0
   isLevel2: 0
-  spawnType: 5
+  spawnType: 6
 --- !u!1 &5547490785925150799
 GameObject:
   m_ObjectHideFlags: 0
@@ -27130,6 +27119,7 @@ MonoBehaviour:
   canBeClosed: 0
   portal: {fileID: 2695074106766434833}
   isOpen: 0
+  isMoving: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
   id: 
@@ -36571,6 +36561,7 @@ MonoBehaviour:
   canBeClosed: 1
   portal: {fileID: 0}
   isOpen: 0
+  isMoving: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
   id: 
@@ -36642,6 +36633,7 @@ MonoBehaviour:
   canBeClosed: 1
   portal: {fileID: 0}
   isOpen: 0
+  isMoving: 0
   rotationAxis: 120
   testRotation: {x: 0, y: 0, z: 0, w: 0}
   id: 
@@ -36731,6 +36723,7 @@ MonoBehaviour:
   canBeClosed: 1
   portal: {fileID: 0}
   isOpen: 0
+  isMoving: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
   id: 
@@ -36835,6 +36828,7 @@ MonoBehaviour:
   canBeClosed: 1
   portal: {fileID: 0}
   isOpen: 0
+  isMoving: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
   id: 

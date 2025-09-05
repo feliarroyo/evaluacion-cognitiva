@@ -93,10 +93,13 @@ public class GameStatus : MonoBehaviour
         {
             case GamePhase.Tutorial_ReachApple:
                 TurnLightsOn(instance.lights[0]);
-                Timer.StartTimer(25);
+                Timer.StartTimer(32);
+                SwapMaterial.SetMaterials(true);
+                Debug.Log("SWAPMATERIAL SET TO TRUE");
                 break;
             case GamePhase.Tutorial_Memorizing:
                 instance.StartCoroutine(instance.TurnLightsOff(instance.lights[0], 0f, false));
+                SwapMaterial.SetMaterials(false);
                 if (HeldItem.currentlyHeldItem != null)
                 {
                     HeldItem.ReturnItem();
@@ -112,7 +115,7 @@ public class GameStatus : MonoBehaviour
                 instance.lights[1].SetActive(false);
                 SwapMaterial.SetMaterials(true);
                 TurnLightsOn(instance.lights[2]);
-                Timer.StartTimer(120);
+                Timer.StartTimer(118);
                 break;
             case GamePhase.Tutorial_Search:
                 savedItems.Clear();
@@ -135,6 +138,7 @@ public class GameStatus : MonoBehaviour
                 TurnLightsOn(instance.lights[0]);
                 //instance.StartCoroutine(instance.FadeInLight(instance.memorizeLight, 0f));
                 Timer.StartTimer(GameConfig.memorizeTime);
+                SwapMaterial.SetMaterials(true);
                 break;
             case GamePhase.Memorizing:
                 if (GameConfig.memorizeTime != 0)
@@ -166,6 +170,7 @@ public class GameStatus : MonoBehaviour
                 }
                 instance.invisibleWall.SetActive(false);
                 instance.lights[1].SetActive(true);
+                SwapMaterial.SetMaterials(false);
                 break;
             case GamePhase.BeforeSearch:
                 instance.lights[1].SetActive(false);
@@ -268,6 +273,7 @@ public class GameStatus : MonoBehaviour
     {
         keyItems.Clear();
         savedItems.Clear();
+        Time.timeScale = 1;
         SceneLoader.LoadScene("MainMenu");
     }
 

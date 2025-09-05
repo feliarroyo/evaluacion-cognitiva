@@ -9,6 +9,7 @@ public class TutorialManager : MonoBehaviour
     private static WaitForSeconds _waitForSeconds1_5 = new WaitForSeconds(1.5f);
     private static WaitForSeconds _waitForSeconds1 = new WaitForSeconds(1f);
     private static WaitForSeconds _waitForSeconds2 = new WaitForSeconds(2f);
+    private static WaitForSeconds _waitForSecondsWall = new WaitForSeconds(0.2f);
     public static TutorialManager instance;
     public GameObject mission;
     // private TextMeshProUGUI missionText;
@@ -27,9 +28,10 @@ public class TutorialManager : MonoBehaviour
     public List<HeldItem> items = new();
     public static float rotationX = 0.0f;
     public static float rotationY = 0.0f;
-    const int DEFAULT_SPEED = 3; // siempre velocidad 3
-    const int SLOW_SPEED = 2; // siempre velocidad 3
+    const int DEFAULT_SPEED = 2; // velocidad default
+    const float SLOW_SPEED = 1.5f; // velocidad más lenta
     const float LOOKDOWN_TIME = 1.4f;
+    const float CAMERA_ROT_SPEED = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -214,7 +216,7 @@ public class TutorialManager : MonoBehaviour
             "Al comienzo del juego,\nse verá la fachada de una casa.",
             "Se debe avanzar hacia la puerta de la casa,\ndeslizando el control izquierdo hacia arriba."
         });
-        player.GetComponent<PlayerMovement>().moveSpeed = SLOW_SPEED;
+        player.GetComponent<PlayerMovement>().moveSpeed = DEFAULT_SPEED;
         yield return _waitForSeconds1;
         MovePlayerVertical();
         yield return new WaitUntil(() => houseDoor.GetComponent<Interactable>().isInteractable);
@@ -242,8 +244,10 @@ public class TutorialManager : MonoBehaviour
         yield return _waitForSeconds1;
         MovePlayerVertical();
         yield return new WaitUntil(() => GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Memorizing);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.4f);
         StopPlayerMovement();
+        player.GetComponent<PlayerMovement>().forceStop = true;
+        yield return new WaitForSeconds(0.1f);
         // player.GetComponent<PlayerMovement>().moveSpeed = DEFAULT_SPEED;
     }
 
@@ -258,7 +262,9 @@ public class TutorialManager : MonoBehaviour
             "Al encenderse la luz del hall,\ncomenzará a correr el tiempo límite\npara observar los objetos,\nen el reloj que se muestra en la pantalla.",
             "Es posible moverse en todas las direcciones del hall\n(adelante, atrás, izquierda y derecha),\ndeslizando el control izquierdo hacia la dirección deseada."
         });
+        
         yield return new WaitForSeconds(0.5f);
+        player.GetComponent<PlayerMovement>().forceStop = false;
         // player.GetComponent<PlayerMovement>().moveSpeed = SLOW_SPEED;
         MovePlayerHorizontal(true);
         yield return new WaitForSeconds(MOVE_TIME);
@@ -276,7 +282,6 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(MOVE_TIME);
         StopPlayerMovement();
         yield return new WaitForSeconds(STOP_TIME);
-        // player.GetComponent<PlayerMovement>().moveSpeed = DEFAULT_SPEED;
     }
 
     /// <summary>
@@ -314,22 +319,40 @@ public class TutorialManager : MonoBehaviour
         GetItem(ITEMID_CAMERA);
         yield return _waitForSeconds1;
         yield return ShowPopups(popups, "Es posible girar un objeto en distintas direcciones\n(izquierda, derecha, arriba y abajo),\ndeslizando sobre el objeto en la dirección deseada."); // #12
+        
+        yield return new WaitForSeconds(WAIT_SPEED); 
+        rotationX = -CAMERA_ROT_SPEED; // izquierda
+        yield return new WaitForSeconds(WAIT_SPEED); 
+        rotationX = 0;
         yield return new WaitForSeconds(WAIT_SPEED);
-        rotationX = -1f;
+        rotationX = CAMERA_ROT_SPEED; // regreso
         yield return new WaitForSeconds(WAIT_SPEED);
-        rotationX = 0f;
+        rotationX = 0;
+        yield return new WaitForSeconds(WAIT_SPEED); 
+        rotationX = CAMERA_ROT_SPEED; // derecha
         yield return new WaitForSeconds(WAIT_SPEED);
-        rotationX = 1f;
+        rotationX = 0;
+        yield return new WaitForSeconds(WAIT_SPEED); 
+        rotationX = -CAMERA_ROT_SPEED; // regreso
         yield return new WaitForSeconds(WAIT_SPEED);
         rotationX = 0;
         yield return new WaitForSeconds(WAIT_SPEED);
-        rotationY = -1f;
+        rotationY = CAMERA_ROT_SPEED; // arriba
         yield return new WaitForSeconds(WAIT_SPEED);
-        rotationY = 0f;
+        rotationY = 0;
         yield return new WaitForSeconds(WAIT_SPEED);
-        rotationY = 1f;
+        rotationY = -CAMERA_ROT_SPEED; // regreso
         yield return new WaitForSeconds(WAIT_SPEED);
-        rotationY = 0f;
+        rotationY = 0;
+        yield return new WaitForSeconds(WAIT_SPEED);
+        rotationY = -CAMERA_ROT_SPEED; // abajo
+        yield return new WaitForSeconds(WAIT_SPEED);
+        rotationY = 0;
+        yield return new WaitForSeconds(WAIT_SPEED);
+        rotationY = CAMERA_ROT_SPEED; // regreso
+        yield return new WaitForSeconds(WAIT_SPEED);
+        rotationY = 0;
+        yield return new WaitForSeconds(WAIT_SPEED);
         yield return ShowPopups(popups, "Para que el objeto vuelva a su lugar en el estante,\nse debe tocar el botón rojo que se muestra en la pantalla.");  // #13
         yield return new WaitForSeconds(0.5f);
         ReturnItem();
@@ -348,7 +371,7 @@ public class TutorialManager : MonoBehaviour
         Vector3 passageStart = new(-48.63f,player.transform.position.y,player.transform.position.z); // -48.45 -> -48.65 -> -48.55 -> -48.62 (no choca)
         yield return _waitForSeconds1;
         yield return MovePlayerToTarget(passageStart);
-        yield return new WaitForSeconds(0.5f);
+        yield return _waitForSecondsWall; // new WaitForSeconds(0.5f);
         yield return CameraMovementX(0);
         yield return _waitForSeconds1;
         //yield return LookPlayerToTarget(passageEnd, false);
@@ -374,11 +397,13 @@ public class TutorialManager : MonoBehaviour
         // MovePlayerVertical();
         // yield return new WaitForSeconds(0.3f);
         Vector3 livingEntrance = new(player.transform.position.x, player.transform.position.y, -89.5f);
-        StartCoroutine(MovePlayerToTarget(livingEntrance));
+        MovePlayerVertical();
         yield return new WaitUntil(() => GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Search);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
+        player.GetComponent<PlayerMovement>().forceStop = true;
+        yield return new WaitForSeconds(0.1f);
+        player.GetComponent<PlayerMovement>().forceStop = false;
         yield return ShowPopups(popups, "Al encenderse la luz de la sala,\ncomenzará a correr el tiempo límite\npara recorrer la sala y seleccionar los objetos,\nen el reloj que se muestra en la pantalla."); // #17
-        // player.GetComponent<PlayerMovement>().moveSpeed = SLOW_SPEED;
         //yield return new WaitForSeconds(0.2f);
         //StopPlayerMovement();
     }
@@ -459,12 +484,14 @@ public class TutorialManager : MonoBehaviour
         // yield return _waitForSeconds1;
         Vector3 rackCorner = new(player.transform.position.x, player.transform.position.y, -84.4f); // -83.7 -> -83.9 -> -84.4
         yield return MovePlayerToTarget(rackCorner);
-        yield return _waitForSeconds1;
+        yield return _waitForSecondsWall; // _waitForSeconds1;
+        player.GetComponent<PlayerMovement>().moveSpeed = SLOW_SPEED;
         yield return CameraMovementX(-90); // mirar a pared opuesta
         Vector3 oppPosition = new(-54.5f, player.transform.position.y, player.transform.position.z); // -54.5 -> -55 -> -54.8 -> -54.7 -> -54.5
         yield return _waitForSeconds1;
         yield return MovePlayerToTarget(oppPosition);
         yield return _waitForSeconds1;
+        player.GetComponent<PlayerMovement>().moveSpeed = DEFAULT_SPEED;
         //Vector3 oppSidestep = new(player.transform.position.x, player.transform.position.y, -85.1f); // -85 -> -85.1
         //yield return MovePlayerToTargetHorizontal(oppSidestep, 1f);
         // MovePlayerHorizontal(false);
@@ -486,8 +513,8 @@ public class TutorialManager : MonoBehaviour
         yield return _waitForSeconds2;
         GetItem(ITEMID_DRAWERITEM);
         yield return _waitForSeconds1;
-        rotationX = -0.35f;
-        yield return new WaitForSeconds(0.4f);
+        rotationX = 0.5f;
+        yield return _waitForSeconds1;
         rotationX = 0f;
         yield return _waitForSeconds1;
         ReturnItem();
@@ -558,7 +585,7 @@ public class TutorialManager : MonoBehaviour
 
         // subir la mirada
         yield return CameraMovementY(0f);
-        yield return new WaitForSeconds(LOOKDOWN_TIME);
+        yield return _waitForSecondsWall; // new WaitForSeconds(LOOKDOWN_TIME);
     }
 
 
@@ -573,7 +600,7 @@ public class TutorialManager : MonoBehaviour
         
         float tablePos = -53f; // -53.89 -> -53.59 -> -53.69 -> -53.83
         yield return MovePlayerToTargetX(tablePos);
-        yield return _waitForSeconds1;
+        yield return _waitForSecondsWall; // _waitForSeconds1;
         // GIRAR 90 GRADOS, BAJAR MIRADA 60
         yield return CameraMovement(90, 40);
         yield return _waitForSeconds1;
@@ -588,7 +615,7 @@ public class TutorialManager : MonoBehaviour
         yield return _waitForSeconds1;
         // subir mirada
         yield return CameraMovementY(0);
-        yield return _waitForSeconds1;
+        yield return _waitForSecondsWall; // _waitForSeconds1;
     }
 
         private IEnumerator GoThroughTVNew(PopUpManager popups)
@@ -609,9 +636,9 @@ public class TutorialManager : MonoBehaviour
         GetItem(ITEMID_SHELFITEM);
         yield return _waitForSeconds1;
         // rotar y llevarse item
-        rotationX = -0.75f;
+        rotationX = CAMERA_ROT_SPEED;
         yield return _waitForSeconds1;
-        rotationX = 0f;
+        rotationX = 0;
         yield return _waitForSeconds1;
         StoreItem();
         yield return _waitForSeconds1;

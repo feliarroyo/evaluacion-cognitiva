@@ -21,11 +21,13 @@ public class SwapMaterial : MonoBehaviour
     {
         
     }
-    public void SetMaterial(bool isLit){
-            Renderer rend = gameObject.GetComponent<Renderer>();
-            Material[] mats = rend.materials;
-            mats[replaceID] = isLit ? litMaterial : unlitMaterial;
-            rend.materials = mats;
+    public void SetMaterial(bool isLit)
+    {
+        Renderer rend = gameObject.GetComponent<Renderer>();
+        Material[] mats = rend.materials;
+        mats[replaceID] = isLit ? litMaterial : unlitMaterial;
+        rend.materials = mats;
+        Debug.Log("SET MATERIAL EN " + isLit + " PARA " + gameObject.name);
     }
 
     public static void SetMaterials(bool isLit){
