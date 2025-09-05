@@ -60,11 +60,11 @@ public class ItemSpawning : MonoBehaviour
         HouseDistributionManage();
         if (GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Start)
         {
-            InstantiateItemsTutorialPreevaluation(gc.GenerateTutorialKeyItems(), gc.GenerateTutorialDecoyItems());
+            InstantiateItemsTutorialPreevaluation(gc.GenerateTutorialKeyItems(), gc.GenerateTutorialDecoyItems(), false);
         }
         else if (Settings.currentDifficulty == Settings.Difficulty.Preevaluación)
         {
-            InstantiateItemsTutorialPreevaluation(gc.preevaluationKeyItemList, gc.preevaluationDecoyItemList);
+            InstantiateItemsTutorialPreevaluation(gc.preevaluationKeyItemList, gc.preevaluationDecoyItemList, true);
         }
         else if (GameStatus.currentPhase == GameStatus.GamePhase.Waiting)
         {
@@ -178,7 +178,7 @@ public class ItemSpawning : MonoBehaviour
     /// </summary>
     /// <param name="keyItemList">List of items that should be retrieved by the user.</param>
     /// <param name="decoyItemList">List of items that are added in the environment.</param>
-    public void InstantiateItemsTutorialPreevaluation(List<GameObject> keyItemList, List<GameObject> decoyItemList)
+    public void InstantiateItemsTutorialPreevaluation(List<GameObject> keyItemList, List<GameObject> decoyItemList, bool isPractice)
     {
         List<GameObject> itemsToMemorize = new();
         List<GameObject> itemsInEnvironment = new();
@@ -199,11 +199,13 @@ public class ItemSpawning : MonoBehaviour
         { "Teclado", SpawnType.aboveLongFurniture },
         { "Cuaderno", SpawnType.insideOppositeDrawer }
     };
-
-        // Posiciono los objetos en el hall
-        itemsToMemorize.Add(PlaceItemInSpecificSpawnpoint(keyItemList[0], availableSpawnPoints_Start[0], false, true));
-        itemsToMemorize.Add(PlaceItemInSpecificSpawnpoint(keyItemList[1], availableSpawnPoints_Start[1], false, true));
-
+        if (isPractice)
+        {
+            // Posiciono los objetos en el hall
+            itemsToMemorize.Add(PlaceItemInSpecificSpawnpoint(keyItemList[0], availableSpawnPoints_Start[0], false, true));
+            itemsToMemorize.Add(PlaceItemInSpecificSpawnpoint(keyItemList[1], availableSpawnPoints_Start[1], false, true));
+        }
+        
         void PlaceFixedItem(GameObject item, bool isKey)
         {
             string itemName = item.GetComponent<HeldItem>().itemName;
