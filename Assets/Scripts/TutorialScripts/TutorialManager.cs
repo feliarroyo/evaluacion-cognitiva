@@ -365,6 +365,7 @@ public class TutorialManager : MonoBehaviour
     {
         yield return new WaitUntil(() => GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_BeforeSearch);
         DisableItemInteractions(new List<HeldItem>() { items[0], items[1] });
+        SwapMaterial.SetMaterials(false);
         yield return new WaitForSeconds(0.5f);
         yield return ShowPopups(popups, "Cuando el tiempo límite termine,\nla luz del hall se apagará,\ny se deberá avanzar hacia el pasillo de la casa."); // #14
         yield return CameraMovementX(90);
@@ -490,7 +491,7 @@ public class TutorialManager : MonoBehaviour
         Vector3 oppPosition = new(-54.5f, player.transform.position.y, player.transform.position.z); // -54.5 -> -55 -> -54.8 -> -54.7 -> -54.5
         yield return _waitForSeconds1;
         yield return MovePlayerToTarget(oppPosition);
-        yield return _waitForSeconds1;
+        yield return _waitForSecondsWall;
         player.GetComponent<PlayerMovement>().moveSpeed = DEFAULT_SPEED;
         //Vector3 oppSidestep = new(player.transform.position.x, player.transform.position.y, -85.1f); // -85 -> -85.1
         //yield return MovePlayerToTargetHorizontal(oppSidestep, 1f);
@@ -868,5 +869,8 @@ public class TutorialManager : MonoBehaviour
         SceneLoader.LoadScene("MainMenu");
         yield return null;
     }
-
+    public void OnDestroy()
+    {
+        instance = null;
+    }
 }

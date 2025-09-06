@@ -60,11 +60,11 @@ public class ItemSpawning : MonoBehaviour
         HouseDistributionManage();
         if (GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Start)
         {
-            InstantiateItemsTutorialPreevaluation(gc.GenerateTutorialKeyItems(), gc.GenerateTutorialDecoyItems(), false);
+            UseItemsFromList(gc.GenerateTutorialKeyItems(), gc.GenerateTutorialDecoyItems());
         }
         else if (Settings.currentDifficulty == Settings.Difficulty.Preevaluación)
         {
-            InstantiateItemsTutorialPreevaluation(gc.preevaluationKeyItemList, gc.preevaluationDecoyItemList, true);
+            InstantiateItemsTutorialPreevaluation(gc.preevaluationKeyItemList, gc.preevaluationDecoyItemList);
         }
         else if (GameStatus.currentPhase == GameStatus.GamePhase.Waiting)
         {
@@ -173,12 +173,18 @@ public class ItemSpawning : MonoBehaviour
         GameStatus.itemsToMemorize = itemsToMemorize;
     }
 
+    public void UseItemsFromList(List<GameObject> keyItemList, List<GameObject> decoyItemList)
+    {
+        GameStatus.itemsToMemorize = keyItemList;
+        GameStatus.itemsInEnvironment = decoyItemList;
+    }
+
     /// <summary>
     /// Instantiate the key and decoy items in the defined spawn points.
     /// </summary>
     /// <param name="keyItemList">List of items that should be retrieved by the user.</param>
     /// <param name="decoyItemList">List of items that are added in the environment.</param>
-    public void InstantiateItemsTutorialPreevaluation(List<GameObject> keyItemList, List<GameObject> decoyItemList, bool isPractice)
+    public void InstantiateItemsTutorialPreevaluation(List<GameObject> keyItemList, List<GameObject> decoyItemList)
     {
         List<GameObject> itemsToMemorize = new();
         List<GameObject> itemsInEnvironment = new();
@@ -199,13 +205,13 @@ public class ItemSpawning : MonoBehaviour
         { "Teclado", SpawnType.aboveLongFurniture },
         { "Cuaderno", SpawnType.insideOppositeDrawer }
     };
-        if (isPractice)
+        if (Settings.currentDifficulty == Settings.Difficulty.Preevaluación)
         {
             // Posiciono los objetos en el hall
             itemsToMemorize.Add(PlaceItemInSpecificSpawnpoint(keyItemList[0], availableSpawnPoints_Start[0], false, true));
             itemsToMemorize.Add(PlaceItemInSpecificSpawnpoint(keyItemList[1], availableSpawnPoints_Start[1], false, true));
         }
-        
+
         void PlaceFixedItem(GameObject item, bool isKey)
         {
             string itemName = item.GetComponent<HeldItem>().itemName;
@@ -246,8 +252,8 @@ public class ItemSpawning : MonoBehaviour
 
         GameStatus.itemsInEnvironment = itemsInEnvironment;
         GameStatus.itemsToMemorize = itemsToMemorize;
-    
-}
+
+    }
 
 
     public void SpawnItemsLargeFirst(List<GameObject> itemsToSpawn, ref List<ItemSpawn> largeSpawnsAvailable, ref List<ItemSpawn> normalSpawnsAvailable, List<GameObject> itemsInEnvironment, bool expandChoice = false)

@@ -99,7 +99,6 @@ public class GameStatus : MonoBehaviour
                 break;
             case GamePhase.Tutorial_Memorizing:
                 instance.StartCoroutine(instance.TurnLightsOff(instance.lights[0], 0f, false));
-                SwapMaterial.SetMaterials(false);
                 if (HeldItem.currentlyHeldItem != null)
                 {
                     HeldItem.ReturnItem();
@@ -120,7 +119,6 @@ public class GameStatus : MonoBehaviour
             case GamePhase.Tutorial_Search:
                 savedItems.Clear();
                 keyItems.Clear();
-                SwapMaterial.SetMaterials(false);
                 OpenDoor.EnableInteractions(false);
                 OpenDrawer.EnableInteractions(false);
                 // Agregado para que no se vea el borde blanco cuando se apaga la luz
@@ -130,6 +128,7 @@ public class GameStatus : MonoBehaviour
                     go.GetComponent<Interactable>().stoppedInteraction = true;
                 }
                 instance.StartCoroutine(instance.TurnLightsOff(instance.lights[2], 1f, false));
+                SwapMaterial.SetMaterials(false);
                 Timer.StopTimer();
                 break;
             case GamePhase.Tutorial_SearchOver:
@@ -189,13 +188,13 @@ public class GameStatus : MonoBehaviour
                 {
                     OpenDoor.EnableInteractions(false);
                     OpenDrawer.EnableInteractions(false);
-                    SwapMaterial.SetMaterials(false);
                     // Agregado para que no se vea el borde blanco cuando se apaga la luz
                     foreach (GameObject go in itemsInEnvironment)
                     {
                         go.GetComponent<Outline>().enabled = false;
                         go.GetComponent<Interactable>().stoppedInteraction = true;
                     }
+                    SwapMaterial.SetMaterials(false);
                     instance.StartCoroutine(instance.TurnLightsOff(instance.lights[2], 1f, Settings.currentDifficulty != Settings.Difficulty.Preevaluación));
                     Timer.StopTimer();
                     timeUsedSearching = Timer.spentTime;
