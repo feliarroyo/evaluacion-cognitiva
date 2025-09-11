@@ -36,10 +36,10 @@ public class TutorialManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
+        // if (instance == null)
+        // {
+        //     instance = this;
+        // }
         Debug.Log("La fase en este momento es : " + GameStatus.currentPhase);
         // missionText = mission.GetComponentInChildren<TextMeshProUGUI>();
         // In the tutorial, certain objects must spawn, and user control is disabled
@@ -48,6 +48,14 @@ public class TutorialManager : MonoBehaviour
         PlayerMovement.allowPlayerMovement = !inTutorial;
         TouchController.allowCameraMovement = !inTutorial;
         cam = player.GetComponentInChildren<CameraControl>();
+    }
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
     private void StartMission()
