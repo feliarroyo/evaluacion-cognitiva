@@ -87,8 +87,6 @@ public class GameStatus : MonoBehaviour
 
     public static void SetNextPhase()
     {
-        //Debug.Log(currentPhase);
-        Logging.Log(Logging.EventType.PhaseEnd, new[] { currentPhase.ToString() });
         switch (currentPhase)
         {
             case GamePhase.Tutorial_ReachApple:
@@ -138,6 +136,7 @@ public class GameStatus : MonoBehaviour
                 //instance.StartCoroutine(instance.FadeInLight(instance.memorizeLight, 0f));
                 Timer.StartTimer(GameConfig.memorizeTime);
                 SwapMaterial.SetMaterials(true);
+                Logging.Log(Logging.EventType.PhaseChange, new[] { "M" });
                 break;
             case GamePhase.Memorizing:
                 if (GameConfig.memorizeTime != 0)
@@ -170,6 +169,7 @@ public class GameStatus : MonoBehaviour
                 instance.invisibleWall.SetActive(false);
                 instance.lights[1].SetActive(true);
                 SwapMaterial.SetMaterials(false);
+                Logging.Log(Logging.EventType.PhaseChange, new[] { "FM" });
                 break;
             case GamePhase.BeforeSearch:
                 instance.lights[1].SetActive(false);
@@ -181,9 +181,11 @@ public class GameStatus : MonoBehaviour
                 {
                     Timer.StartTimer(GameConfig.searchTime);
                 }
+                Logging.Log(Logging.EventType.PhaseChange, new[] { "B" });
                 break;
             case GamePhase.Search:
                 //if (Timer.timerOn) eliminado para que funcione el tiempo de memorización cuando se llega a 0
+                Logging.Log(Logging.EventType.PhaseChange, new[] { "FB" });
                 if (!Timer.timerOn)
                 {
                     OpenDoor.EnableInteractions(false);
@@ -198,16 +200,21 @@ public class GameStatus : MonoBehaviour
                     instance.StartCoroutine(instance.TurnLightsOff(instance.lights[2], 1f, Settings.currentDifficulty != Settings.Difficulty.Preevaluación));
                     Timer.StopTimer();
                     timeUsedSearching = Timer.spentTime;
-                    ExitWithoutSaving();
+                    if (Settings.currentDifficulty == Settings.Difficulty.Preevaluación)
+                    {
+                        ExitWithoutSaving();
+                    }
                 }
                 else
                 {
                     Timer.StopTimer();
                     timeUsedSearching = Timer.spentTime;
-                    if (Settings.currentDifficulty == Settings.Difficulty.Preevaluación){
+                    if (Settings.currentDifficulty == Settings.Difficulty.Preevaluación)
+                    {
                         ExitWithoutSaving();
                     }
-                    else {
+                    else
+                    {
                         Debug.Log("LOAD SCENE 3");
                         Logging.LogEvent.SaveLogToFile();
                         SceneLoader.LoadScene("Results");
@@ -224,7 +231,6 @@ public class GameStatus : MonoBehaviour
                 return; // Final phase
         }
         currentPhase++;
-        Logging.Log(Logging.EventType.PhaseStart, new[] { currentPhase.ToString() });
     }
 
     public void StartTutorial()

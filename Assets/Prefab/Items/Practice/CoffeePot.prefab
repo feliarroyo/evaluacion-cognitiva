@@ -189,6 +189,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4976659471001093358, guid: 84e117c52fea00943a76fa21cc0f48ab, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 53d8e8d7960099f4c8395cb17f15170c, type: 2}
     - target: {fileID: -1256841003522951573, guid: 84e117c52fea00943a76fa21cc0f48ab, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -205,6 +209,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1411287063963538519, guid: 84e117c52fea00943a76fa21cc0f48ab, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 53d8e8d7960099f4c8395cb17f15170c, type: 2}
     - target: {fileID: 2766212503428324877, guid: 84e117c52fea00943a76fa21cc0f48ab, type: 3}
       propertyPath: m_Layer
       value: 8

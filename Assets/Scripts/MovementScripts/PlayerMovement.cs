@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public Joystick joystick;
     private bool isMoving = false;
     public bool forceStop = false;
+    public static Vector3 currentPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentPosition = transform.position;
         if (allowPlayerMovement)
         {
             MyInput();

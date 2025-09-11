@@ -150,7 +150,7 @@ public class Results : MonoBehaviour
                 { "memTime", newResult.memorizeTime },
                 { "memObjects", newResult.keyImageName },
                 { "foundObjects", newResult.foundImageName },
-                {"logging", Logging.LogEvent.GetJSONLog()}
+                {"logging", Logging.logList}
             };
 
             // Si es un nuevo paciente, primero aseguramos que tenga idPatient

@@ -15,7 +15,7 @@ public class OpenDrawer : MonoBehaviour, IElementBehaviour
     public Vector3 closePosition;
     public float openingSize;
 
-    private bool isOpen = false;
+    public bool isOpen = false;
     private bool opening = false;
     private bool closing = false;
 

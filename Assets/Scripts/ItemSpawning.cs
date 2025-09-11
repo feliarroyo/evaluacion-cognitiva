@@ -120,8 +120,7 @@ public class ItemSpawning : MonoBehaviour
                 itemsInEnvironment.Add(PlaceItemInSpecificSpawnpoint(livingItemList[s], getSpawnPoint, true, false));
         }
 
-        GameStatus.itemsInEnvironment = itemsInEnvironment;
-        GameStatus.itemsToMemorize = itemsToMemorize;
+        UseItemsFromList(itemsToMemorize, itemsInEnvironment);
     }
 
 
@@ -159,24 +158,17 @@ public class ItemSpawning : MonoBehaviour
             Debug.Log(s);
             List<ItemSpawn> filteredLargeSpawnPoints = largeSpawnsAvailable.Where(sp => sp.spawnType.ToString() == s).ToList();
             List<ItemSpawn> filteredNormalSpawnPoints = normalSpawnsAvailable.Where(sp => sp.spawnType.ToString() == s).ToList();
-            Debug.Log("Inicio LSA en " + s + ": " + filteredLargeSpawnPoints.Count);
-            Debug.Log("Inicio NSA en " + s + ": " + filteredNormalSpawnPoints.Count);
             SpawnItemsLargeFirst(new(keyItemList[s]), ref filteredLargeSpawnPoints, ref filteredNormalSpawnPoints, itemsInEnvironment);
-            Debug.Log("Tras Key LSA en " + s + ": " + filteredLargeSpawnPoints.Count);
-            Debug.Log("Tras Key NSA en " + s + ": " + filteredNormalSpawnPoints.Count);
             SpawnItemsLargeFirst(new(decoyItemList[s]), ref filteredLargeSpawnPoints, ref filteredNormalSpawnPoints, itemsInEnvironment, true);
-            Debug.Log("Tras Fin LSA en " + s + ": " + filteredLargeSpawnPoints.Count);
-            Debug.Log("Tras Fin NSA en " + s + ": " + filteredNormalSpawnPoints.Count);
         }
-
-        GameStatus.itemsInEnvironment = itemsInEnvironment;
-        GameStatus.itemsToMemorize = itemsToMemorize;
+        UseItemsFromList(itemsToMemorize, itemsInEnvironment);
     }
 
     public void UseItemsFromList(List<GameObject> keyItemList, List<GameObject> decoyItemList)
     {
         GameStatus.itemsToMemorize = keyItemList;
         GameStatus.itemsInEnvironment = decoyItemList;
+        Logging.itemsInLevel = new();
     }
 
     /// <summary>
@@ -250,9 +242,7 @@ public class ItemSpawning : MonoBehaviour
         foreach (GameObject decoyItem in decoyItemList)
             PlaceFixedItem(decoyItem, false);
 
-        GameStatus.itemsInEnvironment = itemsInEnvironment;
-        GameStatus.itemsToMemorize = itemsToMemorize;
-
+        UseItemsFromList(itemsToMemorize, itemsInEnvironment);
     }
 
 

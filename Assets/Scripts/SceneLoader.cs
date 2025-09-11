@@ -22,7 +22,6 @@ public class SceneLoader : MonoBehaviour
         //preloadCanLoad = false;
         GetComponent<SetupScene>().SetConfig();
         GameConfig.SetDifficultyParameters();
-        Logging.Log(Logging.EventType.DifficultySet, new[] { Settings.currentDifficulty.ToString() });
         loadingPanel.SetActive(true);
         StartCoroutine(PreloadSceneAsync(sceneName));
     }

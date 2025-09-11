@@ -56,6 +56,7 @@ public class PopUpManager : MonoBehaviour
         {
             CreateWindow(message);
             yield return new WaitUntil(() => closeMessage); // Wait until window is closed;
+            // yield return new WaitForSecondsRealtime(3f); // Variante para tutorial automatico
             closeMessage = false;
         }
         else

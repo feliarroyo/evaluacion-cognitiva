@@ -41,6 +41,11 @@ public class CameraControl : MonoBehaviour
         return XRotation;
     }
 
+    public Vector2 GetRotationVector()
+    {
+        return new(XRotation, PlayerBody.rotation.y);
+    }
+
     // --- ROTATION COROUTINES USING SENSITIVITY ---
 
     public IEnumerator RotateX(float targetX, float speed = 5f, float tolerance = 0.5f)

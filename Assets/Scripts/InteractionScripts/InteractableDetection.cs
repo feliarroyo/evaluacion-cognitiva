@@ -31,6 +31,19 @@ public class InteractableDetection : MonoBehaviour
             //Debug.Log("OTHER ");
             //Debug.Log(other);
             other.gameObject.GetComponent<Interactable>().EnableInteraction(true);
+            if (other.GetComponent<HeldItem>() != null)
+            {
+                HeldItem hi = other.GetComponent<HeldItem>();
+                // if (Logging.itemsSeen.Contains(hi))
+                // {
+                //     if (Logging.currentLog.seenItems[hi.itemName].isInteractable == false)
+                //     {
+                //         Logging.Log(Logging.EventType.SeenObjectInteractivityChange, new[] {
+                //             hi.itemName
+                //         });
+                //     }
+                // }
+            }
             //Debug.Log("TRIGGER ENTERING... " + gameObject);
         }
     }
@@ -45,10 +58,24 @@ public class InteractableDetection : MonoBehaviour
             TutorialItem.playerIsClose = false;
             return;
         }
-        if (other.gameObject.CompareTag("Interactable")) {
+        if (other.gameObject.CompareTag("Interactable"))
+        {
             Debug.Log("OTHER ");
             Debug.Log(other);
             other.gameObject.GetComponent<Interactable>().EnableInteraction(false);
+            if (other.GetComponent<HeldItem>() != null)
+            {
+                HeldItem hi = other.GetComponent<HeldItem>();
+                // if (Logging.itemsSeen.Contains(hi))
+                // {
+                //     if (Logging.currentLog.seenItems[hi.itemName].isInteractable == true)
+                //     {
+                //         Logging.Log(Logging.EventType.SeenObjectInteractivityChange, new[] {
+                //             hi.itemName
+                //         });
+                //     }
+                // }
+            }
         }
     }
 }

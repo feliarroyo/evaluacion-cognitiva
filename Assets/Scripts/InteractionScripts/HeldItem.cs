@@ -32,11 +32,14 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
     public Camera mainCamera;
     // Define if the item to instantiate should be placed back
     public bool pushBackItem;
+    public static List<HeldItem> itemsInScene = new();
+    public Interactable interactable;
 
 
     protected virtual void Start()
     {
         mainCamera = Camera.main;
+        interactable = GetComponent<Interactable>();
         // Initialize layer to be detected
         groundLayer = LayerMask.GetMask("Furniture");
         //if (validSpawnTypes[(int) ItemSpawning.SpawnType.wall].isValid && isEnvironmentItem){
@@ -59,6 +62,32 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
         }
         originalPosition = transform.position;
         originalRotation = transform.rotation;
+        itemsInScene.Add(this);
+    }
+
+    public bool CheckVisibility()
+    {
+        return IsActuallyVisible(GetComponentInChildren<Renderer>(), Camera.main);
+    }
+
+    bool IsActuallyVisible(Renderer rend, Camera cam)
+    {
+        Vector3 viewportPos = cam.WorldToViewportPoint(rend.bounds.center);
+
+        if (viewportPos.z < 0 || viewportPos.x < 0 || viewportPos.x > 1 || viewportPos.y < 0 || viewportPos.y > 1)
+            return false;
+
+        Vector3 dir = rend.bounds.center - cam.transform.position;
+        if (Physics.Raycast(cam.transform.position, dir, out RaycastHit hit))
+        {
+            return hit.collider == rend;
+        }
+        return false;
+    }
+
+    private void OnDestroy()
+    {
+        itemsInScene.Remove(this);
     }
 
     public void SnapObjectLeft(Vector3 coord)
@@ -283,7 +312,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
     /// </summary>
     public static void ReturnItem()
     {
-        Logging.Log(Logging.EventType.ItemReturn, new[] { currentlyHeldItem.GetComponent<HeldItem>().itemName });
+        Logging.Log(Logging.EventType.ItemReturn, new[] {currentlyHeldItem.itemName});
         ItemInteraction.EnableButton(false);
         currentlyHeldItem.isMoving = false;
         currentlyHeldItem.isHeld = false;
@@ -319,7 +348,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
     {
         if (currentlyHeldItem != null)
         {
-            Logging.Log(Logging.EventType.ItemStore, new[] { currentlyHeldItem.GetComponent<HeldItem>().itemName });
+            Logging.Log(Logging.EventType.ItemStore);
             GameStatus.SaveItem(currentlyHeldItem.GetComponent<HeldItem>());
             // Destroys the gameObject in the scene.
             currentlyHeldItem.gameObject.SetActive(false);
