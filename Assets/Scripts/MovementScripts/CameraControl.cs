@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using Object = System.Object;
 
 /// <summary>
 /// This script controls the camera movement.
@@ -11,9 +10,11 @@ public class CameraControl : MonoBehaviour
     private float XMove;
     private float YMove;
     private float XRotation;
+    private Vector2 lastMovement = new(0, 0);
     [SerializeField] private Transform PlayerBody;
     public Vector2 LockAxis;
     public float sensitivity = 40f;
+    private bool isMoving = false;
     void Start()
     {
 
@@ -29,6 +30,61 @@ public class CameraControl : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(XRotation, 0, 0);
         PlayerBody.Rotate(Vector3.up * XMove);
+        
+        if (isMoving || XMove != 0 || YMove != 0)
+        {
+            LogMovement();
+        }
+    }
+
+    private void LogMovement()
+    {
+        Vector2 currentCamera = new(PlayerBody.rotation.y, -transform.localRotation.x);
+        Vector2 currentMovement = new(XMove, YMove);
+        if (!isMoving)
+        {
+
+            Logging.Log(Logging.EventType.PlayerRotationStart, new[] { currentCamera, (Object)currentMovement });
+            lastMovement = currentMovement;
+            isMoving = true;
+        }
+        else
+        {
+            if (LockAxis.x == 0 && LockAxis.y == 0)
+            {
+                
+                StartCoroutine(CheckIfStill(currentCamera));
+            }
+            else if (Vector2.Distance(currentMovement, lastMovement) > 30f)
+            {
+                Logging.Log(Logging.EventType.PlayerRotationChange, new[] { (Object)currentCamera, currentMovement });
+                lastMovement = currentMovement;
+            }
+        }
+
+    }
+
+    private IEnumerator CheckIfStill(Vector2 currentCamera)
+    {
+        float timer = 0f;
+        while (isMoving)
+        {
+            if (LockAxis.x != 0 || LockAxis.y != 0)
+            {
+                yield break;
+            }
+            else
+            {
+                timer += Time.deltaTime;
+                // If we've been still for long enough, stop
+                if (timer >= 0.6f)
+                {
+                    Logging.Log(Logging.EventType.PlayerRotationEnd, new[] { (Object)currentCamera });
+                    isMoving = false;
+                    yield break; // exit coroutine
+                }
+            }
+        }
     }
 
     public void SetSensitivity(float value)

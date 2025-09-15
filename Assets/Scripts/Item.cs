@@ -36,11 +36,9 @@ public class Item : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 rotate = true;
-                Logging.DebugLog("Rotation active");
             }
             else 
             {
-                Logging.DebugLog("Stop rotation");
                 rotate = false;
             }
         }
@@ -55,9 +53,7 @@ public class Item : MonoBehaviour
 
     void OnMouseDown(){
         currentlyHeldItem = gameObject;
-        Logging.Log(Logging.EventType.ItemGrab, new [] {currentlyHeldItem.GetComponent<HeldItem>().itemName});
         ItemInteraction.EnableButton(true);
-        Logging.DebugLog(gameObject.name + " clicked");
         originalPosition = transform.position;
         isBeingMoved = true;
     }

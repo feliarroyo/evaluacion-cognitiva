@@ -362,6 +362,7 @@ public class ItemSpawning : MonoBehaviour
             GameStatus.keyItems.Add(heldItem);
         }
         Debug.Log(go.name + " fue colocado en " + spawnPoint.name);
+        Logging.ItemInfoLog(heldItem.itemName, isEnvironmentItem, spawnPoint.spawnName, spawnPoint.transform.position.x, spawnPoint.transform.position.z);
         return go;
     }
 

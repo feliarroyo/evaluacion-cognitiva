@@ -28,6 +28,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
     public Sprite uiIcon;
     public Sprite uiIconNoBG;
     private LayerMask groundLayer;
+    private LayerMask itemLayer;
     public List<SpawnTypeEntry> validSpawnTypes = new();
     public Camera mainCamera;
     // Define if the item to instantiate should be placed back
@@ -42,6 +43,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
         interactable = GetComponent<Interactable>();
         // Initialize layer to be detected
         groundLayer = LayerMask.GetMask("Furniture");
+        itemLayer = LayerMask.GetMask("Items");
         //if (validSpawnTypes[(int) ItemSpawning.SpawnType.wall].isValid && isEnvironmentItem){
         //  transform.Rotate(90f, 0f, -90f); // place over wall
         //  SnapObjectBack(transform.position + Vector3.back * 0.05f);
@@ -72,16 +74,22 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
 
     bool IsActuallyVisible(Renderer rend, Camera cam)
     {
+        
         Vector3 viewportPos = cam.WorldToViewportPoint(rend.bounds.center);
 
-        if (viewportPos.z < 0 || viewportPos.x < 0 || viewportPos.x > 1 || viewportPos.y < 0 || viewportPos.y > 1)
+        if (viewportPos.z < 0 || viewportPos.x < 0 || viewportPos.x > 1 || viewportPos.y < 0 || viewportPos.y > 1){
+            Debug.Log(itemName + " IS ACTUALLY VISIBLE: (VIEWPOINT) " + false);
             return false;
+        }
+        Vector3 dir = (rend.bounds.center - cam.transform.position).normalized;
 
-        Vector3 dir = rend.bounds.center - cam.transform.position;
         if (Physics.Raycast(cam.transform.position, dir, out RaycastHit hit))
         {
-            return hit.collider == rend;
+            bool visible = hit.collider == GetComponent<Collider>();
+            Debug.Log(itemName + " IS ACTUALLY VISIBLE (RAYCAST): " + visible);
+            return visible;
         }
+        Debug.Log(itemName + " IS ACTUALLY VISIBLE: " + false);
         return false;
     }
 
@@ -280,6 +288,10 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
         isReturning = false;
         GetComponent<Collider>().enabled = true;
         GetComponent<Outline>().OutlineWidth = 8;
+        if (Logging.currentLog.heldItem == gameObject.GetComponent<HeldItem>().itemName)
+        {
+            Logging.Log(Logging.EventType.NoItem, null);
+        }
     }
 
     /// <summary>
@@ -351,13 +363,17 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
             Logging.Log(Logging.EventType.ItemStore);
             GameStatus.SaveItem(currentlyHeldItem.GetComponent<HeldItem>());
             // Destroys the gameObject in the scene.
+            StoredItemCoroutine.instance.CheckNoItem(currentlyHeldItem.itemName);
             currentlyHeldItem.gameObject.SetActive(false);
             currentlyHeldItem = null;
             Interactable.allowAllInteractions = true;
             return true;
+
         }
         return false;
     }
+
+
 
     /// <summary>
     /// Checks whether a determined spawn type is recommended for this item.

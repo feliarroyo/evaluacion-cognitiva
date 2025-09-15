@@ -19,6 +19,7 @@ public class GameStatus : MonoBehaviour
         Tutorial_Search,
         Tutorial_SearchOver,
         Waiting,
+        BeforeMemorizing,
         Memorizing,
         BeforeSearch,
         Search,
@@ -132,6 +133,9 @@ public class GameStatus : MonoBehaviour
             case GamePhase.Tutorial_SearchOver:
                 break;
             case GamePhase.Waiting:
+                Logging.Log(Logging.EventType.PhaseChange, new[] { "IM" });
+                break;
+            case GamePhase.BeforeMemorizing:
                 TurnLightsOn(instance.lights[0]);
                 //instance.StartCoroutine(instance.FadeInLight(instance.memorizeLight, 0f));
                 Timer.StartTimer(GameConfig.memorizeTime);

@@ -1389,6 +1389,7 @@ MonoBehaviour:
   openPosition: {x: 0, y: 0, z: 0}
   closePosition: {x: 0, y: 0, z: 0}
   openingSize: -0.35
+  isOpen: 0
   spawnsContained:
   - {fileID: 0}
   - {fileID: 0}
@@ -7333,6 +7334,7 @@ MonoBehaviour:
   openPosition: {x: 0, y: 0, z: 0}
   closePosition: {x: 0, y: 0, z: 0}
   openingSize: -0.35
+  isOpen: 0
   spawnsContained:
   - {fileID: 0}
   - {fileID: 0}
@@ -16939,6 +16941,7 @@ MonoBehaviour:
   openPosition: {x: 0, y: 0, z: 0}
   closePosition: {x: 0, y: 0, z: 0}
   openingSize: -0.35
+  isOpen: 0
   spawnsContained:
   - {fileID: 0}
   - {fileID: 0}
@@ -17418,6 +17421,7 @@ MonoBehaviour:
   openPosition: {x: 0, y: 0, z: 0}
   closePosition: {x: 0, y: 0, z: 0}
   openingSize: -0.35
+  isOpen: 0
   spawnsContained:
   - {fileID: 0}
   - {fileID: 0}
@@ -27074,7 +27078,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 415571264231304930}
-  - component: {fileID: 8328933834612450145}
+  - component: {fileID: 4662006164735030758}
   - component: {fileID: 3586898996660297917}
   - component: {fileID: 3913338595626764120}
   - component: {fileID: 5104120681274031046}
@@ -27102,7 +27106,7 @@ Transform:
   m_Father: {fileID: 4488692905115188916}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8328933834612450145
+--- !u!114 &4662006164735030758
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -27111,18 +27115,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 6783274254844667215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8779a817d6adc0b479625a8f8ec185fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 10212ab874567e145b84655aaf71ba4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
   openAngle: 90
   canBeClosed: 0
-  portal: {fileID: 2695074106766434833}
+  portal: {fileID: 0}
   isOpen: 0
   isMoving: 0
   rotationAxis: 121
   testRotation: {x: 0, y: 0, z: 0, w: 0}
-  id: 
+  id: Puerta de casa
+  triggerPhase: 6
 --- !u!65 &3586898996660297917
 BoxCollider:
   m_ObjectHideFlags: 0

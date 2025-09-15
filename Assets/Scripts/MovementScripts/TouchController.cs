@@ -20,11 +20,11 @@ public class TouchController : MonoBehaviour
         if (allowCameraMovement){
             _cameraControl.LockAxis = _FixedTouchField.TouchDist;
             if (!isRotating && _FixedTouchField.Pressed) {
-                Logging.Log(Logging.EventType.PlayerRotationStart, new[] { (Object) _cameraControl.GetRotationVector() });
+                //Logging.Log(Logging.EventType.PlayerRotationStart, new[] { (Object) _cameraControl.GetRotationVector() });
                 isRotating = true;
             }
             else if (isRotating && !_FixedTouchField.Pressed) {
-                Logging.Log(Logging.EventType.PlayerRotationEnd, new[] { (Object) _cameraControl.GetRotationVector() });
+                //Logging.Log(Logging.EventType.PlayerRotationEnd, new[] { (Object) _cameraControl.GetRotationVector() });
                 isRotating = false;
             }
         }

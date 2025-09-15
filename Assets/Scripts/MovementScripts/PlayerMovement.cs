@@ -21,12 +21,13 @@ public class PlayerMovement : MonoBehaviour
     private bool isMoving = false;
     public bool forceStop = false;
     public static Vector3 currentPosition;
+    Vector3 lastDirection;
 
     // Start is called before the first frame update
     void Start()
     {
         // LockAndHideCursor(true)
-
+        currentPosition = transform.position;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
@@ -48,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.yellow;
 
         // Draw a sphere to indicate spawn points
-        Gizmos.DrawWireCube(orientation.position, new(0.74f,2f,0.74f));
+        Gizmos.DrawWireCube(orientation.position, new(0.74f, 2f, 0.74f));
     }
 
     private void FixedUpdate()
@@ -64,12 +65,13 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = joystick.Horizontal;
         verticalInput = joystick.Vertical;
         // Windows Editor Controls
-        #if UNITY_EDITOR_WIN
-            if (joystick.Horizontal == 0 && joystick.Vertical == 0) { // If joystick not being used, used AWSD keys
-                horizontalInput = Input.GetAxisRaw("Horizontal");
-                verticalInput = Input.GetAxisRaw("Vertical");
-            }
-        #endif
+#if UNITY_EDITOR_WIN
+        if (joystick.Horizontal == 0 && joystick.Vertical == 0)
+        { // If joystick not being used, used AWSD keys
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            verticalInput = Input.GetAxisRaw("Vertical");
+        }
+#endif
     }
 
     /// <summary>
@@ -78,23 +80,37 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayer()
     {
         if (forceStop)
-         {
-             rb.velocity = Vector3.zero;
-             return;
-         }
+        {
+            rb.velocity = Vector3.zero;
+            return;
+        }
         moveDirection = verticalInput * orientation.forward + horizontalInput * orientation.right;
-        if (!isMoving && moveDirection != Vector3.zero){
-            Logging.Log(Logging.EventType.PlayerMovementStart, new[] {(Object) gameObject.transform.position});
-            isMoving = true;
-        }
-        if (isMoving && moveDirection == Vector3.zero){
-            Logging.Log(Logging.EventType.PlayerMovementEnd, new[] {(Object) gameObject.transform.position});
-            isMoving = false;
-        }
-        
+        LogMovement();
         rb.AddForce(10f * moveSpeed * moveDirection.normalized, ForceMode.Force);
     }
 
+    private void LogMovement()
+    {
+        if (!isMoving && moveDirection != Vector3.zero)
+        { // Empieza a moverse
+            Logging.Log(Logging.EventType.PlayerMovementStart, new[] { (Object)gameObject.transform.position, moveDirection });
+            lastDirection = moveDirection;
+            isMoving = true;
+        }
+        if (isMoving)
+        {
+            if (moveDirection == Vector3.zero) // Deja de moverse
+            {
+                Logging.Log(Logging.EventType.PlayerMovementEnd, new[] { (Object)gameObject.transform.position });
+                isMoving = false;
+            }
+            else if (Vector3.Distance(moveDirection, lastDirection) > 0.25f)
+            {
+                Logging.Log(Logging.EventType.PlayerMovementChange, new[] { (Object)gameObject.transform.position, moveDirection });
+                lastDirection = moveDirection;
+            }
+        }
+    }
     /// <summary>
     /// Limit maximum speed to a certain value.
     /// </summary>
