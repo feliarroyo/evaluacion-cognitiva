@@ -39,8 +39,10 @@ public class CameraControl : MonoBehaviour
 
     private void LogMovement()
     {
-        Vector2 currentCamera = new(PlayerBody.rotation.y, -transform.localRotation.x);
-        Vector2 currentMovement = new(XMove, YMove);
+        Vector2 currentCamera = new(Mathf.DeltaAngle(0, PlayerBody.rotation.eulerAngles.y), -Mathf.DeltaAngle(0, transform.rotation.eulerAngles.x));
+        Vector2 rawMovement = new(XMove, YMove);
+        Vector2 currentMovement = rawMovement.normalized;
+        Debug.Log("currentMovement is " + currentMovement);
         if (!isMoving)
         {
 
@@ -50,12 +52,13 @@ public class CameraControl : MonoBehaviour
         }
         else
         {
+            float angle = Vector2.Angle(lastMovement, currentMovement);
             if (LockAxis.x == 0 && LockAxis.y == 0)
             {
-                
+
                 StartCoroutine(CheckIfStill(currentCamera));
             }
-            else if (Vector2.Distance(currentMovement, lastMovement) > 30f)
+            else if (angle > 30f)
             {
                 Logging.Log(Logging.EventType.PlayerRotationChange, new[] { (Object)currentCamera, currentMovement });
                 lastMovement = currentMovement;

@@ -57,7 +57,7 @@ public class Logging : MonoBehaviour
             public Vector2 screenPosition;
             public override string ToString()
             {
-                return "<" + objectName + ", " + itemType + ", INTERACTUABLE: " + isInteractable + ", DISTANCIA: " + distance + " POSICIÓN EN PANTALLA: " + screenPosition + ">";
+                return "<" + objectName + ": " + itemType + ", " + (isInteractable? "INTERACTUABLE" : "NO INTERACTUABLE") + ", " + distance + ", " + screenPosition + ">";
             }
         }
 
@@ -70,49 +70,51 @@ public class Logging : MonoBehaviour
             public Vector2 screenPosition;
             public override string ToString()
             {
-                return "<NOMBRE: " + objectName + "\nINTERACTUABLE: " + isInteractable + "\nABIERTO: " + isOpen + "\nDISTANCIA: " + distance + "\nPOSICIÓN EN PANTALLA: " + screenPosition + ">";
+                return "<" + objectName + ": " + (isInteractable? "INTERACTUABLE" : "NO INTERACTUABLE") + " | " + (isOpen? "ABIERTO" : "CERRADO") + "| DISTANCIA: " + distance + " | POSICIÓN " + screenPosition + ">";
             }
         }
         public override string ToString()
         {
-            string result = "TIEMPO: " + timeStamp
-            + "\nFASE: " + gamePhase
-            + "\nESTADO FÍSICO: " + movementStatus
-            + "\nPOSICIÓN: " + movementPosition
-            + "\nDIRECCIÓN DE MOVIMIENTO: " + movementDirection
-            + "\nESTADO DE CÁMARA: " + cameraStatus
-            + "\nORIENTACIÓN DE CÁMARA: " + cameraOrientation
-            + "\nDIRECCIÓN DE MOVIMIENTO: " + cameraMovementDirection
-            + "\nOBJETOS VISIBLES: { \n";
-            if (seenItems != null)
+            string result = timeStamp
+            + " | FASE: " + gamePhase
+            + " | ESTADO MOV.: " + movementStatus
+            + " | POSICIÓN " + movementPosition
+            + " | DIRECCIÓN MOV.: " + movementDirection
+            + " | ESTADO CÁM.: " + cameraStatus
+            + " | ORIENTACIÓN CÁM: " + cameraOrientation
+            + " | DIRECCIÓN MOV. CÁM: " + cameraMovementDirection
+            + " | OBJETOS VISIBLES: {";
+            if (seenItems != null && seenItems.Count > 0)
             {
                 foreach (string item in seenItems.Keys)
                 {
-                    result += seenItems[item].ToString() + "\n";
+                    result += seenItems[item].ToString() + ", ";
                 }
+                result = result.Substring(0, result.Length - 2);
             }
             else result += "- }";
-            result += "\nOBJETO EN MANO: " + heldItem
-            + " (" + heldItemStatus
-            + ")\nMUEBLES VISIBLES: { \n";
-            if (seenFurniture != null)
+            result += " | OBJETO SOSTENIDO: " + heldItem
+            + " | ESTADO DE OBJ. SOSTENIDO: " + heldItemStatus
+            + " | INTERACTIVOS VISIBLES: {";
+            if (seenFurniture != null && seenFurniture.Count > 0)
             {
                 foreach (string furniture in seenFurniture.Keys)
                 {
-                    result += seenFurniture[furniture].ToString() + "\n";
+                    result += seenFurniture[furniture].ToString() + ", ";
                 }
+                result = result.Substring(0, result.Length - 2);
             }
             else result += "-";
-            return result + " }";
+            return result + " }\n";
         }
 
-        public static void SaveLogToFile(string fileName = "log.json")
+        public static void SaveLogToFile(string fileName = "log.txt")
         {
             // Define file path (persistentDataPath is safe for all platforms)
             string path = Path.Combine(Application.persistentDataPath, fileName);
 
             // Write file
-            File.WriteAllText(path, logList);
+            File.WriteAllText(path, extraInfo + "\n" + logList);
 
             DebugLog("Log saved to: " + path);
         }
@@ -144,6 +146,7 @@ public class Logging : MonoBehaviour
     public static LogEvent currentLog = new();
 
     public static string logList = "";
+    public static string extraInfo = "";
     public static List<string> itemsInLevel;
     public static List<Interactable> furnitureSeen;
     public static List<HeldItem> itemsSeen;
@@ -176,7 +179,7 @@ public class Logging : MonoBehaviour
         itemsSeen = new();
         furnitureSeen = new();
         logList = currentLog.ToString();
-        GameObject.Find("Status").GetComponent<TextMeshProUGUI>().text = currentLog.ToString();
+        //GameObject.Find("Status").GetComponent<TextMeshProUGUI>().text = currentLog.ToString();
         InvokeRepeating(nameof(CheckVisibility), 0f, 0.5f);
     }
 
@@ -188,7 +191,7 @@ public class Logging : MonoBehaviour
             interactChange = true;
         }
         currentLog.seenItems[hi.itemName].isInteractable = hi.interactable.isInteractable;
-        currentLog.seenItems[hi.itemName].distance = Vector3.Distance(PlayerMovement.currentPosition, hi.originalPosition);
+        currentLog.seenItems[hi.itemName].distance = (float)Math.Round(Vector3.Distance(PlayerMovement.currentPosition, hi.originalPosition), 2);
         currentLog.seenItems[hi.itemName].screenPosition = Camera.main.WorldToViewportPoint(hi.originalPosition);
         return interactChange;
     }
@@ -247,10 +250,6 @@ public class Logging : MonoBehaviour
                     currentLog.seenFurniture.Add(i.GetID(), new()
                     {
                         objectName = i.GetID(),
-                        isInteractable = i.isInteractable,
-                        isOpen = i.GetComponent<OpenDrawer>() != null ? i.GetComponent<OpenDrawer>().isOpen : i.GetComponent<OpenDoor>().isOpen,
-                        distance = Vector3.Distance(PlayerMovement.currentPosition, i.transform.position),
-                        screenPosition = Camera.main.WorldToViewportPoint(i.transform.position)
                     });
                 }
                 if (CalculateFurnitureStatus(i)) // check changes in visible furniture info
@@ -277,16 +276,16 @@ public class Logging : MonoBehaviour
             case EventType.PlayerMovementStart:
                 currentLog.movementStatus = "M";
                 Vector3 pos = (Vector3)parameters[0];
-                Vector3 mov = (Vector3)parameters[1];
+                Vector3 mov = ((Vector3)parameters[1]).normalized;
                 currentLog.movementPosition = new(pos.x, pos.z);
-                currentLog.movementDirection = new(mov.x, mov.y);
+                currentLog.movementDirection = new(mov.x, mov.z);
                 break;
             case EventType.PlayerMovementChange:
                 currentLog.movementStatus = "M";
                 pos = (Vector3)parameters[0];
-                mov = (Vector3)parameters[1];
+                mov = ((Vector3)parameters[1]).normalized;
                 currentLog.movementPosition = new(pos.x, pos.z);
-                currentLog.movementDirection = new(mov.x, mov.y);
+                currentLog.movementDirection = new(mov.x, mov.z);
                 break;
             case EventType.PlayerMovementEnd:
                 currentLog.movementStatus = "Q";
@@ -297,12 +296,12 @@ public class Logging : MonoBehaviour
             case EventType.PlayerRotationStart:
                 currentLog.cameraStatus = "M";
                 currentLog.cameraOrientation = (Vector2)parameters[0];
-                currentLog.cameraMovementDirection = (Vector2)parameters[0];
+                currentLog.cameraMovementDirection = (Vector2)parameters[1];
                 break;
             case EventType.PlayerRotationChange:
                 currentLog.cameraStatus = "M";
                 currentLog.cameraOrientation = (Vector2)parameters[0];
-                currentLog.cameraMovementDirection = (Vector2)parameters[0];
+                currentLog.cameraMovementDirection = (Vector2)parameters[1];
                 break;
             case EventType.PlayerRotationEnd:
                 currentLog.cameraStatus = "Q";
@@ -358,15 +357,21 @@ public class Logging : MonoBehaviour
         currentLog.SetTimeStamp();
         LogEvent newLog = new(currentLog);
         Debug.Log(newLog.ToString());
-        GameObject.Find("Status").GetComponent<TextMeshProUGUI>().text = newLog.ToString();
+        //GameObject.Find("Status").GetComponent<TextMeshProUGUI>().text = newLog.ToString();
         logList += newLog.ToString();
     }
 
-    public static void ItemInfoLog(string itemName, bool isEnvironmentItem, string spawnName, float spawnPositionX, float spawnPositionY)
+    public static void ItemInfoLog(string itemName, bool isEnvironmentItem, string spawnName, float spawnPositionX, float spawnPositionY, float spawnPositionZ)
     {
-        string itemInfo = "TIEMPO: " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "INFORMACIÓN DE OBJETO: <" + itemName + ", TIPO: ";
+        string itemInfo = "INFORMACIÓN DE OBJETO: <" + itemName + ", ";
         itemInfo += isEnvironmentItem ? "LIVING" : "HALL";
-        itemInfo += ", SPAWN: " + spawnName + " (" + spawnPositionX + ", " + spawnPositionY + ")>";
-        logList += itemInfo;
+        itemInfo += ", SPAWN: " + spawnName + ", POSICIÓN: (" + spawnPositionX + ", " + spawnPositionY + ")>";
+        extraInfo += itemInfo + "\n";
+    }
+
+    public static void FurnitureInfoLog(string furnitureName, float posX, float posY, float posZ)
+    {
+        string furnitureInfo = "INFORMACIÓN DE INTERACTUABLE: <POSICIÓN: " + furnitureName + ", POSICIÓN: (" + posX + ", " + posY + ", " + posZ + ")";
+        extraInfo += furnitureInfo + ">\n";
     }
 }

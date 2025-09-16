@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isMoving && moveDirection != Vector3.zero)
         { // Empieza a moverse
             Logging.Log(Logging.EventType.PlayerMovementStart, new[] { (Object)gameObject.transform.position, moveDirection });
-            lastDirection = moveDirection;
+            lastDirection = moveDirection.normalized;
             isMoving = true;
         }
         if (isMoving)
@@ -104,10 +104,10 @@ public class PlayerMovement : MonoBehaviour
                 Logging.Log(Logging.EventType.PlayerMovementEnd, new[] { (Object)gameObject.transform.position });
                 isMoving = false;
             }
-            else if (Vector3.Distance(moveDirection, lastDirection) > 0.25f)
+            else if (Vector3.Distance(moveDirection.normalized, lastDirection) > 0.25f)
             {
-                Logging.Log(Logging.EventType.PlayerMovementChange, new[] { (Object)gameObject.transform.position, moveDirection });
-                lastDirection = moveDirection;
+                Logging.Log(Logging.EventType.PlayerMovementChange, new[] { (Object)gameObject.transform.position, moveDirection.normalized });
+                lastDirection = moveDirection.normalized;
             }
         }
     }

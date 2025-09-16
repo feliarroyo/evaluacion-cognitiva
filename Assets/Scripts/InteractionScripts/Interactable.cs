@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(Collider))]
+
 /// <summary>
 /// This class represents the behavior of interactive elements within the environment, such as items or doors.
 /// </summary>
@@ -19,7 +21,7 @@ public class Interactable : MonoBehaviour
     {
         if (GetComponent<HeldItem>() == null)
         {
-            Debug.Log("NUEVO FURNITURE EN SCENE: " + name);
+            Logging.FurnitureInfoLog(GetID(), transform.position.x, transform.position.z, transform.position.y);
             interactablesInScene.Add(this);
         }
         GetComponent<Outline>().enabled = false;
@@ -60,7 +62,6 @@ public class Interactable : MonoBehaviour
 
         if (viewportPos.z < 0 || viewportPos.x < 0 || viewportPos.x > 1 || viewportPos.y < 0 || viewportPos.y > 1)
         {
-            Debug.Log(name + " IS ACTUALLY VISIBLE: (VIEWPOINT) " + false);
             return false;
         }
         Vector3 dir = (rend.bounds.center - cam.transform.position).normalized;
@@ -68,10 +69,8 @@ public class Interactable : MonoBehaviour
         if (Physics.Raycast(cam.transform.position, dir, out RaycastHit hit))
         {
             bool visible = hit.collider == GetComponent<Collider>();
-            Debug.Log(name + " IS ACTUALLY VISIBLE (RAYCAST): " + visible);
             return visible;
         }
-        Debug.Log(name + " IS ACTUALLY VISIBLE: " + false);
         return false;
     }
 

@@ -362,7 +362,7 @@ public class ItemSpawning : MonoBehaviour
             GameStatus.keyItems.Add(heldItem);
         }
         Debug.Log(go.name + " fue colocado en " + spawnPoint.name);
-        Logging.ItemInfoLog(heldItem.itemName, isEnvironmentItem, spawnPoint.spawnName, spawnPoint.transform.position.x, spawnPoint.transform.position.z);
+        Logging.ItemInfoLog(heldItem.itemName, isEnvironmentItem, spawnPoint.spawnName, spawnPoint.transform.position.x, spawnPoint.transform.position.z, spawnPoint.transform.position.y);
         return go;
     }
 
@@ -398,6 +398,7 @@ public class ItemSpawning : MonoBehaviour
                 Logging.DebugLog("Utilizamos " + next_position + " para " + item.name);
                 heldItem.isEnvironmentItem = isEnvironmentItem;
                 GameObject go = Instantiate(item, next_position.transform);
+                Logging.ItemInfoLog(heldItem.itemName, isEnvironmentItem, next_position.spawnName, next_position.transform.position.x, next_position.transform.position.z, next_position.transform.position.y);
                 result.Add(go);
             }
             catch (ArgumentOutOfRangeException)

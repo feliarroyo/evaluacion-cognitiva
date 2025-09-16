@@ -1,12 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
-using Object = System.Object;
-using System.Linq;
 
+[RequireComponent(typeof(Collider))]
 public class HeldItem : MonoBehaviour, IElementBehaviour
 {
     public string itemName; // Used to identify item in results.
@@ -78,7 +75,6 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
         Vector3 viewportPos = cam.WorldToViewportPoint(rend.bounds.center);
 
         if (viewportPos.z < 0 || viewportPos.x < 0 || viewportPos.x > 1 || viewportPos.y < 0 || viewportPos.y > 1){
-            Debug.Log(itemName + " IS ACTUALLY VISIBLE: (VIEWPOINT) " + false);
             return false;
         }
         Vector3 dir = (rend.bounds.center - cam.transform.position).normalized;
@@ -86,10 +82,8 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
         if (Physics.Raycast(cam.transform.position, dir, out RaycastHit hit))
         {
             bool visible = hit.collider == GetComponent<Collider>();
-            Debug.Log(itemName + " IS ACTUALLY VISIBLE (RAYCAST): " + visible);
             return visible;
         }
-        Debug.Log(itemName + " IS ACTUALLY VISIBLE: " + false);
         return false;
     }
 
