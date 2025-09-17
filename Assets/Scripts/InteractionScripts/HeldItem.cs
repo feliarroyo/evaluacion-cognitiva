@@ -76,10 +76,11 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
 
     bool IsActuallyVisible(Renderer rend, Camera cam)
     {
-        
+
         Vector3 viewportPos = cam.WorldToViewportPoint(rend.bounds.center);
 
-        if (viewportPos.z < 0 || viewportPos.x < 0 || viewportPos.x > 1 || viewportPos.y < 0 || viewportPos.y > 1){
+        if (viewportPos.z < 0 || viewportPos.x < 0 || viewportPos.x > 1 || viewportPos.y < 0 || viewportPos.y > 1)
+        {
             return false;
         }
         Vector3 dir = (rend.bounds.center - cam.transform.position).normalized;
@@ -323,7 +324,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
     /// </summary>
     public static void ReturnItem()
     {
-        Logging.Log(Logging.EventType.ItemReturn, new[] {currentlyHeldItem.itemName});
+        Logging.Log(Logging.EventType.ItemReturn, new[] { currentlyHeldItem.itemName });
         ItemInteraction.EnableButton(false);
         currentlyHeldItem.isMoving = false;
         currentlyHeldItem.isHeld = false;
@@ -382,6 +383,33 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
     public bool CanUseSpawnType(ItemSpawning.SpawnType spawnType)
     {
         return validSpawnTypes[(int)spawnType].isValid;
+    }
+
+    public IEnumerator RotateItemOverTime(float rotateXDegrees, float rotateYDegrees, float duration = 1f)
+    {
+        if (currentlyHeldItem == null || duration <= 0f) yield break;
+
+        Quaternion startRotation = currentlyHeldItem.transform.rotation;
+
+        // Target rotation based on requested X (pitch) and Y (yaw)
+        Quaternion targetRotation = Quaternion.Euler(
+            currentlyHeldItem.transform.eulerAngles.x + rotateXDegrees,
+            currentlyHeldItem.transform.eulerAngles.y + rotateYDegrees,
+            currentlyHeldItem.transform.eulerAngles.z // keep Z as is
+        );
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            currentlyHeldItem.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, t);
+            yield return null;
+        }
+
+        // Ensure exact final rotation
+        currentlyHeldItem.transform.rotation = targetRotation;
     }
 }
 
