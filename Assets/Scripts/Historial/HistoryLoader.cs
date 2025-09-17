@@ -17,6 +17,9 @@ public class HistoryLoader : MonoBehaviour
     public static event HistoryUpdated OnHistoryUpdated;
 
     private bool firebaseReady = false;
+    private Query resultsRef;
+    private bool isListening = false;
+
 
     private void Awake()
     {
@@ -52,82 +55,89 @@ public class HistoryLoader : MonoBehaviour
     //     //FirebaseInit.OnFirebaseInitialized -= OnFirebaseInitialized;
     //     PatientInfoLoader.OnEmailLoaded -= StartListeningToFirestore;
     // }
+public void StartDatabase(string email)
+{
+    Debug.Log("MAIL " + email);
 
-    public void StartDatabase(string email)
+    if (resultsRef != null && isListening)
     {
-        Query resultsRef = db.GetReference("results");
-
-        resultsRef.GetValueAsync().ContinueWithOnMainThread(task =>
-        {
-            if (task.IsFaulted)
-            {
-                Debug.LogError("[HistoryLoader] Error al buscar resultados: " + task.Exception);
-                return;
-            }
-
-            if (!task.Result.Exists)
-            {
-                Debug.LogWarning("[HistoryLoader] No hay resultados registrados.");
-                return;
-            }
-
-            DataSnapshot resultsSnapshot = task.Result;
-            DataSnapshot patientSnapshot = null;
-
-            // Buscar el nodo que tenga el email como idPatient
-            foreach (DataSnapshot child in resultsSnapshot.Children)
-            {
-                var idPatientSnap = child.Child("idPatient");
-                if (idPatientSnap.Exists && idPatientSnap.Value.ToString() == email)
-                {
-                    patientSnapshot = child;
-                    break;
-                }
-            }
-
-            if (patientSnapshot == null)
-            {
-                Debug.LogWarning("[HistoryLoader] No se encontró ningún paciente con ese email.");
-                return;
-            }
-
-            historyResults.Clear();
-            
-            // Ahora accedemos a los registros del paciente
-            DataSnapshot recordsSnapshot = patientSnapshot.Child("results");
-
-            foreach (DataSnapshot recordSnap in recordsSnapshot.Children)
-            {
-                Dictionary<string, object> data = (Dictionary<string, object>)recordSnap.GetValue(false);
-                List<string> memObjectsList = new();
-                List<string> foundObjectsList = new();
-
-                if (data.TryGetValue("memObjects", out var memObjects) && memObjects is List<object> memList)
-                    memObjectsList = memList.Select(item => item.ToString()).ToList();
-
-                if (data.TryGetValue("foundObjects", out var foundObjects) && foundObjects is List<object> foundList)
-                    foundObjectsList = foundList.Select(item => item.ToString()).ToList();
-
-                ResultData newResult = new()
-                {
-                    id = data.TryGetValue("id", out var idVal) ? int.Parse(idVal.ToString()) : 0,
-                    date = data.TryGetValue("date", out var dateVal) ? dateVal.ToString() : "",
-                    time = data.TryGetValue("time", out var timeVal) ? timeVal.ToString() : "",
-                    level = data.TryGetValue("level", out var levelVal) ? levelVal.ToString() : "",
-                    memorizeTime = data.TryGetValue("memTime", out var memTimeVal) ? memTimeVal.ToString() : "",
-                    searchTime = data.TryGetValue("searchTime", out var searchTimeVal) ? searchTimeVal.ToString() : "",
-                    keyImageName = memObjectsList,
-                    foundImageName = foundObjectsList
-                };
-
-                historyResults.Add(newResult);
-            }
-
-            SaveHistory();
-            Debug.Log("[HistoryLoader] Registros cargados exitosamente para " + email);
-            OnHistoryUpdated?.Invoke();
-        });
+        resultsRef.ValueChanged -= OnResultsValueChanged;
+        isListening = false;
     }
+
+    resultsRef = db.GetReference("results");
+    resultsRef.ValueChanged += OnResultsValueChanged;
+    isListening = true;
+
+    void OnResultsValueChanged(object sender, ValueChangedEventArgs e)
+    {
+        if (e.DatabaseError != null)
+        {
+            Debug.LogError("Error al escuchar resultados: " + e.DatabaseError.Message);
+            return;
+        }
+
+        if (!e.Snapshot.Exists)
+        {
+            Debug.LogWarning("No hay resultados registrados.");
+            return;
+        }
+
+        DataSnapshot patientSnapshot = null;
+        foreach (DataSnapshot child in e.Snapshot.Children)
+        {
+            var idPatientSnap = child.Child("idPatient");
+            if (idPatientSnap.Exists && idPatientSnap.Value != null 
+                && idPatientSnap.Value.ToString().Trim().ToLower() == email.Trim().ToLower())
+            {
+                patientSnapshot = child;
+                break;
+            }
+        }
+
+        if (patientSnapshot == null)
+        {
+            Debug.LogWarning("No se encontró ningún paciente con ese email.");
+            historyResults.Clear();
+            OnHistoryUpdated?.Invoke();
+            return;
+        }
+
+        historyResults.Clear();
+
+        DataSnapshot recordsSnapshot = patientSnapshot.Child("results");
+        foreach (DataSnapshot recordSnap in recordsSnapshot.Children)
+        {
+            Dictionary<string, object> data = (Dictionary<string, object>)recordSnap.GetValue(false);
+            List<string> memObjectsList = new();
+            List<string> foundObjectsList = new();
+
+            if (data.TryGetValue("memObjects", out var memObjects) && memObjects is List<object> memList)
+                memObjectsList = memList.Select(item => item.ToString()).ToList();
+
+            if (data.TryGetValue("foundObjects", out var foundObjects) && foundObjects is List<object> foundList)
+                foundObjectsList = foundList.Select(item => item.ToString()).ToList();
+
+            ResultData newResult = new()
+            {
+                id = data.TryGetValue("id", out var idVal) ? int.Parse(idVal.ToString()) : 0,
+                date = data.TryGetValue("date", out var dateVal) ? dateVal.ToString() : "",
+                time = data.TryGetValue("time", out var timeVal) ? timeVal.ToString() : "",
+                level = data.TryGetValue("level", out var levelVal) ? levelVal.ToString() : "",
+                memorizeTime = data.TryGetValue("memTime", out var memTimeVal) ? memTimeVal.ToString() : "",
+                searchTime = data.TryGetValue("searchTime", out var searchTimeVal) ? searchTimeVal.ToString() : "",
+                keyImageName = memObjectsList,
+                foundImageName = foundObjectsList
+            };
+
+            historyResults.Add(newResult);
+        }
+
+        SaveHistory();
+        OnHistoryUpdated?.Invoke();
+        Debug.Log("Historial actualizado en tiempo real para " + email);
+    }
+}
 
     public void StopListeningToFirestore()
     {
