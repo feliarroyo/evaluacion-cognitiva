@@ -159,7 +159,7 @@ public class ItemSpawning : MonoBehaviour
             List<ItemSpawn> filteredLargeSpawnPoints = largeSpawnsAvailable.Where(sp => sp.spawnType.ToString() == s).ToList();
             List<ItemSpawn> filteredNormalSpawnPoints = normalSpawnsAvailable.Where(sp => sp.spawnType.ToString() == s).ToList();
             SpawnItemsLargeFirst(new(keyItemList[s]), ref filteredLargeSpawnPoints, ref filteredNormalSpawnPoints, itemsInEnvironment);
-            SpawnItemsLargeFirst(new(decoyItemList[s]), ref filteredLargeSpawnPoints, ref filteredNormalSpawnPoints, itemsInEnvironment, true);
+            SpawnItemsLargeFirst(new(decoyItemList[s]), ref filteredLargeSpawnPoints, ref filteredNormalSpawnPoints, itemsInEnvironment);
         }
         UseItemsFromList(itemsToMemorize, itemsInEnvironment);
     }
@@ -246,7 +246,7 @@ public class ItemSpawning : MonoBehaviour
     }
 
 
-    public void SpawnItemsLargeFirst(List<GameObject> itemsToSpawn, ref List<ItemSpawn> largeSpawnsAvailable, ref List<ItemSpawn> normalSpawnsAvailable, List<GameObject> itemsInEnvironment, bool expandChoice = false)
+    public void SpawnItemsLargeFirst(List<GameObject> itemsToSpawn, ref List<ItemSpawn> largeSpawnsAvailable, ref List<ItemSpawn> normalSpawnsAvailable, List<GameObject> itemsInEnvironment)
     {
         // Place large items first
         itemsToSpawn.Sort((item1, item2) => item2.GetComponent<HeldItem>().isLargeItem.CompareTo(item1.GetComponent<HeldItem>().isLargeItem));
@@ -361,6 +361,10 @@ public class ItemSpawning : MonoBehaviour
         if (isHallItem){
             GameStatus.keyItems.Add(heldItem);
         }
+        else if (!GameStatus.IsKeyItem(heldItem.itemName))
+        {
+            GameStatus.decoyItems.Add(heldItem);
+        }
         Debug.Log(go.name + " fue colocado en " + spawnPoint.name);
         Logging.ItemInfoLog(heldItem.itemName, isEnvironmentItem, spawnPoint.spawnName, spawnPoint.transform.position.x, spawnPoint.transform.position.z, spawnPoint.transform.position.y);
         return go;
@@ -390,12 +394,9 @@ public class ItemSpawning : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("ELSEEEEEEE");
-                    Debug.Log("Next position: " + positions[shelfPosition]);
                     next_position = compatibleSpawnPoints[positions[shelfPosition]];
                     shelfPosition++;
                 }
-                Logging.DebugLog("Utilizamos " + next_position + " para " + item.name);
                 heldItem.isEnvironmentItem = isEnvironmentItem;
                 GameObject go = Instantiate(item, next_position.transform);
                 Logging.ItemInfoLog(heldItem.itemName, isEnvironmentItem, next_position.spawnName, next_position.transform.position.x, next_position.transform.position.z, next_position.transform.position.y);
@@ -403,7 +404,6 @@ public class ItemSpawning : MonoBehaviour
             }
             catch (ArgumentOutOfRangeException)
             {
-                Logging.DebugLog("¡No hay suficientes spawns adecuados para el objeto: " + item.name + "!");
                 return result;
             }
         }

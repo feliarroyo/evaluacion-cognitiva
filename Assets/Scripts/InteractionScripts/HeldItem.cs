@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class HeldItem : MonoBehaviour, IElementBehaviour
+public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
 {
     public string itemName; // Used to identify item in results.
     public bool isBeingHeld = false; // an item being currently held shouldn't be interactable.
@@ -64,6 +64,11 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
         itemsInScene.Add(this);
     }
 
+    public bool Equals(HeldItem other)
+    {
+        return itemName.Equals(other.itemName);
+    }
+
     public bool CheckVisibility()
     {
         return IsActuallyVisible(GetComponentInChildren<Renderer>(), Camera.main);
@@ -105,7 +110,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
                 originalRotation = transform.rotation;
             }
         }
-        catch (System.Exception e)
+        catch (Exception e)
         {
             Debug.LogError("Raycast crash prevented: " + e);
         }
@@ -130,7 +135,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
                 originalRotation = transform.rotation;
             }
         }
-        catch (System.Exception e)
+        catch (Exception e)
         {
             Debug.LogError("Raycast crash prevented: " + e);
         }
@@ -378,6 +383,10 @@ public class HeldItem : MonoBehaviour, IElementBehaviour
     {
         return validSpawnTypes[(int)spawnType].isValid;
     }
+}
+
+internal interface IEquatable
+{
 }
 
 [Serializable]

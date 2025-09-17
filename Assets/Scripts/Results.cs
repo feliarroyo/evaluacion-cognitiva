@@ -54,7 +54,9 @@ public class Results : MonoBehaviour
         }
 
         List<string> keyItemsNames = new List<string>();
+        List<string> decoyItemsNames = new List<string>();
         List<string> foundItemsNames = new List<string>();
+        
 
         foreach (var item in GameStatus.keyItems)
         {
@@ -64,12 +66,16 @@ public class Results : MonoBehaviour
         {
             foundItemsNames.Add(item.itemName);
         }
+        foreach (var item in GameStatus.decoyItems)
+        {
+            decoyItemsNames.Add(item.itemName);
+        }
         GameStatus.keyItems.Clear();
-
-        SaveResults(keyItemsNames, foundItemsNames);
+        GameStatus.decoyItems.Clear();
+        SaveResults(keyItemsNames, foundItemsNames, decoyItemsNames);
     }
 
-    public void SaveResults(List<string> keyItemsNames, List<string> foundItemsNames)
+    public void SaveResults(List<string> keyItemsNames, List<string> foundItemsNames, List<string> decoyItemsNames)
     {
         DatabaseReference resultsRef = db.GetReference("results");
         resultsRef.GetValueAsync().ContinueWithOnMainThread(task =>
@@ -147,10 +153,12 @@ public class Results : MonoBehaviour
                 { "time", newResult.time },
                 { "level", newResult.level },
                 { "searchTime", newResult.searchTime },
+                { "availableSearchTime", GameConfig.searchTime },
                 { "memTime", newResult.memorizeTime },
                 { "memObjects", newResult.keyImageName },
                 { "foundObjects", newResult.foundImageName },
-                {"logging", Logging.logList}
+                { "decoyObjects", decoyItemsNames},
+                { "logging", Logging.logList }
             };
 
             // Si es un nuevo paciente, primero aseguramos que tenga idPatient

@@ -28,6 +28,7 @@ public class GameStatus : MonoBehaviour
     public static GamePhase currentPhase;
     public static List<HeldItem> savedItems = new List<HeldItem>();
     public static List<HeldItem> keyItems = new List<HeldItem>();
+    public static List<HeldItem> decoyItems = new List<HeldItem>();
     public static List<GameObject>
         itemsToMemorize = new(),
         itemsInEnvironment = new();
@@ -118,6 +119,7 @@ public class GameStatus : MonoBehaviour
             case GamePhase.Tutorial_Search:
                 savedItems.Clear();
                 keyItems.Clear();
+                decoyItems.Clear();
                 OpenDoor.EnableInteractions(false);
                 OpenDrawer.EnableInteractions(false);
                 // Agregado para que no se vea el borde blanco cuando se apaga la luz
@@ -282,21 +284,27 @@ public class GameStatus : MonoBehaviour
     {
         keyItems.Clear();
         savedItems.Clear();
+        decoyItems.Clear();
         Time.timeScale = 1;
         SceneLoader.LoadScene("MainMenu");
     }
 
-private IEnumerator ShowPracticePopup()
-{
-    PopUpManager popups = PopUpManager.instance;
+    private IEnumerator ShowPracticePopup()
+    {
+        PopUpManager popups = PopUpManager.instance;
 
-    PlayerMovement.allowPlayerMovement = false;
-    TouchController.allowCameraMovement = false;
+        PlayerMovement.allowPlayerMovement = false;
+        TouchController.allowCameraMovement = false;
 
-    yield return popups.ShowPopups("En esta práctica, es posible recorrer\n el ambiente en el que se desarrolla el juego,\n y experimentar las tareas descriptas en el tutorial.");
+        yield return popups.ShowPopups("En esta práctica, es posible recorrer\n el ambiente en el que se desarrolla el juego,\n y experimentar las tareas descriptas en el tutorial.");
 
-    PlayerMovement.allowPlayerMovement = true;
-    TouchController.allowCameraMovement = true;
-}
+        PlayerMovement.allowPlayerMovement = true;
+        TouchController.allowCameraMovement = true;
+    }
+
+    public static bool IsKeyItem(string itemName)
+    {
+        return keyItems.Any(item => item.itemName == itemName);
+    }
 
 }
