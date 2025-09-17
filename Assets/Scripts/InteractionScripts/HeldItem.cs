@@ -39,7 +39,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
         mainCamera = Camera.main;
         interactable = GetComponent<Interactable>();
         // Initialize layer to be detected
-        groundLayer = LayerMask.GetMask("Furniture");
+        groundLayer = LayerMask.GetMask("Furniture", "Drawer");
         itemLayer = LayerMask.GetMask("Items");
         //if (validSpawnTypes[(int) ItemSpawning.SpawnType.wall].isValid && isEnvironmentItem){
         //  transform.Rotate(90f, 0f, -90f); // place over wall

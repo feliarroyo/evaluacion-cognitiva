@@ -26,6 +26,7 @@ public class OpenDrawer : MonoBehaviour, IElementBehaviour
     private Dictionary<ItemSpawn, Vector3> itemOffsets; // Stores original item positions relative to drawer
 
     public string id;
+    public Collider floorCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,11 @@ public class OpenDrawer : MonoBehaviour, IElementBehaviour
         }
 
         allDrawers.Add(this);
+
+        // Ignore collision with player, due to causing bugs
+        Collider playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>();
+        Collider drawerCollider = GetComponentInChildren<Collider>();
+        Physics.IgnoreCollision(playerCollider, drawerCollider, true);
     }
 
     void OnDestroy(){
