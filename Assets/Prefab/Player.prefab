@@ -1261,7 +1261,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 15
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1501,7 +1501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerBody: {fileID: 8700067999511558763}
   LockAxis: {x: 0, y: 0}
-  sensitivity: 15
+  sensitivity: 10
 --- !u!1 &7119546160923636418
 GameObject:
   m_ObjectHideFlags: 0
@@ -2378,7 +2378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6adc93097a35fcd40a7bfbb14c7e5ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 2
   orientation: {fileID: 8700067999511558763}
   horizontalInput: 0
   verticalInput: 0

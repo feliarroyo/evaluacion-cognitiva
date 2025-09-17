@@ -13,7 +13,7 @@ public class CameraControl : MonoBehaviour
     private Vector2 lastMovement = new(0, 0);
     [SerializeField] private Transform PlayerBody;
     public Vector2 LockAxis;
-    public float sensitivity = 40f;
+    public float sensitivity = 10f;
     private bool isMoving = false;
     void Start()
     {

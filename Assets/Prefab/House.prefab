@@ -27085,7 +27085,7 @@ GameObject:
   - component: {fileID: 2695074106766434833}
   m_Layer: 0
   m_Name: Hinge
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27098,7 +27098,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6783274254844667215}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.887, y: 1.139, z: -66.482}
+  m_LocalPosition: {x: -1.41, y: 1.139, z: -66.482}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27121,7 +27121,7 @@ MonoBehaviour:
   speed: 2
   openAngle: 90
   canBeClosed: 0
-  portal: {fileID: 0}
+  portal: {fileID: 2695074106766434833}
   isOpen: 0
   isMoving: 0
   rotationAxis: 121

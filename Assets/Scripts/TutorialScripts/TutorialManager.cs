@@ -48,6 +48,10 @@ public class TutorialManager : MonoBehaviour
         PlayerMovement.allowPlayerMovement = !inTutorial;
         TouchController.allowCameraMovement = !inTutorial;
         cam = player.GetComponentInChildren<CameraControl>();
+        if (inTutorial)
+        {
+            cam.sensitivity = 15;
+        }
     }
 
     void Awake()
