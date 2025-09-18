@@ -331,7 +331,10 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
         currentlyHeldItem.StartCoroutine(currentlyHeldItem.ReturnItemToSpawn());
         currentlyHeldItem.isReturning = true;
         currentlyHeldItem = null;
-        Interactable.allowAllInteractions = true;
+        if (GameStatus.currentPhase > GameStatus.GamePhase.Waiting)
+        {
+            Interactable.allowAllInteractions = true;
+        }
     }
     /// <summary>
     /// An item can be stored only if time is not over and if it was placed on the testing environment
@@ -366,7 +369,10 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
             StoredItemCoroutine.instance.CheckNoItem(currentlyHeldItem.itemName);
             currentlyHeldItem.gameObject.SetActive(false);
             currentlyHeldItem = null;
-            Interactable.allowAllInteractions = true;
+            if (GameStatus.currentPhase > GameStatus.GamePhase.Waiting)
+            {
+                Interactable.allowAllInteractions = true;
+            }
             return true;
 
         }
