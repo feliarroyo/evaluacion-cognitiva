@@ -208,7 +208,7 @@ public class GameStatus : MonoBehaviour
                     timeUsedSearching = Timer.spentTime;
                     if (Settings.currentDifficulty == Settings.Difficulty.Preevaluación)
                     {
-                        ExitWithoutSaving();
+                        instance.StartCoroutine(GameStatus.ExitWithoutSaving());
                     }
                 }
                 else
@@ -217,7 +217,7 @@ public class GameStatus : MonoBehaviour
                     timeUsedSearching = Timer.spentTime;
                     if (Settings.currentDifficulty == Settings.Difficulty.Preevaluación)
                     {
-                        ExitWithoutSaving();
+                        instance.StartCoroutine(GameStatus.ExitWithoutSaving());
                     }
                     else
                     {
@@ -280,8 +280,10 @@ public class GameStatus : MonoBehaviour
     /// <summary>
     /// Quits the application while deleting items saved by the player.
     /// </summary>
-    public static void ExitWithoutSaving()
+    public static IEnumerator ExitWithoutSaving()
     {
+        yield return new WaitForSeconds(2f);
+
         keyItems.Clear();
         savedItems.Clear();
         decoyItems.Clear();
