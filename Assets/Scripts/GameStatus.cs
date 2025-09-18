@@ -114,7 +114,7 @@ public class GameStatus : MonoBehaviour
                 instance.lights[1].SetActive(false);
                 SwapMaterial.SetMaterials(true);
                 TurnLightsOn(instance.lights[2]);
-                Timer.StartTimer(118);
+                Timer.StartTimer(120);
                 break;
             case GamePhase.Tutorial_Search:
                 savedItems.Clear();
@@ -208,7 +208,7 @@ public class GameStatus : MonoBehaviour
                     timeUsedSearching = Timer.spentTime;
                     if (Settings.currentDifficulty == Settings.Difficulty.Preevaluación)
                     {
-                        instance.StartCoroutine(GameStatus.ExitWithoutSaving());
+                        instance.StartCoroutine(WaitAndExitWithoutSaving());
                     }
                 }
                 else
@@ -217,7 +217,7 @@ public class GameStatus : MonoBehaviour
                     timeUsedSearching = Timer.spentTime;
                     if (Settings.currentDifficulty == Settings.Difficulty.Preevaluación)
                     {
-                        instance.StartCoroutine(GameStatus.ExitWithoutSaving());
+                        instance.StartCoroutine(WaitAndExitWithoutSaving());
                     }
                     else
                     {
@@ -280,15 +280,19 @@ public class GameStatus : MonoBehaviour
     /// <summary>
     /// Quits the application while deleting items saved by the player.
     /// </summary>
-    public static IEnumerator ExitWithoutSaving()
+    public static void ExitWithoutSaving()
     {
-        yield return new WaitForSeconds(2f);
-
         keyItems.Clear();
         savedItems.Clear();
         decoyItems.Clear();
         Time.timeScale = 1;
         SceneLoader.LoadScene("MainMenu");
+    }
+
+    public static IEnumerator WaitAndExitWithoutSaving()
+    {
+        yield return new WaitForSeconds(2f);
+        ExitWithoutSaving();
     }
 
     private IEnumerator ShowPracticePopup()

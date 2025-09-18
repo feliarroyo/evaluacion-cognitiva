@@ -385,17 +385,17 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
         return validSpawnTypes[(int)spawnType].isValid;
     }
 
-    public IEnumerator RotateItemOverTime(float rotateXDegrees, float rotateYDegrees, float duration = 1f)
+    public IEnumerator RotateItemOverTime(float rotateXDegrees, float rotateYDegrees, float rotateZDegrees = 0, float duration = 1f)
     {
         if (currentlyHeldItem == null || duration <= 0f) yield break;
 
-        Quaternion startRotation = currentlyHeldItem.transform.rotation;
+        Quaternion startRotation = currentlyHeldItem.transform.localRotation;
 
         // Target rotation based on requested X (pitch) and Y (yaw)
         Quaternion targetRotation = Quaternion.Euler(
-            currentlyHeldItem.transform.eulerAngles.x + rotateXDegrees,
-            currentlyHeldItem.transform.eulerAngles.y + rotateYDegrees,
-            currentlyHeldItem.transform.eulerAngles.z // keep Z as is
+            currentlyHeldItem.transform.localEulerAngles.x + rotateXDegrees,
+            currentlyHeldItem.transform.localEulerAngles.y + rotateYDegrees,
+            currentlyHeldItem.transform.localEulerAngles.z + rotateZDegrees // keep Z as is
         );
 
         float elapsed = 0f;
@@ -404,7 +404,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
-            currentlyHeldItem.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, t);
+            currentlyHeldItem.transform.localRotation = Quaternion.Slerp(startRotation, targetRotation, t);
             yield return null;
         }
 
