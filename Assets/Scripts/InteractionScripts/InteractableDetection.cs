@@ -26,7 +26,7 @@ public class InteractableDetection : MonoBehaviour
             TutorialItem.playerIsClose = true;
             return;
         }
-        if (other.gameObject.CompareTag("Interactable") && GameStatus.currentPhase != GameStatus.GamePhase.Tutorial_BeforeSearch)
+        if (other.gameObject.CompareTag("Interactable") && GameStatus.currentPhase != GameStatus.GamePhase.Tutorial_BeforeSearch && GameStatus.currentPhase != GameStatus.GamePhase.BeforeSearch)
         { // to avoid showing silhouettes before entering
             //Debug.Log("OTHER ");
             //Debug.Log(other);
