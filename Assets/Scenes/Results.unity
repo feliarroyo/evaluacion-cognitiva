@@ -1000,11 +1000,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5421482846122850260, guid: e5af5e02701e6c1438e7bcc36bd6cc10, type: 3}
       propertyPath: m_Size
-      value: 1
+      value: 0.5448273
       objectReference: {fileID: 0}
     - target: {fileID: 5421482846122850260, guid: e5af5e02701e6c1438e7bcc36bd6cc10, type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5421482846153628656, guid: e5af5e02701e6c1438e7bcc36bd6cc10, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -1016,11 +1016,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5421482846274710125, guid: e5af5e02701e6c1438e7bcc36bd6cc10, type: 3}
       propertyPath: m_Size
-      value: 1
+      value: 0.44827932
       objectReference: {fileID: 0}
     - target: {fileID: 5421482846274710125, guid: e5af5e02701e6c1438e7bcc36bd6cc10, type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5421482846279529109, guid: e5af5e02701e6c1438e7bcc36bd6cc10, type: 3}
       propertyPath: m_AnchorMax.y
