@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -32,7 +33,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
     public bool pushBackItem;
     public static List<HeldItem> itemsInScene = new();
     public Interactable interactable;
-
+    public int logId;
 
     protected virtual void Start()
     {
@@ -246,7 +247,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
             Interactable.allowAllInteractions = false; // disable all interactions while the item is active.
             ItemInteraction.EnableButton(true); // Allow item to be left.
             // Log item
-            Logging.Log(Logging.EventType.ItemGrab, new[] { gameObject.GetComponent<HeldItem>().itemName });
+            Logging.Log(Logging.EventType.ItemGrab, new[] { gameObject.GetComponent<HeldItem>().logId.ToString() });
             // Move to the center of the screen.
             StartCoroutine(BringItemToPlayer());
             isHeld = true;
@@ -288,10 +289,6 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
         isReturning = false;
         GetComponent<Collider>().enabled = true;
         GetComponent<Outline>().OutlineWidth = 8;
-        if (Logging.currentLog.heldItem == gameObject.GetComponent<HeldItem>().itemName)
-        {
-            Logging.Log(Logging.EventType.NoItem, null);
-        }
     }
 
     /// <summary>
@@ -324,7 +321,8 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
     /// </summary>
     public static void ReturnItem()
     {
-        Logging.Log(Logging.EventType.ItemReturn, new[] { currentlyHeldItem.itemName });
+        Logging.Log(Logging.EventType.ItemReturn, new[] { currentlyHeldItem.logId.ToString() });
+        Logging.Log(Logging.EventType.NoItem);
         ItemInteraction.EnableButton(false);
         currentlyHeldItem.isMoving = false;
         currentlyHeldItem.isHeld = false;
@@ -364,9 +362,10 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
         if (currentlyHeldItem != null)
         {
             Logging.Log(Logging.EventType.ItemStore);
+            Logging.Log(Logging.EventType.NoItem);
             GameStatus.SaveItem(currentlyHeldItem.GetComponent<HeldItem>());
             // Destroys the gameObject in the scene.
-            StoredItemCoroutine.instance.CheckNoItem(currentlyHeldItem.itemName);
+            // StoredItemCoroutine.instance.CheckNoItem(currentlyHeldItem.itemName);
             currentlyHeldItem.gameObject.SetActive(false);
             currentlyHeldItem = null;
             if (GameStatus.currentPhase > GameStatus.GamePhase.Waiting)

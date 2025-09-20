@@ -403,6 +403,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 4
+  description: 
 --- !u!1 &156273456311643008
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,6 +453,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 6
+  description: 
 --- !u!1 &168784238479090438
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,6 +619,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &184600202887805868
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,6 +669,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 6
+  description: 
 --- !u!1 &186156053074800540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,6 +1398,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   id: 
+  floorCollider: {fileID: 0}
 --- !u!65 &102768123836704087
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1471,6 +1476,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &476445367735377965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,6 +1789,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 14
+  description: 
 --- !u!1 &639462383752561046
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,6 +1839,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 2
+  description: 
 --- !u!1 &669188026506677338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1913,6 +1921,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &735924654960807109
 GameObject:
   m_ObjectHideFlags: 0
@@ -2327,6 +2336,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &929156804839324171
 GameObject:
   m_ObjectHideFlags: 0
@@ -2606,6 +2616,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 7
+  description: 
 --- !u!1 &1023164419323287132
 GameObject:
   m_ObjectHideFlags: 0
@@ -3779,6 +3790,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 4
+  description: 
 --- !u!1 &1332270525456370424
 GameObject:
   m_ObjectHideFlags: 0
@@ -3828,6 +3840,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &1347086076057649875
 GameObject:
   m_ObjectHideFlags: 0
@@ -4010,6 +4023,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 5
+  description: 
 --- !u!1 &1417149013379970064
 GameObject:
   m_ObjectHideFlags: 0
@@ -4189,6 +4203,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 14
+  description: 
 --- !u!1 &1512288072957374181
 GameObject:
   m_ObjectHideFlags: 0
@@ -4238,6 +4253,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &1518110699009828436
 GameObject:
   m_ObjectHideFlags: 0
@@ -4367,6 +4383,56 @@ Transform:
   m_Father: {fileID: 6831720232067912042}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1549898669475113771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 774695857951742469}
+  - component: {fileID: 4174276344827598173}
+  m_Layer: 0
+  m_Name: ItemSpawnPoint1 (Shelf 1 7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 125
+  m_IsActive: 1
+--- !u!4 &774695857951742469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549898669475113771}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.094, y: 0.24500002, z: -1.982}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 498246398608851586}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4174276344827598173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549898669475113771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnName: lv2TvShelfLow7
+  allowLargeItems: 0
+  isLevel1: 0
+  isLevel2: 1
+  spawnType: 4
+  description: 
 --- !u!1 &1616577580283285266
 GameObject:
   m_ObjectHideFlags: 0
@@ -4449,6 +4515,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &1654894032593233611
 GameObject:
   m_ObjectHideFlags: 0
@@ -4858,6 +4925,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &1748758740238761314
 GameObject:
   m_ObjectHideFlags: 0
@@ -4907,6 +4975,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 5
+  description: 
 --- !u!1 &1789069203396578236
 GameObject:
   m_ObjectHideFlags: 0
@@ -6196,6 +6265,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &2064115970619944877
 GameObject:
   m_ObjectHideFlags: 0
@@ -6277,6 +6347,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &2130066348106447597
 GameObject:
   m_ObjectHideFlags: 0
@@ -6326,6 +6397,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &2139215401807637519
 GameObject:
   m_ObjectHideFlags: 0
@@ -6407,6 +6479,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 14
+  description: 
 --- !u!1 &2182244348622070312
 GameObject:
   m_ObjectHideFlags: 0
@@ -6830,6 +6903,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &2336767899981040835
 GameObject:
   m_ObjectHideFlags: 0
@@ -6879,6 +6953,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 4
+  description: 
 --- !u!1 &2337507606748455611
 GameObject:
   m_ObjectHideFlags: 0
@@ -7485,6 +7560,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   id: 
+  floorCollider: {fileID: 0}
 --- !u!65 &7228351784194482997
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8040,6 +8116,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &2714878031944179777
 GameObject:
   m_ObjectHideFlags: 0
@@ -8269,6 +8346,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 2
+  description: 
 --- !u!1 &2800109975809563057
 GameObject:
   m_ObjectHideFlags: 0
@@ -8422,6 +8500,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 14
+  description: 
 --- !u!1 &2918765832927113068
 GameObject:
   m_ObjectHideFlags: 0
@@ -8904,6 +8983,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 7
+  description: 
 --- !u!1 &3160928816771933740
 GameObject:
   m_ObjectHideFlags: 0
@@ -9052,6 +9132,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 7
+  description: 
 --- !u!1 &3215800178008298142
 GameObject:
   m_ObjectHideFlags: 0
@@ -9184,6 +9265,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &3233441687088563969
 GameObject:
   m_ObjectHideFlags: 0
@@ -9530,6 +9612,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 7
+  description: 
 --- !u!1 &3335430220571176602
 GameObject:
   m_ObjectHideFlags: 0
@@ -9694,6 +9777,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 10
+  description: 
 --- !u!1 &3405161489175906319
 GameObject:
   m_ObjectHideFlags: 0
@@ -9862,6 +9946,56 @@ Transform:
   m_Father: {fileID: 4469890810360261528}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3433222995627580380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2892359912337435488}
+  - component: {fileID: 1460264604843459780}
+  m_Layer: 0
+  m_Name: ItemSpawnPoint1 (Shelf 2 7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 125
+  m_IsActive: 1
+--- !u!4 &2892359912337435488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433222995627580380}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.094, y: 0.553, z: -1.982}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 498246398608851586}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1460264604843459780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433222995627580380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f5eab7266dcef4ab9552c265e09b7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnName: lv2TvShelfLow7
+  allowLargeItems: 0
+  isLevel1: 0
+  isLevel2: 1
+  spawnType: 4
+  description: 
 --- !u!1 &3435808039829570510
 GameObject:
   m_ObjectHideFlags: 0
@@ -10042,6 +10176,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 6
+  description: 
 --- !u!1 &3460782468593512729
 GameObject:
   m_ObjectHideFlags: 0
@@ -10091,6 +10226,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 10
+  description: 
 --- !u!1 &3463535114140865284
 GameObject:
   m_ObjectHideFlags: 0
@@ -11006,6 +11142,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 4
+  description: 
 --- !u!1 &3670015109331751481
 GameObject:
   m_ObjectHideFlags: 0
@@ -11366,6 +11503,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &3709877477085153938
 GameObject:
   m_ObjectHideFlags: 0
@@ -11512,6 +11650,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &3726798080038758387
 GameObject:
   m_ObjectHideFlags: 0
@@ -11799,6 +11938,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &3884572656834441009
 GameObject:
   m_ObjectHideFlags: 0
@@ -12783,6 +12923,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 5
+  description: 
 --- !u!1 &4214443005928196652
 GameObject:
   m_ObjectHideFlags: 0
@@ -12864,6 +13005,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 9
+  description: 
 --- !u!1 &4230394140075883910
 GameObject:
   m_ObjectHideFlags: 0
@@ -13407,6 +13549,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 10
+  description: 
 --- !u!1 &4414567764653423303
 GameObject:
   m_ObjectHideFlags: 0
@@ -13456,6 +13599,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 4
+  description: 
 --- !u!1 &4417879788848532353
 GameObject:
   m_ObjectHideFlags: 0
@@ -13589,6 +13733,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &4438054062387592939
 GameObject:
   m_ObjectHideFlags: 0
@@ -14016,6 +14161,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &4602254417598677310
 GameObject:
   m_ObjectHideFlags: 0
@@ -14339,6 +14485,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &4697620043822896043
 GameObject:
   m_ObjectHideFlags: 0
@@ -14485,6 +14632,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 4
+  description: 
 --- !u!1 &4760828605028779305
 GameObject:
   m_ObjectHideFlags: 0
@@ -15074,6 +15222,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 10
+  description: 
 --- !u!1 &4909359691457558702
 GameObject:
   m_ObjectHideFlags: 0
@@ -15155,6 +15304,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &4917093988460234221
 GameObject:
   m_ObjectHideFlags: 0
@@ -15204,6 +15354,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 7
+  description: 
 --- !u!1 &4917254970575752928
 GameObject:
   m_ObjectHideFlags: 0
@@ -15336,6 +15487,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 7
+  description: 
 --- !u!1 &4929940346547248323
 GameObject:
   m_ObjectHideFlags: 0
@@ -15385,6 +15537,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 4
+  description: 
 --- !u!1 &4935740466973375894
 GameObject:
   m_ObjectHideFlags: 0
@@ -15645,6 +15798,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 9
+  description: 
 --- !u!1 &4998384059447189947
 GameObject:
   m_ObjectHideFlags: 0
@@ -16005,6 +16159,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 9
+  description: 
 --- !u!1 &5106753402431755387
 GameObject:
   m_ObjectHideFlags: 0
@@ -16441,6 +16596,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &5210920323494223212
 GameObject:
   m_ObjectHideFlags: 0
@@ -17097,6 +17253,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 4
+  description: 
 --- !u!1 &5431879907687970144
 GameObject:
   m_ObjectHideFlags: 0
@@ -17353,6 +17510,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   id: 
+  floorCollider: {fileID: 0}
 --- !u!114 &6901938696670009996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17564,6 +17722,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 6
+  description: 
 --- !u!1 &5547490785925150799
 GameObject:
   m_ObjectHideFlags: 0
@@ -17677,6 +17836,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 7
+  description: 
 --- !u!1 &5671323446175828834
 GameObject:
   m_ObjectHideFlags: 0
@@ -17833,6 +17993,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   id: 
+  floorCollider: {fileID: 0}
 --- !u!65 &7854136994934473696
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18007,6 +18168,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &5755687381827420546
 GameObject:
   m_ObjectHideFlags: 0
@@ -18056,6 +18218,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 5
+  description: 
 --- !u!1 &5759431708848953916
 GameObject:
   m_ObjectHideFlags: 0
@@ -18234,6 +18397,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &5811985526917474511
 GameObject:
   m_ObjectHideFlags: 0
@@ -18283,6 +18447,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 7
+  description: 
 --- !u!1 &5829524335671240764
 GameObject:
   m_ObjectHideFlags: 0
@@ -18594,6 +18759,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 6
+  description: 
 --- !u!1 &5895624720304817219
 GameObject:
   m_ObjectHideFlags: 0
@@ -19174,6 +19340,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &6073426175089217886
 GameObject:
   m_ObjectHideFlags: 0
@@ -19378,6 +19545,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &6155796138004125471
 GameObject:
   m_ObjectHideFlags: 0
@@ -19785,6 +19953,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 7
+  description: 
 --- !u!1 &6181619118395042098
 GameObject:
   m_ObjectHideFlags: 0
@@ -20372,6 +20541,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 11
+  description: 
 --- !u!1 &6289638277051975268
 GameObject:
   m_ObjectHideFlags: 0
@@ -20421,6 +20591,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 7
+  description: 
 --- !u!1 &6299624109911092022
 GameObject:
   m_ObjectHideFlags: 0
@@ -21044,6 +21215,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 6
+  description: 
 --- !u!1 &6420403718070554706
 GameObject:
   m_ObjectHideFlags: 0
@@ -26696,6 +26868,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 7
+  description: 
 --- !u!1 &6554449723066386999
 GameObject:
   m_ObjectHideFlags: 0
@@ -26990,6 +27163,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 4
+  description: 
 --- !u!1 &6631181702745251223
 GameObject:
   m_ObjectHideFlags: 0
@@ -27039,6 +27213,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 6
+  description: 
 --- !u!1 &6633641555691766545
 GameObject:
   m_ObjectHideFlags: 0
@@ -27295,6 +27470,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &6716895516467501783
 GameObject:
   m_ObjectHideFlags: 0
@@ -28087,6 +28263,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &6898336294671474547
 GameObject:
   m_ObjectHideFlags: 0
@@ -28168,6 +28345,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &6966094568848446239
 GameObject:
   m_ObjectHideFlags: 0
@@ -28495,6 +28673,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &7027923987812417620
 GameObject:
   m_ObjectHideFlags: 0
@@ -29218,6 +29397,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 7
+  description: 
 --- !u!1 &7251137019332825854
 GameObject:
   m_ObjectHideFlags: 0
@@ -30092,6 +30272,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &7434257546549692282
 GameObject:
   m_ObjectHideFlags: 0
@@ -30359,6 +30540,8 @@ Transform:
   - {fileID: 5033365957784032612}
   - {fileID: 6346278476531947704}
   - {fileID: 4309337203919078671}
+  - {fileID: 774695857951742469}
+  - {fileID: 2892359912337435488}
   m_Father: {fileID: 3643294567720843386}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -30446,6 +30629,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &7502342686687033936
 GameObject:
   m_ObjectHideFlags: 0
@@ -30708,6 +30892,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 6
+  description: 
 --- !u!1 &7587116631218911215
 GameObject:
   m_ObjectHideFlags: 0
@@ -31630,6 +31815,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &7874004912727004809
 GameObject:
   m_ObjectHideFlags: 0
@@ -31978,6 +32164,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &7941646276997459356
 GameObject:
   m_ObjectHideFlags: 0
@@ -32027,6 +32214,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 4
+  description: 
 --- !u!1 &7949703466160879075
 GameObject:
   m_ObjectHideFlags: 0
@@ -32109,6 +32297,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &7984063171549197143
 GameObject:
   m_ObjectHideFlags: 0
@@ -32158,6 +32347,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 6
+  description: 
 --- !u!1 &8104332118853833583
 GameObject:
   m_ObjectHideFlags: 0
@@ -32243,6 +32433,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 4
+  description: 
 --- !u!1 &8115093113787569191
 GameObject:
   m_ObjectHideFlags: 0
@@ -32424,6 +32615,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &8188101901627110675
 GameObject:
   m_ObjectHideFlags: 0
@@ -32473,6 +32665,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 14
+  description: 
 --- !u!1 &8210479994767568951
 GameObject:
   m_ObjectHideFlags: 0
@@ -32944,6 +33137,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 7
+  description: 
 --- !u!1 &8349979199397634887
 GameObject:
   m_ObjectHideFlags: 0
@@ -33741,6 +33935,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &8591691132580773716
 GameObject:
   m_ObjectHideFlags: 0
@@ -34070,6 +34265,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &8651503736123672175
 GameObject:
   m_ObjectHideFlags: 0
@@ -34332,6 +34528,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 7
+  description: 
 --- !u!1 &8743413405105149997
 GameObject:
   m_ObjectHideFlags: 0
@@ -34659,6 +34856,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 5
+  description: 
 --- !u!1 &8832583846943141197
 GameObject:
   m_ObjectHideFlags: 0
@@ -34708,6 +34906,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &8859189927387756477
 GameObject:
   m_ObjectHideFlags: 0
@@ -34854,6 +35053,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 2
+  description: 
 --- !u!1 &8876478258041197459
 GameObject:
   m_ObjectHideFlags: 0
@@ -35314,6 +35514,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 0
+  description: 
 --- !u!1 &8974626272092037091
 GameObject:
   m_ObjectHideFlags: 0
@@ -35363,6 +35564,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 3
+  description: 
 --- !u!1 &9017524908657134032
 GameObject:
   m_ObjectHideFlags: 0
@@ -35756,6 +35958,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 11
+  description: 
 --- !u!1 &9076714482513184099
 GameObject:
   m_ObjectHideFlags: 0
@@ -35805,6 +36008,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 6
+  description: 
 --- !u!1 &9093985673104989611
 GameObject:
   m_ObjectHideFlags: 0
@@ -35919,6 +36123,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 1
   spawnType: 2
+  description: 
 --- !u!1 &9175790456274381095
 GameObject:
   m_ObjectHideFlags: 0
@@ -36149,6 +36354,7 @@ MonoBehaviour:
   isLevel1: 0
   isLevel2: 0
   spawnType: 4
+  description: 
 --- !u!1 &9220913447897543790
 GameObject:
   m_ObjectHideFlags: 0

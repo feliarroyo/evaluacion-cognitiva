@@ -27,6 +27,8 @@ public class ItemSpawning : MonoBehaviour
         {9, new() {0, 1, 2, 3, 4, 5, 6}},
         {10, new() {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}},
     };
+
+    public static int itemCount;
     // private TagField groundTag;
 
     public enum SpawnType
@@ -57,6 +59,7 @@ public class ItemSpawning : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        itemCount = 0;
         HouseDistributionManage();
         if (GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Start)
         {
@@ -83,6 +86,7 @@ public class ItemSpawning : MonoBehaviour
         {
             itemSpawnPoints_Search.RemoveAll(spawn => spawn.isLevel2);
         }
+        Logging.SpawnInfoLog(itemSpawnPoints_Start, itemSpawnPoints_Search);
     }
 
     /// <summary>
@@ -357,6 +361,8 @@ public class ItemSpawning : MonoBehaviour
     {
         HeldItem heldItem = item.GetComponent<HeldItem>();
         heldItem.isEnvironmentItem = isEnvironmentItem;
+        heldItem.logId = itemCount;
+        itemCount++;
         GameObject go = Instantiate(item, spawnPoint.transform);
         if (isHallItem){
             GameStatus.keyItems.Add(heldItem);
@@ -366,7 +372,7 @@ public class ItemSpawning : MonoBehaviour
             GameStatus.decoyItems.Add(heldItem);
         }
         Debug.Log(go.name + " fue colocado en " + spawnPoint.name);
-        Logging.ItemInfoLog(heldItem.itemName, isEnvironmentItem, spawnPoint.spawnName, spawnPoint.transform.position.x, spawnPoint.transform.position.z, spawnPoint.transform.position.y);
+        Logging.ItemInfoLog(heldItem.logId, heldItem.itemName, isEnvironmentItem, spawnPoint.logId, spawnPoint.transform.position.x, spawnPoint.transform.position.z, spawnPoint.transform.position.y);
         return go;
     }
 
@@ -398,8 +404,10 @@ public class ItemSpawning : MonoBehaviour
                     shelfPosition++;
                 }
                 heldItem.isEnvironmentItem = isEnvironmentItem;
+                heldItem.logId = itemCount;
+                itemCount++;
                 GameObject go = Instantiate(item, next_position.transform);
-                Logging.ItemInfoLog(heldItem.itemName, isEnvironmentItem, next_position.spawnName, next_position.transform.position.x, next_position.transform.position.z, next_position.transform.position.y);
+                Logging.ItemInfoLog(heldItem.logId, heldItem.itemName, isEnvironmentItem, next_position.logId, next_position.transform.position.x, next_position.transform.position.z, next_position.transform.position.y);
                 result.Add(go);
             }
             catch (ArgumentOutOfRangeException)

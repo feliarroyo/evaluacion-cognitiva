@@ -16,13 +16,15 @@ public class Interactable : MonoBehaviour
     public bool isInteractable = false;
     public bool stoppedInteraction = false; // used to stop interaction completely
     public static List<Interactable> interactablesInScene = new();
+    public int id;
     // Start is called before the first frame update
     void Start()
     {
         if (GetComponent<HeldItem>() == null)
         {
-            Logging.FurnitureInfoLog(GetID(), transform.position.x, transform.position.z, transform.position.y);
+            id = interactablesInScene.Count;
             interactablesInScene.Add(this);
+            Logging.FurnitureInfoLog(id, GetName(), transform.position.x, transform.position.z, transform.position.y);
         }
         GetComponent<Outline>().enabled = false;
         behaviour = GetComponent<IElementBehaviour>();
@@ -116,7 +118,7 @@ public class Interactable : MonoBehaviour
         if (isInteractable && allowAllInteractions)
             behaviour.ClickBehaviour(gameObject);
     }
-    public string GetID()
+    public string GetName()
     {
         if (GetComponent<OpenDoor>() != null)
             return GetComponent<OpenDoor>().id;

@@ -5,6 +5,7 @@ using Object = System.Object;
 using System.IO;
 using System.Linq;
 using TMPro;
+using System.Globalization;
 
 public class Logging : MonoBehaviour
 {
@@ -18,14 +19,14 @@ public class Logging : MonoBehaviour
         public string cameraStatus; // (Q = Quieto o M = En movimiento)
         public Vector2 cameraOrientation; // (Ángulo H o V)
         public Vector2 cameraMovementDirection; // (Vector de dirección)
-        public Dictionary<string, SeenItem> seenItems;
+        public Dictionary<int, SeenItem> seenItems;
         public string heldItem; // nombre del objeto sostenido
         public string heldItemStatus; // S = sostenido, E = elegido, R = retornado
-        public Dictionary<string, SeenFurniture> seenFurniture;
+        public Dictionary<int, SeenFurniture> seenFurniture;
 
         public void SetTimeStamp()
         {
-            timeStamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            timeStamp = DateTime.Now.ToString("yyyy-MM-dd;HH:mm:ss");
         }
 
         public LogEvent(LogEvent other)
@@ -50,6 +51,7 @@ public class Logging : MonoBehaviour
 
         public class SeenItem
         {
+            public int id;
             public string objectName;
             public string itemType;
             public bool isInteractable;
@@ -57,12 +59,13 @@ public class Logging : MonoBehaviour
             public Vector2 screenPosition;
             public override string ToString()
             {
-                return "<" + objectName + ": " + itemType + ", " + (isInteractable? "INTERACTUABLE" : "NO INTERACTUABLE") + ", " + distance + ", " + screenPosition + ">";
+                return "<" + id + ": " + itemType + ", " + (isInteractable ? "INTERACTUABLE" : "NO INTERACTUABLE") + ", " + distance + ", " + screenPosition + ">";
             }
         }
 
         public class SeenFurniture
         {
+            public int id;
             public string objectName;
             public bool isInteractable;
             public bool isOpen;
@@ -70,42 +73,42 @@ public class Logging : MonoBehaviour
             public Vector2 screenPosition;
             public override string ToString()
             {
-                return "<" + objectName + ": " + (isInteractable? "INTERACTUABLE" : "NO INTERACTUABLE") + " | " + (isOpen? "ABIERTO" : "CERRADO") + "| DISTANCIA: " + distance + " | POSICIÓN " + screenPosition + ">";
+                return "<" + id + ":" + (isInteractable ? "I" : "NI") + ";" + (isOpen ? "A" : "C") + ";" + distance.ToString(CultureInfo.InvariantCulture) + ";" + screenPosition + ">";
             }
         }
         public override string ToString()
         {
             string result = timeStamp
-            + " | FASE: " + gamePhase
-            + " | ESTADO MOV.: " + movementStatus
-            + " | POSICIÓN " + movementPosition
-            + " | DIRECCIÓN MOV.: " + movementDirection
-            + " | ESTADO CÁM.: " + cameraStatus
-            + " | ORIENTACIÓN CÁM: " + cameraOrientation
-            + " | DIRECCIÓN MOV. CÁM: " + cameraMovementDirection
-            + " | OBJETOS VISIBLES: {";
+            + ";" + gamePhase
+            + ";" + movementStatus
+            + ";" + movementPosition
+            + ";" + movementDirection
+            + ";" + cameraStatus
+            + ";" + cameraOrientation
+            + ";" + cameraMovementDirection
+            + ";{";
             if (seenItems != null && seenItems.Count > 0)
             {
-                foreach (string item in seenItems.Keys)
+                foreach (int item in seenItems.Keys)
                 {
                     result += seenItems[item].ToString() + ", ";
                 }
-                result = result.Substring(0, result.Length - 2);
+                result = result.Substring(0, result.Length - 2) + "}";
             }
-            else result += "- }";
-            result += " | OBJETO SOSTENIDO: " + heldItem
-            + " | ESTADO DE OBJ. SOSTENIDO: " + heldItemStatus
-            + " | INTERACTIVOS VISIBLES: {";
+            else result += "-}";
+            result += ";" + heldItem
+            + ";" + heldItemStatus
+            + ";{";
             if (seenFurniture != null && seenFurniture.Count > 0)
             {
-                foreach (string furniture in seenFurniture.Keys)
+                foreach (int furniture in seenFurniture.Keys)
                 {
                     result += seenFurniture[furniture].ToString() + ", ";
                 }
                 result = result.Substring(0, result.Length - 2);
             }
             else result += "-";
-            return result + " }\n";
+            return result + "}\n";
         }
 
         public static void SaveLogToFile(string fileName = "log.txt")
@@ -114,8 +117,20 @@ public class Logging : MonoBehaviour
             string path = Path.Combine(Application.persistentDataPath, fileName);
 
             // Write file
-            File.WriteAllText(path, extraInfo + "\n" + logList);
-
+            File.WriteAllText(path,
+                "ID;OBJETO;TIPO;ID SPAWN" + "\n"
+                + extraItemInfo + "\n"
+                + "ID;DESCRIPCION;POSICION" + "\n"
+                + extraSpawnInfo + "\n"
+                + "ID;INTERACTUABLE;POSICION" + "\n"
+                + extraFurnitureInfo + "\n"
+                + "FECHA;TIEMPO;FASE;ESTADO MOVIMIENTO;POSICION;DIRECCIÓN MOVIMIENTO;ESTADO CAMARA;ORIENTACION CAMARA;INTENSIDAD MOV. DE CAMARA;OBJETOS VISIBLES;OBJETO SOSTENIDO;ESTADO OBJ SOSTENIDO;INTERACTUABLES VISIBLES\n"
+                + logList
+            );
+            logList = "";
+            extraItemInfo = "";
+            extraSpawnInfo = "";
+            extraFurnitureInfo = "";
             DebugLog("Log saved to: " + path);
         }
     }
@@ -146,7 +161,9 @@ public class Logging : MonoBehaviour
     public static LogEvent currentLog = new();
 
     public static string logList = "";
-    public static string extraInfo = "";
+    public static string extraItemInfo = "";
+    public static string extraFurnitureInfo = "";
+    public static string extraSpawnInfo = "";
     public static List<string> itemsInLevel;
     public static List<Interactable> furnitureSeen;
     public static List<HeldItem> itemsSeen;
@@ -159,12 +176,11 @@ public class Logging : MonoBehaviour
 
     void Start()
     {
-
         currentLog = new()
         {
             gamePhase = "E",
             movementStatus = "Q",
-            movementPosition = new(PlayerMovement.currentPosition.x, PlayerMovement.currentPosition.z), // Get starting position from some script
+            movementPosition = new(-53.37f, -120),
             movementDirection = new(0, 0),
             cameraStatus = "Q",
             cameraOrientation = new(0, 0),
@@ -185,30 +201,31 @@ public class Logging : MonoBehaviour
 
     private static bool CalculateItemStatus(HeldItem hi)
     {
+        int id = hi.logId;
         bool interactChange = false;
-        if (currentLog.seenItems[hi.itemName].isInteractable != hi.interactable.isInteractable)
+        if (currentLog.seenItems[id].isInteractable != hi.interactable.isInteractable)
         {
             interactChange = true;
         }
-        currentLog.seenItems[hi.itemName].isInteractable = hi.interactable.isInteractable;
-        currentLog.seenItems[hi.itemName].distance = (float)Math.Round(Vector3.Distance(PlayerMovement.currentPosition, hi.originalPosition), 2);
-        currentLog.seenItems[hi.itemName].screenPosition = Camera.main.WorldToViewportPoint(hi.originalPosition);
+        currentLog.seenItems[id].isInteractable = hi.interactable.isInteractable;
+        currentLog.seenItems[id].distance = (float)Math.Round(Vector3.Distance(PlayerMovement.currentPosition, hi.originalPosition), 2);
+        currentLog.seenItems[id].screenPosition = Camera.main.WorldToViewportPoint(hi.originalPosition);
         return interactChange;
     }
 
     private static bool CalculateFurnitureStatus(Interactable i)
     {
         bool interactChange = false;
-        string name = i.GetID();
+        int id = i.id;
         bool isOpen = i.GetComponent<OpenDrawer>() != null ? i.GetComponent<OpenDrawer>().isOpen : i.GetComponent<OpenDoor>().isOpen;
-        if ((currentLog.seenFurniture[name].isInteractable != i.isInteractable) || isOpen)
+        if ((currentLog.seenFurniture[id].isInteractable != i.isInteractable) || isOpen)
         {
             interactChange = true;
         }
-        currentLog.seenFurniture[name].isInteractable = i.isInteractable;
-        currentLog.seenFurniture[name].isOpen = isOpen;
-        currentLog.seenFurniture[name].distance = Vector3.Distance(PlayerMovement.currentPosition, i.transform.position);
-        currentLog.seenFurniture[name].screenPosition = Camera.main.WorldToViewportPoint(i.transform.position);
+        currentLog.seenFurniture[id].isInteractable = i.isInteractable;
+        currentLog.seenFurniture[id].isOpen = isOpen;
+        currentLog.seenFurniture[id].distance = (float)Math.Round(Vector3.Distance(PlayerMovement.currentPosition, i.transform.position), 2);
+        currentLog.seenFurniture[id].screenPosition = Camera.main.WorldToViewportPoint(i.transform.position);
         return interactChange;
     }
 
@@ -222,11 +239,12 @@ public class Logging : MonoBehaviour
                 if (!itemsSeen.Contains(hi)) // new item added to visible objects
                 {
                     itemsSeen.Add(hi);
-                    currentLog.seenItems.Add(hi.itemName, new()
+                    currentLog.seenItems.Add(hi.logId, new()
                     {
+                        id = hi.logId,
                         objectName = hi.itemName,
                         itemType = hi.isEnvironmentItem ?
-                            (hi.isKeyItem ? "A MEMORIZAR" : "DISTRACTOR") : "HALL"
+                            (hi.isKeyItem ? "M" : "D") : "H"
                     });
                 }
                 if (CalculateItemStatus(hi)) // check changes in visible item info
@@ -235,7 +253,7 @@ public class Logging : MonoBehaviour
             else if (!hi.CheckVisibility() && itemsSeen.Contains(hi)) // unseen object removed
             {
                 itemsSeen.Remove(hi);
-                currentLog.seenItems.Remove(hi.itemName);
+                currentLog.seenItems.Remove(hi.logId);
                 changesDetected = true;
             }
         }
@@ -246,10 +264,10 @@ public class Logging : MonoBehaviour
                 if (!furnitureSeen.Contains(i))
                 {
                     furnitureSeen.Add(i);
-                    Debug.Log("NUEVO FURNITURE: " + furnitureSeen);
-                    currentLog.seenFurniture.Add(i.GetID(), new()
+                    currentLog.seenFurniture.Add(i.id, new()
                     {
-                        objectName = i.GetID(),
+                        id = i.id,
+                        objectName = i.GetName(),
                     });
                 }
                 if (CalculateFurnitureStatus(i)) // check changes in visible furniture info
@@ -258,7 +276,7 @@ public class Logging : MonoBehaviour
             else if (!i.CheckVisibility() && furnitureSeen.Contains(i))
             {
                 furnitureSeen.Remove(i);
-                currentLog.seenFurniture.Remove(i.GetID());
+                currentLog.seenFurniture.Remove(i.id);
                 changesDetected = true;
             }
         }
@@ -329,7 +347,7 @@ public class Logging : MonoBehaviour
                 // se agregaron a currentLog aparte, es solo actualizarlo
                 break;
             case EventType.SeenObjectInteractivityChange:
-                currentLog.seenItems[(string)parameters[0]].isInteractable = !currentLog.seenItems[(string)parameters[0]].isInteractable;
+                currentLog.seenItems[(int)parameters[0]].isInteractable = !currentLog.seenItems[(int)parameters[0]].isInteractable;
                 break;
             case EventType.ObjectUnseen:
                 // currentLog.seenItems.Remove((string)parameters[0]);
@@ -361,17 +379,34 @@ public class Logging : MonoBehaviour
         logList += newLog.ToString();
     }
 
-    public static void ItemInfoLog(string itemName, bool isEnvironmentItem, string spawnName, float spawnPositionX, float spawnPositionY, float spawnPositionZ)
+    public static void ItemInfoLog(int id, string itemName, bool isEnvironmentItem, int spawnId, float spawnPositionX, float spawnPositionY, float spawnPositionZ)
     {
-        string itemInfo = "INFORMACIÓN DE OBJETO: <" + itemName + ", ";
-        itemInfo += isEnvironmentItem ? "LIVING" : "HALL";
-        itemInfo += ", SPAWN: " + spawnName + ", POSICIÓN: (" + spawnPositionX + ", " + spawnPositionY + ")>";
-        extraInfo += itemInfo + "\n";
+        string itemInfo = id + ";" + itemName + ";" + (isEnvironmentItem ? "L" : "H") + ";" + spawnId + ";(" + spawnPositionX + "," + spawnPositionY + "," + spawnPositionZ + ")" + "\n";
+        extraItemInfo += itemInfo;
     }
 
-    public static void FurnitureInfoLog(string furnitureName, float posX, float posY, float posZ)
+    public static void FurnitureInfoLog(int id, string furnitureName, float posX, float posY, float posZ)
     {
-        string furnitureInfo = "INFORMACIÓN DE INTERACTUABLE: <POSICIÓN: " + furnitureName + ", POSICIÓN: (" + posX + ", " + posY + ", " + posZ + ")";
-        extraInfo += furnitureInfo + ">\n";
+        string furnitureInfo = id + ";" + furnitureName + ";(" + posX + "," + posY + "," + posZ + ")\n";
+        extraFurnitureInfo += furnitureInfo;
+    }
+
+    public static void SpawnInfoLog(List<ItemSpawn> startSpawns, List<ItemSpawn> searchSpawns)
+    {
+        int id = 0;
+        string spawnInfo = "";
+        foreach (ItemSpawn sp in startSpawns)
+        {
+            sp.logId = id;
+            spawnInfo += sp.logId + ";" + sp.spawnName + ";" + sp.description + "\n";
+            id++;
+        }
+        foreach (ItemSpawn sp in searchSpawns)
+        {
+            sp.logId = id;
+            spawnInfo += sp.logId + ";" + sp.spawnName + ";" + sp.description + "\n";
+            id++;
+        }
+        extraSpawnInfo += spawnInfo;
     }
 }
