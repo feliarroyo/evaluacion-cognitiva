@@ -111,27 +111,26 @@ public class Logging : MonoBehaviour
             return result + "}\n";
         }
 
-        public static void SaveLogToFile(string fileName = "log.txt")
+        public static string GetLog(string fileName = "log.txt")
         {
             // Define file path (persistentDataPath is safe for all platforms)
             string path = Path.Combine(Application.persistentDataPath, fileName);
-
-            // Write file
-            File.WriteAllText(path,
-                "ID;OBJETO;TIPO;ID SPAWN;POSICION" + "\n"
+            string content = "ID;OBJETO;TIPO;ID SPAWN;POSICION" + "\n"
                 + extraItemInfo + "\n"
                 + "ID;SPAWN;DESCRIPCION" + "\n"
                 + extraSpawnInfo + "\n"
                 + "ID;INTERACTUABLE;POSICION" + "\n"
                 + extraFurnitureInfo + "\n"
                 + "FECHA;TIEMPO;FASE;ESTADO MOVIMIENTO;POSICION;DIRECCIÓN MOVIMIENTO;ESTADO CAMARA;ORIENTACION CAMARA;INTENSIDAD MOV. DE CAMARA;OBJETOS VISIBLES;OBJETO SOSTENIDO;ESTADO OBJ SOSTENIDO;INTERACTUABLES VISIBLES\n"
-                + logList
-            );
+                + logList;
+            // Write file
+            File.WriteAllText(path, content);
             logList = "";
             extraItemInfo = "";
             extraSpawnInfo = "";
             extraFurnitureInfo = "";
             DebugLog("Log saved to: " + path);
+            return content;
         }
     }
 

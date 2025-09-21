@@ -158,7 +158,7 @@ public class Results : MonoBehaviour
                 { "memObjects", newResult.keyImageName },
                 { "foundObjects", newResult.foundImageName },
                 { "decoyObjects", decoyItemsNames},
-                { "logging", Logging.logList }
+                { "logging", Logging.LogEvent.GetLog() }
             };
 
             // Si es un nuevo paciente, primero aseguramos que tenga idPatient

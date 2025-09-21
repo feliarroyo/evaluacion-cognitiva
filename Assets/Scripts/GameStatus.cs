@@ -221,7 +221,6 @@ public class GameStatus : MonoBehaviour
                     else
                     {
                         Debug.Log("LOAD SCENE 3");
-                        Logging.LogEvent.SaveLogToFile();
                         SceneLoader.LoadScene("Results");
                     }
                 }
@@ -229,7 +228,6 @@ public class GameStatus : MonoBehaviour
             case GamePhase.SearchOver:
                 if (Settings.currentDifficulty != Settings.Difficulty.Preevaluación)
                 {
-                    Logging.LogEvent.SaveLogToFile();
                     Debug.Log("LOAD SCENE 2");
                     SceneLoader.LoadScene("Results");
                 }
@@ -270,7 +268,6 @@ public class GameStatus : MonoBehaviour
 
         if (sendToResults)
         {
-            Logging.LogEvent.SaveLogToFile();
             Debug.Log("LOAD SCENE 1");
             SceneLoader.LoadScene("Results");
         }
