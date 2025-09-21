@@ -167,6 +167,7 @@ public static void SetDifficultyParameters()
     public Dictionary<string, GameObject> GenerateDecoyItems()
     {
         Dictionary<string, GameObject> result = new();
+        List<string> keyItems = GetKeyItemNames();
         foreach (string spawnType in decoyItems.Keys)
         {
             // Busca el objeto en lista en el inspector
@@ -177,7 +178,7 @@ public static void SetDifficultyParameters()
             });
             if (itemToAdd != null)
             {
-                itemToAdd.GetComponent<HeldItem>().isKeyItem = false;
+                itemToAdd.GetComponent<HeldItem>().isKeyItem = keyItems.Contains(itemToAdd.GetComponent<HeldItem>().itemName);
                 decoyItemList.Add(itemToAdd);
                 result[spawnType] = itemToAdd;
             }
@@ -220,5 +221,13 @@ public static void SetDifficultyParameters()
         return new List<GameObject>(tutorialDecoyItemList);
     }
 
-    
+    private List<string> GetKeyItemNames()
+    {
+        List<string> result = new();
+        foreach (GameObject go in keyItemList)
+        {
+            result.Add(go.GetComponent<HeldItem>().itemName);
+        }
+        return result;
+    }
 }

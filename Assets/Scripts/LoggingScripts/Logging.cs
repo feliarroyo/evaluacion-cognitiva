@@ -26,7 +26,7 @@ public class Logging : MonoBehaviour
 
         public void SetTimeStamp()
         {
-            timeStamp = DateTime.Now.ToString("yyyy-MM-dd;HH:mm:ss");
+            timeStamp = DateTime.Now.ToString("dd-MM-yyyy;HH:mm:ss");
         }
 
         public LogEvent(LogEvent other)
@@ -59,7 +59,7 @@ public class Logging : MonoBehaviour
             public Vector2 screenPosition;
             public override string ToString()
             {
-                return "<" + id + ": " + itemType + ", " + (isInteractable ? "INTERACTUABLE" : "NO INTERACTUABLE") + ", " + distance + ", " + screenPosition + ">";
+                return "<" + id + ":" + itemType + ";" + (isInteractable ? "I" : "NI") + ";" + distance.ToString(CultureInfo.InvariantCulture) + ";" + screenPosition + ">";
             }
         }
 
@@ -118,9 +118,9 @@ public class Logging : MonoBehaviour
 
             // Write file
             File.WriteAllText(path,
-                "ID;OBJETO;TIPO;ID SPAWN" + "\n"
+                "ID;OBJETO;TIPO;ID SPAWN;POSICION" + "\n"
                 + extraItemInfo + "\n"
-                + "ID;DESCRIPCION;POSICION" + "\n"
+                + "ID;SPAWN;DESCRIPCION" + "\n"
                 + extraSpawnInfo + "\n"
                 + "ID;INTERACTUABLE;POSICION" + "\n"
                 + extraFurnitureInfo + "\n"
@@ -381,13 +381,13 @@ public class Logging : MonoBehaviour
 
     public static void ItemInfoLog(int id, string itemName, bool isEnvironmentItem, int spawnId, float spawnPositionX, float spawnPositionY, float spawnPositionZ)
     {
-        string itemInfo = id + ";" + itemName + ";" + (isEnvironmentItem ? "L" : "H") + ";" + spawnId + ";(" + spawnPositionX + "," + spawnPositionY + "," + spawnPositionZ + ")" + "\n";
+        string itemInfo = id + ";" + itemName + ";" + (isEnvironmentItem ? "L" : "H") + ";" + spawnId + ";(" + Math.Round(spawnPositionX,2).ToString(CultureInfo.InvariantCulture) + ", " + Math.Round(spawnPositionY,2).ToString(CultureInfo.InvariantCulture) + ", " + Math.Round(spawnPositionZ,2).ToString(CultureInfo.InvariantCulture) + ")" + "\n";
         extraItemInfo += itemInfo;
     }
 
     public static void FurnitureInfoLog(int id, string furnitureName, float posX, float posY, float posZ)
     {
-        string furnitureInfo = id + ";" + furnitureName + ";(" + posX + "," + posY + "," + posZ + ")\n";
+        string furnitureInfo = id + ";" + furnitureName + ";(" + Math.Round(posX,2).ToString(CultureInfo.InvariantCulture) + ", " + Math.Round(posY,2).ToString(CultureInfo.InvariantCulture) + ", " + Math.Round(posZ,2).ToString(CultureInfo.InvariantCulture) + ")\n";
         extraFurnitureInfo += furnitureInfo;
     }
 

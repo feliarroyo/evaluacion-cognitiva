@@ -35,8 +35,7 @@ public class GameStatus : MonoBehaviour
 
     public static int
         timeUsedMemorizing = 0,
-        timeUsedSearching = 0
-        ;
+        timeUsedSearching = 0;
 
     //public Light memorizeLight;
     //public Light searchLight;

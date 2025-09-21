@@ -301,7 +301,7 @@ public class ItemSpawning : MonoBehaviour
     /// <param name="isKeyItem">Whether the item should be marked as retrieved or not.</param>
     /// <param name="isEnvironmentItem">Whether the item is placed in the search environment or not.</param>
     /// <returns>The GameObject representing the item added.</returns>
-    public GameObject PlaceItemInSpawnpoint(GameObject item, List<ItemSpawn> availableSpawnPoints, bool isEnvironmentItem, bool forceInstantiate = false)
+    public GameObject PlaceItemInSpawnpoint(GameObject item, List<ItemSpawn> availableSpawnPoints, bool isEnvironmentItem)
     {
         try
         {
