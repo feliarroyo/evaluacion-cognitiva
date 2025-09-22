@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class InteractableDetection : MonoBehaviour
 {
+    public static List<Interactable> enableWhenEntering;
     // Start is called before the first frame update
     void Start()
     {
         GetComponent<SphereCollider>();
+        enableWhenEntering = new();
     }
 
     // Update is called once per frame
@@ -26,24 +28,27 @@ public class InteractableDetection : MonoBehaviour
             TutorialItem.playerIsClose = true;
             return;
         }
-        if (other.gameObject.CompareTag("Interactable") && GameStatus.currentPhase != GameStatus.GamePhase.Tutorial_BeforeSearch && GameStatus.currentPhase != GameStatus.GamePhase.BeforeSearch)
-        { // to avoid showing silhouettes before entering
-            //Debug.Log("OTHER ");
-            //Debug.Log(other);
-            other.gameObject.GetComponent<Interactable>().EnableInteraction(true);
-            if (other.GetComponent<HeldItem>() != null)
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            // to avoid showing silhouettes before entering
+            if (GameStatus.currentPhase != GameStatus.GamePhase.Tutorial_BeforeSearch && GameStatus.currentPhase != GameStatus.GamePhase.BeforeSearch)
             {
-                HeldItem hi = other.GetComponent<HeldItem>();
-                // if (Logging.itemsSeen.Contains(hi))
-                // {
-                //     if (Logging.currentLog.seenItems[hi.itemName].isInteractable == false)
-                //     {
-                //         Logging.Log(Logging.EventType.SeenObjectInteractivityChange, new[] {
-                //             hi.itemName
-                //         });
-                //     }
-                // }
+                other.gameObject.GetComponent<Interactable>().EnableInteraction(true);
+                if (other.GetComponent<HeldItem>() != null)
+                {
+                    HeldItem hi = other.GetComponent<HeldItem>();
+                    // if (Logging.itemsSeen.Contains(hi))
+                    // {
+                    //     if (Logging.currentLog.seenItems[hi.itemName].isInteractable == false)
+                    //     {
+                    //         Logging.Log(Logging.EventType.SeenObjectInteractivityChange, new[] {
+                    //             hi.itemName
+                    //         });
+                    //     }
+                    // }
+                }
             }
+            else enableWhenEntering.Add(other.gameObject.GetComponent<Interactable>());
             //Debug.Log("TRIGGER ENTERING... " + gameObject);
         }
     }
@@ -60,22 +65,15 @@ public class InteractableDetection : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Interactable"))
         {
-            Debug.Log("OTHER ");
-            Debug.Log(other);
-            other.gameObject.GetComponent<Interactable>().EnableInteraction(false);
-            if (other.GetComponent<HeldItem>() != null)
+            if (GameStatus.currentPhase != GameStatus.GamePhase.Tutorial_BeforeSearch && GameStatus.currentPhase != GameStatus.GamePhase.BeforeSearch)
             {
-                HeldItem hi = other.GetComponent<HeldItem>();
-                // if (Logging.itemsSeen.Contains(hi))
-                // {
-                //     if (Logging.currentLog.seenItems[hi.itemName].isInteractable == true)
-                //     {
-                //         Logging.Log(Logging.EventType.SeenObjectInteractivityChange, new[] {
-                //             hi.itemName
-                //         });
-                //     }
-                // }
+                other.gameObject.GetComponent<Interactable>().EnableInteraction(false);
             }
+            else
+            {
+                enableWhenEntering.Remove(other.gameObject.GetComponent<Interactable>());
+            }
+            
         }
     }
 }

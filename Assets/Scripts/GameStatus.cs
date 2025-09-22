@@ -114,6 +114,10 @@ public class GameStatus : MonoBehaviour
                 SwapMaterial.SetMaterials(true);
                 TurnLightsOn(instance.lights[2]);
                 Timer.StartTimer(125);
+                foreach (Interactable i in InteractableDetection.enableWhenEntering)
+                {
+                    i.EnableInteraction(true);
+                }
                 break;
             case GamePhase.Tutorial_Search:
                 savedItems.Clear();
@@ -182,6 +186,10 @@ public class GameStatus : MonoBehaviour
                 TurnLightsOn(instance.lights[2]);
                 //instance.StartCoroutine(instance.FadeInLight(instance.searchLight, 0f));
                 savedItems.Clear();
+                foreach (Interactable i in InteractableDetection.enableWhenEntering)
+                {
+                    i.EnableInteraction(true);
+                }
                 if (GameConfig.searchTime != 0)
                 {
                     Timer.StartTimer(GameConfig.searchTime);
