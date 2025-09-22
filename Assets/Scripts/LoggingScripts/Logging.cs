@@ -111,7 +111,7 @@ public class Logging : MonoBehaviour
             return result + "}\n";
         }
 
-        public static string GetLog(string fileName = "log.txt")
+        public static (string logContent, float intermediateFMTime, string memObjectsSerialized, string searchObjectsSerialized, string searchSelectionTimesSerialized, string searchChoiceIntervalsSerialized) GetLog(string fileName = "log.txt")
         {
             // Define file path (persistentDataPath is safe for all platforms)
             string path = Path.Combine(Application.persistentDataPath, fileName);
@@ -130,7 +130,35 @@ public class Logging : MonoBehaviour
             extraSpawnInfo = "";
             extraFurnitureInfo = "";
             DebugLog("Log saved to: " + path);
-            return content;
+
+            //LogAnalyzer
+            float intermediateFMTime = LogAnalyzer.GetIntermediateTime();
+            List<LogAnalyzer.MemViewObject> memViewObjects = LogAnalyzer.GetMemViewObjects();
+
+            // 1) MemViewObjects
+            string memObjectsSerialized = string.Join(";", memViewObjects.Select(obj =>
+                $"<{obj.ObjectName},{obj.StartTime},{obj.EndTime},{obj.TotalDuration}>"
+            ));
+
+            // 2) SearchViewObjects
+            List<LogAnalyzer.SearchViewObject> searchViewObjects = LogAnalyzer.GetSearchViewObjects();
+            string searchObjectsSerialized = string.Join(";", searchViewObjects.Select(obj =>
+                $"<{obj.ObjectName},{obj.StartTime},{obj.EndTime},{obj.TotalDuration},{obj.Selected}>"
+            ));
+
+            // 3) SearchSelectionTime
+            List<LogAnalyzer.SearchSelectionTime> searchSelectionTimes = LogAnalyzer.GetSearchSelectionTimes();
+            string searchSelectionTimesSerialized = string.Join(";", searchSelectionTimes.Select(obj =>
+                $"<{obj.ObjectName},{obj.SearchStart},{obj.SelectionTime},{obj.TotalDuration}>"
+            ));
+
+            // 4) SearchChoiceInterval
+            List<LogAnalyzer.SearchChoiceInterval> searchChoiceIntervals = LogAnalyzer.GetSearchChoiceIntervals();
+            string searchChoiceIntervalsSerialized = string.Join(";", searchChoiceIntervals.Select(obj =>
+                $"<{obj.PreviousObject},{obj.PreviousSelectionTime},{obj.CurrentObject},{obj.CurrentSelectionTime},{obj.TotalDuration}>"
+            ));
+
+            return (content, intermediateFMTime, memObjectsSerialized, searchObjectsSerialized, searchSelectionTimesSerialized, searchChoiceIntervalsSerialized);
         }
     }
 

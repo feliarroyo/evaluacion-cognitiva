@@ -146,6 +146,31 @@ public class Results : MonoBehaviour
                 foundImageName = foundItemsNames
             };
 
+            // MetricsCalculator
+            int tp = MetricsCalculator.TruePositive(keyItemsNames, foundItemsNames);
+            int tn = MetricsCalculator.TrueNegative(decoyItemsNames, foundItemsNames);
+            int fp = MetricsCalculator.FalsePositive(decoyItemsNames, foundItemsNames);
+            int fn = MetricsCalculator.FalseNegative(keyItemsNames, foundItemsNames);
+
+            float accuracy = MetricsCalculator.Accuracy(tp, tn, fp, fn);
+            float precision = MetricsCalculator.Precision(tp, fp);
+            float recall = MetricsCalculator.Recall(tp, fn);
+            float omissionIndex = MetricsCalculator.OmissionIndex(tp, fn);
+            float errorRate = MetricsCalculator.ErrorRate(tp, fp);
+            float temporalEfficiency = MetricsCalculator.TemporalEfficiency(
+                float.Parse(GameStatus.timeUsedSearching.ToString()), GameConfig.searchTime
+            );
+
+            List<string> memNotChosen = MetricsCalculator.MemNotChosen(keyItemsNames, foundItemsNames);
+
+            var logResult = Logging.LogEvent.GetLog();
+            string logContent = logResult.logContent;
+            float intermediateFMTime = logResult.intermediateFMTime;
+            string memObjectsSerialized = logResult.memObjectsSerialized;
+            string searchViewObjectsSerialized = logResult.searchObjectsSerialized;
+            string searchSelectionTimesSerialized = logResult.searchSelectionTimesSerialized;
+            string searchChoiceIntervalsSerialized = logResult.searchChoiceIntervalsSerialized;
+
             Dictionary<string, object> resultData = new Dictionary<string, object>
             {
                 { "id", newResult.id },
@@ -158,7 +183,25 @@ public class Results : MonoBehaviour
                 { "memObjects", newResult.keyImageName },
                 { "foundObjects", newResult.foundImageName },
                 { "decoyObjects", decoyItemsNames},
-                { "logging", Logging.LogEvent.GetLog() }
+                { "logging", logContent },
+                // MetricsCalculator
+                { "truePositive", tp },
+                { "trueNegative", tn },
+                { "falsePositive", fp },
+                { "falseNegative", fn },
+                { "accuracy", accuracy },
+                { "precision", precision },
+                { "recall", recall },
+                { "omissionIndex", omissionIndex },
+                { "errorRate", errorRate },
+                { "temporalEfficiency", temporalEfficiency },
+                { "memNotChosen", memNotChosen },
+                //LogAnalyzer
+                { "intermediateTime", intermediateFMTime},
+                { "memViewObjects", memObjectsSerialized},
+                { "searchViewObject", searchViewObjectsSerialized},
+                { "searchSelectionTimes", searchSelectionTimesSerialized},
+                { "searchChoiceInterval", searchChoiceIntervalsSerialized}
             };
 
             // Si es un nuevo paciente, primero aseguramos que tenga idPatient
