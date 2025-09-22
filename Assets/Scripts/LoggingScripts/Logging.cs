@@ -59,7 +59,7 @@ public class Logging : MonoBehaviour
             public Vector2 screenPosition;
             public override string ToString()
             {
-                return "<" + id + ":" + itemType + ";" + (isInteractable ? "I" : "NI") + ";" + distance.ToString(CultureInfo.InvariantCulture) + ";" + screenPosition + ">";
+                return "<" + id + ":" + itemType + "|" + (isInteractable ? "I" : "NI") + "|" + distance.ToString(CultureInfo.InvariantCulture) + "|" + screenPosition + ">";
             }
         }
 
@@ -73,7 +73,7 @@ public class Logging : MonoBehaviour
             public Vector2 screenPosition;
             public override string ToString()
             {
-                return "<" + id + ":" + (isInteractable ? "I" : "NI") + ";" + (isOpen ? "A" : "C") + ";" + distance.ToString(CultureInfo.InvariantCulture) + ";" + screenPosition + ">";
+                return "<" + id + ":" + (isInteractable ? "I" : "NI") + "|" + (isOpen ? "A" : "C") + "|" + distance.ToString(CultureInfo.InvariantCulture) + "|" + screenPosition + ">";
             }
         }
         public override string ToString()
