@@ -20,14 +20,19 @@ public class Interactable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CheckInteractableInScene();
+        GetComponent<Outline>().enabled = false;
+        behaviour = GetComponent<IElementBehaviour>();
+    }
+
+    protected void CheckInteractableInScene()
+    {
         if (GetComponent<HeldItem>() == null)
         {
             id = interactablesInScene.Count;
             interactablesInScene.Add(this);
             Logging.FurnitureInfoLog(id, GetName(), transform.position.x, transform.position.z, transform.position.y);
         }
-        GetComponent<Outline>().enabled = false;
-        behaviour = GetComponent<IElementBehaviour>();
     }
 
     // Update is called once per frame

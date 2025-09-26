@@ -164,19 +164,19 @@ public class PatientInfoLoader : MonoBehaviour
         // In case of error, return empty list
         if (!levelData.ContainsKey(itemsName)) return new List<SpawnInfo>();
 
-        Debug.Log("SetupScene 1");
+        //Debug.Log("SetupScene 1");
         // In case of wrong format, return empty list
         if (levelData[itemsName] is not Dictionary<string, object> searchMap) 
         return new List<SpawnInfo>();
 
-        Debug.Log("SetupScene 2");
+        //Debug.Log("SetupScene 2");
 
         config.Clear();
 
         foreach (var zone in searchMap)
         {
             if (zone.Value is string v) {
-                Debug.Log("For iteration");
+                //Debug.Log("For iteration");
                 config.Add(new SpawnInfo(zone.Key, v));
             }
         }

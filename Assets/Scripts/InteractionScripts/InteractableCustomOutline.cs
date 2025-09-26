@@ -13,6 +13,7 @@ public class InteractableCustomOutline : Interactable
 
     void Start()
     {
+        CheckInteractableInScene();
         outlineComponent.enabled = false;
         behaviour = GetComponent<IElementBehaviour>();
     }

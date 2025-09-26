@@ -9,6 +9,11 @@ using System.Globalization;
 
 public class Logging : MonoBehaviour
 {
+    public static string NoSpaceVector2(Vector2 v2)
+    {
+        return "(" + v2.x.ToString("F2", CultureInfo.InvariantCulture) + "," + v2.y.ToString("F2", CultureInfo.InvariantCulture) + ")";
+    }
+
     public class LogEvent
     {
         public string timeStamp;
@@ -59,7 +64,7 @@ public class Logging : MonoBehaviour
             public Vector2 screenPosition;
             public override string ToString()
             {
-                return "<" + id + ":" + itemType + "|" + (isInteractable ? "I" : "NI") + "|" + distance.ToString(CultureInfo.InvariantCulture) + "|" + screenPosition + ">";
+                return "<" + id + ":" + itemType + "|" + (isInteractable ? "I" : "NI") + "|" + distance.ToString("F2",CultureInfo.InvariantCulture) + "|" + NoSpaceVector2(screenPosition) + ">";
             }
         }
 
@@ -73,25 +78,26 @@ public class Logging : MonoBehaviour
             public Vector2 screenPosition;
             public override string ToString()
             {
-                return "<" + id + ":" + (isInteractable ? "I" : "NI") + "|" + (isOpen ? "A" : "C") + "|" + distance.ToString(CultureInfo.InvariantCulture) + "|" + screenPosition + ">";
+                return "<" + id + ":" + (isInteractable ? "I" : "NI") + "|" + (isOpen ? "A" : "C") + "|" + distance.ToString("F2", CultureInfo.InvariantCulture) + "|" + NoSpaceVector2(screenPosition) + ">";
             }
+
         }
         public override string ToString()
         {
             string result = timeStamp
             + ";" + gamePhase
             + ";" + movementStatus
-            + ";" + movementPosition
-            + ";" + movementDirection
+            + ";" + NoSpaceVector2(movementPosition)
+            + ";" + NoSpaceVector2(movementDirection)
             + ";" + cameraStatus
-            + ";" + cameraOrientation
-            + ";" + cameraMovementDirection
+            + ";" + NoSpaceVector2(cameraOrientation)
+            + ";" + NoSpaceVector2(cameraMovementDirection)
             + ";{";
             if (seenItems != null && seenItems.Count > 0)
             {
                 foreach (int item in seenItems.Keys)
                 {
-                    result += seenItems[item].ToString() + ", ";
+                    result += seenItems[item].ToString() + ",";
                 }
                 result = result.Substring(0, result.Length - 2) + "}";
             }
@@ -103,7 +109,7 @@ public class Logging : MonoBehaviour
             {
                 foreach (int furniture in seenFurniture.Keys)
                 {
-                    result += seenFurniture[furniture].ToString() + ", ";
+                    result += seenFurniture[furniture].ToString() + ",";
                 }
                 result = result.Substring(0, result.Length - 2);
             }
@@ -115,7 +121,10 @@ public class Logging : MonoBehaviour
         {
             // Define file path (persistentDataPath is safe for all platforms)
             string path = Path.Combine(Application.persistentDataPath, fileName);
-            string content = "ID;OBJETO;TIPO;ID SPAWN;POSICION" + "\n"
+            string content =
+                PatientInfoLoader.Instance.GetPatientEmail()
+                + " - Nivel: " + Settings.currentDifficulty.ToString() + "\n"
+                + "ID;OBJETO;TIPO;ID SPAWN;POSICION" + "\n"
                 + extraItemInfo + "\n"
                 + "ID;SPAWN;DESCRIPCION" + "\n"
                 + extraSpawnInfo + "\n"
@@ -245,7 +254,8 @@ public class Logging : MonoBehaviour
         bool interactChange = false;
         int id = i.id;
         bool isOpen = i.GetComponent<OpenDrawer>() != null ? i.GetComponent<OpenDrawer>().isOpen : i.GetComponent<OpenDoor>().isOpen;
-        if ((currentLog.seenFurniture[id].isInteractable != i.isInteractable) || isOpen)
+        if ((currentLog.seenFurniture[id].isInteractable != i.isInteractable)
+            || (currentLog.seenFurniture[id].isOpen != isOpen))
         {
             interactChange = true;
         }
@@ -257,6 +267,14 @@ public class Logging : MonoBehaviour
     }
 
     private void CheckVisibility()
+    {
+        if (RefreshStatus())
+        {
+            Log(EventType.SeenElementsChange);
+        }
+    }
+
+    private static bool RefreshStatus()
     {
         bool changesDetected = false;
         foreach (HeldItem hi in HeldItem.itemsInScene)
@@ -307,10 +325,7 @@ public class Logging : MonoBehaviour
                 changesDetected = true;
             }
         }
-        if (changesDetected)
-        {
-            Log(EventType.SeenElementsChange);
-        }
+        return changesDetected;
     }
 
     public static void Log(EventType ev, Object[] parameters = null)
@@ -401,6 +416,7 @@ public class Logging : MonoBehaviour
         }
         currentLog.SetTimeStamp();
         LogEvent newLog = new(currentLog);
+        RefreshStatus();
         Debug.Log(newLog.ToString());
         //GameObject.Find("Status").GetComponent<TextMeshProUGUI>().text = newLog.ToString();
         logList += newLog.ToString();
@@ -408,13 +424,13 @@ public class Logging : MonoBehaviour
 
     public static void ItemInfoLog(int id, string itemName, bool isEnvironmentItem, int spawnId, float spawnPositionX, float spawnPositionY, float spawnPositionZ)
     {
-        string itemInfo = id + ";" + itemName + ";" + (isEnvironmentItem ? "L" : "H") + ";" + spawnId + ";(" + Math.Round(spawnPositionX,2).ToString(CultureInfo.InvariantCulture) + ", " + Math.Round(spawnPositionY,2).ToString(CultureInfo.InvariantCulture) + ", " + Math.Round(spawnPositionZ,2).ToString(CultureInfo.InvariantCulture) + ")" + "\n";
+        string itemInfo = id + ";" + itemName + ";" + (isEnvironmentItem ? "L" : "H") + ";" + spawnId + ";(" + Math.Round(spawnPositionX, 2).ToString("F2", CultureInfo.InvariantCulture) + "," + Math.Round(spawnPositionY, 2).ToString("F2", CultureInfo.InvariantCulture) + "," + Math.Round(spawnPositionZ, 2).ToString("F2", CultureInfo.InvariantCulture) + ")" + "\n";
         extraItemInfo += itemInfo;
     }
 
     public static void FurnitureInfoLog(int id, string furnitureName, float posX, float posY, float posZ)
     {
-        string furnitureInfo = id + ";" + furnitureName + ";(" + Math.Round(posX,2).ToString(CultureInfo.InvariantCulture) + ", " + Math.Round(posY,2).ToString(CultureInfo.InvariantCulture) + ", " + Math.Round(posZ,2).ToString(CultureInfo.InvariantCulture) + ")\n";
+        string furnitureInfo = id + ";" + furnitureName + ";(" + Math.Round(posX, 2).ToString("F2", CultureInfo.InvariantCulture) + "," + Math.Round(posY, 2).ToString("F2", CultureInfo.InvariantCulture) + "," + Math.Round(posZ, 2).ToString("F2", CultureInfo.InvariantCulture) + ")\n";
         extraFurnitureInfo += furnitureInfo;
     }
 
