@@ -123,7 +123,7 @@ public class FirebaseAuthManager : MonoBehaviour
 
                 {
                     Debug.Log("yelo");
-                    statusText.text = "Correo y/o contraseña incorrecta";
+                    statusText.text = "Usuario incorrecto y/o Clave incorrecta";
                     statusWindow.SetActive(true);
                     
                     return;
@@ -183,7 +183,7 @@ public class FirebaseAuthManager : MonoBehaviour
                     //statusText.text = "Sign in failed!";
                     unityContext.Post(_ =>
                     {
-                        statusText.text = "Correo y/o contraseña incorrecta";
+                        statusText.text = "Usuario incorrecto y/o Clave incorrecta";
                         statusWindow.SetActive(true);
                     }, null);
                     
