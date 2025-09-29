@@ -59,4 +59,19 @@ public static class MetricsCalculator
     {
         return memObjects.Where(obj => !foundObjects.Contains(obj)).ToList();
     }
+
+    public static List<string> MemChosen(List<string> memObjects, List<string> foundObjects)
+    {
+        return memObjects.Where(obj => foundObjects.Contains(obj)).ToList();
+    }
+
+    public static List<string> DecoyChosen(List<string> decoyObjects, List<string> foundObjects)
+    {
+        return decoyObjects.Where(obj => foundObjects.Contains(obj)).ToList();
+    }
+
+    public static List<string> DecoyNotChosen(List<string> decoyObjects, List<string> foundObjects)
+    {
+        return decoyObjects.Where(obj => !foundObjects.Contains(obj)).ToList();
+    }
 }

@@ -162,6 +162,9 @@ public class Results : MonoBehaviour
             );
 
             List<string> memNotChosen = MetricsCalculator.MemNotChosen(keyItemsNames, foundItemsNames);
+            List<string> memChosen = MetricsCalculator.MemChosen(keyItemsNames, foundItemsNames);
+            List<string> decoyChosen = MetricsCalculator.DecoyChosen(decoyItemsNames, foundItemsNames);
+            List<string> decoyNotChosen = MetricsCalculator.DecoyNotChosen(decoyItemsNames, foundItemsNames);
 
             var logResult = Logging.LogEvent.GetLog();
             string logContent = logResult.logContent;
@@ -196,6 +199,9 @@ public class Results : MonoBehaviour
                 { "errorRate", errorRate },
                 { "temporalEfficiency", temporalEfficiency },
                 { "memNotChosen", memNotChosen },
+                {"memChosen", memChosen},
+                {"decoyChosen", decoyChosen},
+                {"decoyNotChosen", decoyNotChosen},
                 //LogAnalyzer
                 { "intermediateTime", intermediateFMTime},
                 { "memViewObjects", memObjectsSerialized},
