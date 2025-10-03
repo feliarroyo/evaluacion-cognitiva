@@ -215,6 +215,7 @@ public class FirebaseAuthManager : MonoBehaviour
 
     public void SignOut()
     {
+        MenuUIController.ResetCurrentStatus();
         HistoryLoader.Instance.CleanHistorialFile();
         PatientInfoLoader.Instance.CleanPatientFile();
         emailInputField.text = "";

@@ -122,8 +122,8 @@ public class Logging : MonoBehaviour
             // Define file path (persistentDataPath is safe for all platforms)
             string path = Path.Combine(Application.persistentDataPath, fileName);
             string content =
-                PatientInfoLoader.Instance.GetPatientEmail()
-                + " - Nivel: " + Settings.currentDifficulty.ToString() + "\n"
+                PatientInfoLoader.Instance.GetPatientEmail() + "\n"
+                + "Nivel: " + Settings.currentDifficulty.ToString() + "\n\n"
                 + "ID;OBJETO;TIPO;ID SPAWN;POSICION" + "\n"
                 + extraItemInfo + "\n"
                 + "ID;SPAWN;DESCRIPCION" + "\n"

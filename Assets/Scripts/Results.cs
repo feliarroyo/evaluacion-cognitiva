@@ -17,6 +17,7 @@ public class Results : MonoBehaviour
 
     void Start()
     {
+        resultUI.ShowResult(GameStatus.keyItems, GameStatus.savedItems);
         db = FirebaseDatabase.DefaultInstance;
         patientEmail = PatientInfoLoader.Instance.GetPatientEmail();
 

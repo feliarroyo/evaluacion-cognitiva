@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MenuUIController))]
 public class SetupScene : MonoBehaviour
 {
     public Settings.Difficulty difficulty;
@@ -11,5 +12,6 @@ public class SetupScene : MonoBehaviour
         Settings.currentDifficulty = difficulty;
         Settings.startingPhase = startingPhase;
         GameStatus.currentPhase = startingPhase; // sacar luego
+        GetComponent<MenuUIController>().UpdateCurrentStatus();
     }
 }
