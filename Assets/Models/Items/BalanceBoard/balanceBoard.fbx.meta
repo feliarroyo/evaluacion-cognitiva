@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: a8dc8ba7fe8832142a50afff97e672a7
+guid: 963f965b4f8184b49b1203d6ea53df60
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black
+    second: {fileID: 2100000, guid: 0720229528d2bad4cb9b18a2f1d461a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ScaleImage
+    second: {fileID: 2100000, guid: aa7dd8756364eff499bb6b688709b61c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mq_ML043_STEEL-Blackened-Rough
+    second: {fileID: 2100000, guid: ec1b609ba8f7bec4db7e91b6ab5c52f3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

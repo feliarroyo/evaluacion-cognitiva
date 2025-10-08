@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO.Compression;
 using UnityEngine;
-using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 public class TutorialManager : MonoBehaviour
@@ -307,7 +305,6 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     private IEnumerator PlayerMovementDemonstration(PopUpManager popups)
     {
-        const float MOVE_TIME = 0.4f;
         const float STOP_TIME = 0.75f;
         yield return ShowPopups(popups, new string[] {  // #7-#8
             "Al encenderse la luz del hall,\ncomenzará a correr el tiempo límite\npara observar los objetos,\nen el reloj que se muestra en la pantalla.",
@@ -569,7 +566,7 @@ public class TutorialManager : MonoBehaviour
         const int ITEMID_SHELFITEM = 9;
         Vector3 centerPosition = new(player.transform.position.x, player.transform.position.y, -86.85f); // -86.2 -> -86.6 -> -86.85
         // ir al centro
-        yield return MoveToTargetOverTime(stopPoints[13]);
+        yield return MoveToTargetOverTime(stopPoints[13], 0, -1);
         //yield return MovePlayerToTargetHorizontal(centerPosition, 1f);
         // MovePlayerHorizontal(false);
         // yield return new WaitForSeconds(0.45f);

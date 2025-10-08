@@ -232,7 +232,8 @@ public class Logging : MonoBehaviour
         furnitureSeen = new();
         logList = currentLog.ToString();
         //GameObject.Find("Status").GetComponent<TextMeshProUGUI>().text = currentLog.ToString();
-        InvokeRepeating(nameof(CheckVisibility), 0f, 0.5f);
+        if (!DoNotLog()) // no refreshing in Tutorial/Practice
+            InvokeRepeating(nameof(CheckVisibility), 0f, 0.5f);
     }
 
     private static bool CalculateItemStatus(HeldItem hi)
@@ -274,8 +275,14 @@ public class Logging : MonoBehaviour
         }
     }
 
+    private static bool DoNotLog()
+    {
+        return GameStatus.currentPhase < GameStatus.GamePhase.Waiting || Settings.currentDifficulty == Settings.Difficulty.Preevaluación;
+    }
     private static bool RefreshStatus()
     {
+        if (DoNotLog()) // no refreshing in Tutorial/Practice
+            return false;
         bool changesDetected = false;
         foreach (HeldItem hi in HeldItem.itemsInScene)
         {

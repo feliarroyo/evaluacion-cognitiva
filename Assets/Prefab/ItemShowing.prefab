@@ -718,15 +718,7 @@ MonoBehaviour:
   - {fileID: 6008032443393008561, guid: 42d423c44ac367b4d8c45e0f0cf96913, type: 3}
   keyItemList: []
   decoyItemList: []
-  tutorialKeyItemList:
-  - {fileID: 202657999415875872, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-  - {fileID: 5998648360444666710, guid: ce697d3b2d4d75848bcd2080de20aed3, type: 3}
-  - {fileID: 2234814364261375056, guid: 637f2aa0e561f734c8d749280c2c283d, type: 3}
-  - {fileID: 5998648360444666710, guid: 5f054d72a125f704581b2af70a668e7e, type: 3}
-  - {fileID: 5998648360444666710, guid: 058e257332accd244bb1285998072fd3, type: 3}
-  - {fileID: 5998648360444666710, guid: 0961008d0fa82054ca31eb829e6f3f45, type: 3}
-  - {fileID: 2632411802067107309, guid: 95b2463ea75207c4f9534b9e3009e2bf, type: 3}
-  - {fileID: 222804259561212222, guid: 10dd7cf8c7724634cac6a23814e3e4e1, type: 3}
+  tutorialKeyItemList: []
   tutorialDecoyItemList:
   - {fileID: 5998648360444666710, guid: c606258a139a7994c8cce12ac83a325d, type: 3}
   - {fileID: 7259987606962699071, guid: 6a85bd52831b57c41b11af161637e59b, type: 3}

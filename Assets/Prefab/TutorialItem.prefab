@@ -1,72 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4084058996250918409
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 202657999415875872, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-      propertyPath: m_Name
-      value: TutorialItem
-      objectReference: {fileID: 0}
-    - target: {fileID: 6884713319386004404, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-      propertyPath: itemName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970034197532708189, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970034197532708189, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970034197532708189, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970034197532708189, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970034197532708189, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970034197532708189, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970034197532708189, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970034197532708189, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970034197532708189, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970034197532708189, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970034197532708189, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6884713319386004404, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-  m_SourcePrefab: {fileID: 100100000, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
---- !u!1 &4207068370666071849 stripped
+--- !u!1 &4207068370666071849
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 202657999415875872, guid: 7679469f16132444982c6945fb8b0aa3, type: 3}
-  m_PrefabInstance: {fileID: 4084058996250918409}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4033553334628244286}
+  - component: {fileID: 5946482353973703518}
+  m_Layer: 0
+  m_Name: TutorialItem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4033553334628244286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4207068370666071849}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5946482353973703518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cded276fb2410468f75227628f3d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: "Manzana (pre-evaluaci\xF3n)"
+  itemName: "Detecci\xF3n de pr\xE1ctica"
   isBeingHeld: 0
   originalPosition: {x: -53, y: 0.3, z: -110}
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -88,8 +53,8 @@ MonoBehaviour:
   isKeyItem: 0
   isEnvironmentItem: 0
   isLargeItem: 0
-  uiIcon: {fileID: 21300000, guid: 874b58860d8005b41be152ba77f73412, type: 3}
-  uiIconNoBG: {fileID: 0}
+  uiIcon: {fileID: 21300000, guid: b3d63d2309c53ba43b23aab56250030a, type: 3}
+  uiIconNoBG: {fileID: 21300000, guid: 5b6d31c112a51504d845885f3e75a0de, type: 3}
   validSpawnTypes:
   - spawnType: 0
     isValid: 0
@@ -127,3 +92,7 @@ MonoBehaviour:
     isValid: 0
   - spawnType: 17
     isValid: 0
+  mainCamera: {fileID: 0}
+  pushBackItem: 0
+  interactable: {fileID: 0}
+  logId: 0
