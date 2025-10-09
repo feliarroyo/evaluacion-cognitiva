@@ -404,6 +404,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 4
   description: 
+  logId: 0
 --- !u!1 &156273456311643008
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,6 +455,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 6
   description: 
+  logId: 0
 --- !u!1 &168784238479090438
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,6 +622,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &184600202887805868
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +673,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 6
   description: 
+  logId: 0
 --- !u!1 &186156053074800540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,121 +1197,6 @@ Transform:
   m_Father: {fileID: 2936791679399144138}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &421423293530865829
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2095068567481611493}
-  - component: {fileID: 6653100388219666954}
-  - component: {fileID: 3071911411322593866}
-  m_Layer: 0
-  m_Name: LivingCeilingLight
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!4 &2095068567481611493
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 421423293530865829}
-  m_LocalRotation: {x: -0.00000019949611, y: -0.7071066, z: -0.707107, w: 0.00000019949594}
-  m_LocalPosition: {x: -0.70342004, y: 1.7339597, z: 0.00879}
-  m_LocalScale: {x: 0.49999997, y: 0.5000001, z: 0.4000001}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9147546724325978295}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
---- !u!108 &6653100388219666954
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 421423293530865829}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 1
-  m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.5
-  m_Range: 400
-  m_SpotAngle: 179
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 0.408
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!114 &3071911411322593866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 421423293530865829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 1
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &436567667691567557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1426,6 +1315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 0
   stoppedInteraction: 0
+  id: 0
   outlineComponent: {fileID: 8563586065066236026}
 --- !u!1 &474004668692758586
 GameObject:
@@ -1477,6 +1367,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &476445367735377965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,6 +1681,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 14
   description: 
+  logId: 0
 --- !u!1 &639462383752561046
 GameObject:
   m_ObjectHideFlags: 0
@@ -1840,6 +1732,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 2
   description: 
+  logId: 0
 --- !u!1 &669188026506677338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1922,6 +1815,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &735924654960807109
 GameObject:
   m_ObjectHideFlags: 0
@@ -2337,6 +2231,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &929156804839324171
 GameObject:
   m_ObjectHideFlags: 0
@@ -2617,6 +2512,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 7
   description: 
+  logId: 0
 --- !u!1 &1023164419323287132
 GameObject:
   m_ObjectHideFlags: 0
@@ -3791,6 +3687,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 4
   description: 
+  logId: 0
 --- !u!1 &1332270525456370424
 GameObject:
   m_ObjectHideFlags: 0
@@ -3841,6 +3738,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &1347086076057649875
 GameObject:
   m_ObjectHideFlags: 0
@@ -4024,6 +3922,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 5
   description: 
+  logId: 0
 --- !u!1 &1417149013379970064
 GameObject:
   m_ObjectHideFlags: 0
@@ -4204,6 +4103,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 14
   description: 
+  logId: 0
 --- !u!1 &1512288072957374181
 GameObject:
   m_ObjectHideFlags: 0
@@ -4254,6 +4154,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &1518110699009828436
 GameObject:
   m_ObjectHideFlags: 0
@@ -4433,6 +4334,7 @@ MonoBehaviour:
   isLevel2: 1
   spawnType: 4
   description: 
+  logId: 0
 --- !u!1 &1616577580283285266
 GameObject:
   m_ObjectHideFlags: 0
@@ -4516,6 +4418,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &1654894032593233611
 GameObject:
   m_ObjectHideFlags: 0
@@ -4926,6 +4829,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &1748758740238761314
 GameObject:
   m_ObjectHideFlags: 0
@@ -4976,6 +4880,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 5
   description: 
+  logId: 0
 --- !u!1 &1789069203396578236
 GameObject:
   m_ObjectHideFlags: 0
@@ -5634,6 +5539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 0
   stoppedInteraction: 0
+  id: 0
 --- !u!114 &5684125431675247166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5738,6 +5644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 0
   stoppedInteraction: 0
+  id: 0
 --- !u!114 &8439881016278740341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6266,6 +6173,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &2064115970619944877
 GameObject:
   m_ObjectHideFlags: 0
@@ -6348,6 +6256,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &2130066348106447597
 GameObject:
   m_ObjectHideFlags: 0
@@ -6398,6 +6307,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &2139215401807637519
 GameObject:
   m_ObjectHideFlags: 0
@@ -6480,6 +6390,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 14
   description: 
+  logId: 0
 --- !u!1 &2182244348622070312
 GameObject:
   m_ObjectHideFlags: 0
@@ -6904,6 +6815,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &2336767899981040835
 GameObject:
   m_ObjectHideFlags: 0
@@ -6954,6 +6866,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 4
   description: 
+  logId: 0
 --- !u!1 &2337507606748455611
 GameObject:
   m_ObjectHideFlags: 0
@@ -7588,6 +7501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 0
   stoppedInteraction: 0
+  id: 0
   outlineComponent: {fileID: 764348576525694718}
 --- !u!1 &2515122888873764260
 GameObject:
@@ -8117,6 +8031,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &2714878031944179777
 GameObject:
   m_ObjectHideFlags: 0
@@ -8347,6 +8262,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 2
   description: 
+  logId: 0
 --- !u!1 &2800109975809563057
 GameObject:
   m_ObjectHideFlags: 0
@@ -8398,6 +8314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 0
   stoppedInteraction: 0
+  id: 0
 --- !u!114 &60270732305716376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8501,6 +8418,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 14
   description: 
+  logId: 0
 --- !u!1 &2918765832927113068
 GameObject:
   m_ObjectHideFlags: 0
@@ -8984,6 +8902,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 7
   description: 
+  logId: 0
 --- !u!1 &3160928816771933740
 GameObject:
   m_ObjectHideFlags: 0
@@ -9133,6 +9052,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 7
   description: 
+  logId: 0
 --- !u!1 &3215800178008298142
 GameObject:
   m_ObjectHideFlags: 0
@@ -9266,6 +9186,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &3233441687088563969
 GameObject:
   m_ObjectHideFlags: 0
@@ -9613,6 +9534,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 7
   description: 
+  logId: 0
 --- !u!1 &3335430220571176602
 GameObject:
   m_ObjectHideFlags: 0
@@ -9778,6 +9700,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 10
   description: 
+  logId: 0
 --- !u!1 &3405161489175906319
 GameObject:
   m_ObjectHideFlags: 0
@@ -9861,6 +9784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 0
   stoppedInteraction: 0
+  id: 0
 --- !u!114 &2130202320896056979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9996,6 +9920,7 @@ MonoBehaviour:
   isLevel2: 1
   spawnType: 4
   description: 
+  logId: 0
 --- !u!1 &3435808039829570510
 GameObject:
   m_ObjectHideFlags: 0
@@ -10177,6 +10102,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 6
   description: 
+  logId: 0
 --- !u!1 &3460782468593512729
 GameObject:
   m_ObjectHideFlags: 0
@@ -10227,6 +10153,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 10
   description: 
+  logId: 0
 --- !u!1 &3463535114140865284
 GameObject:
   m_ObjectHideFlags: 0
@@ -10957,142 +10884,6 @@ Transform:
   m_Father: {fileID: 6432719337195861109}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3660414911242473246
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9073871850664479394}
-  - component: {fileID: 4460792353419873759}
-  - component: {fileID: 4745649334098930862}
-  - component: {fileID: 86808806002552298}
-  m_Layer: 0
-  m_Name: EntranceWallLight
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!4 &9073871850664479394
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3660414911242473246}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.25, y: 1.38, z: 2.29}
-  m_LocalScale: {x: 3.333334, y: 3.3333337, z: 3.333334}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7734486060080850667}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: -57.3, z: 0}
---- !u!108 &4460792353419873759
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3660414911242473246}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 1
-  m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 5
-  m_SpotAngle: 179
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 2147483647
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!114 &4745649334098930862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3660414911242473246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 1
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
---- !u!114 &86808806002552298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3660414911242473246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 1
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &3665436721347493301
 GameObject:
   m_ObjectHideFlags: 0
@@ -11143,6 +10934,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 4
   description: 
+  logId: 0
 --- !u!1 &3670015109331751481
 GameObject:
   m_ObjectHideFlags: 0
@@ -11504,6 +11296,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &3709877477085153938
 GameObject:
   m_ObjectHideFlags: 0
@@ -11651,6 +11444,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &3726798080038758387
 GameObject:
   m_ObjectHideFlags: 0
@@ -11939,6 +11733,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &3884572656834441009
 GameObject:
   m_ObjectHideFlags: 0
@@ -12924,6 +12719,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 5
   description: 
+  logId: 0
 --- !u!1 &4214443005928196652
 GameObject:
   m_ObjectHideFlags: 0
@@ -13006,6 +12802,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 9
   description: 
+  logId: 0
 --- !u!1 &4230394140075883910
 GameObject:
   m_ObjectHideFlags: 0
@@ -13067,7 +12864,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6432719337203665363}
-  - {fileID: 9073871850664479394}
   - {fileID: 3696073603089518814}
   m_Father: {fileID: 9128125685081306848}
   m_RootOrder: 0
@@ -13550,6 +13346,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 10
   description: 
+  logId: 0
 --- !u!1 &4414567764653423303
 GameObject:
   m_ObjectHideFlags: 0
@@ -13600,6 +13397,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 4
   description: 
+  logId: 0
 --- !u!1 &4417879788848532353
 GameObject:
   m_ObjectHideFlags: 0
@@ -13734,6 +13532,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &4438054062387592939
 GameObject:
   m_ObjectHideFlags: 0
@@ -13978,7 +13777,6 @@ Transform:
   - {fileID: 6432719337256835824}
   - {fileID: 6432719337851533929}
   - {fileID: 6432719336817100648}
-  - {fileID: 6432719337753704266}
   m_Father: {fileID: 9128125685081306848}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14162,6 +13960,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &4602254417598677310
 GameObject:
   m_ObjectHideFlags: 0
@@ -14486,6 +14285,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &4697620043822896043
 GameObject:
   m_ObjectHideFlags: 0
@@ -14633,6 +14433,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 4
   description: 
+  logId: 0
 --- !u!1 &4760828605028779305
 GameObject:
   m_ObjectHideFlags: 0
@@ -15223,6 +15024,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 10
   description: 
+  logId: 0
 --- !u!1 &4909359691457558702
 GameObject:
   m_ObjectHideFlags: 0
@@ -15305,6 +15107,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &4917093988460234221
 GameObject:
   m_ObjectHideFlags: 0
@@ -15355,6 +15158,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 7
   description: 
+  logId: 0
 --- !u!1 &4917254970575752928
 GameObject:
   m_ObjectHideFlags: 0
@@ -15488,6 +15292,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 7
   description: 
+  logId: 0
 --- !u!1 &4929940346547248323
 GameObject:
   m_ObjectHideFlags: 0
@@ -15538,6 +15343,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 4
   description: 
+  logId: 0
 --- !u!1 &4935740466973375894
 GameObject:
   m_ObjectHideFlags: 0
@@ -15799,6 +15605,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 9
   description: 
+  logId: 0
 --- !u!1 &4998384059447189947
 GameObject:
   m_ObjectHideFlags: 0
@@ -16160,6 +15967,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 9
   description: 
+  logId: 0
 --- !u!1 &5106753402431755387
 GameObject:
   m_ObjectHideFlags: 0
@@ -16597,6 +16405,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &5210920323494223212
 GameObject:
   m_ObjectHideFlags: 0
@@ -17254,6 +17063,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 4
   description: 
+  logId: 0
 --- !u!1 &5431879907687970144
 GameObject:
   m_ObjectHideFlags: 0
@@ -17525,6 +17335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 0
   stoppedInteraction: 0
+  id: 0
 --- !u!65 &6296997032374754553
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17723,6 +17534,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 6
   description: 
+  logId: 0
 --- !u!1 &5547490785925150799
 GameObject:
   m_ObjectHideFlags: 0
@@ -17837,6 +17649,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 7
   description: 
+  logId: 0
 --- !u!1 &5671323446175828834
 GameObject:
   m_ObjectHideFlags: 0
@@ -18021,6 +17834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 0
   stoppedInteraction: 0
+  id: 0
   outlineComponent: {fileID: 8276629662279103137}
 --- !u!1 &5677109447767585796
 GameObject:
@@ -18169,6 +17983,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &5755687381827420546
 GameObject:
   m_ObjectHideFlags: 0
@@ -18219,6 +18034,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 5
   description: 
+  logId: 0
 --- !u!1 &5759431708848953916
 GameObject:
   m_ObjectHideFlags: 0
@@ -18398,6 +18214,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &5811985526917474511
 GameObject:
   m_ObjectHideFlags: 0
@@ -18448,6 +18265,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 7
   description: 
+  logId: 0
 --- !u!1 &5829524335671240764
 GameObject:
   m_ObjectHideFlags: 0
@@ -18594,7 +18412,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7734486060080850667}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!108 &1389441393755963110
 Light:
@@ -18760,6 +18578,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 6
   description: 
+  logId: 0
 --- !u!1 &5895624720304817219
 GameObject:
   m_ObjectHideFlags: 0
@@ -19341,6 +19160,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &6073426175089217886
 GameObject:
   m_ObjectHideFlags: 0
@@ -19546,6 +19366,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &6155796138004125471
 GameObject:
   m_ObjectHideFlags: 0
@@ -19954,6 +19775,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 7
   description: 
+  logId: 0
 --- !u!1 &6181619118395042098
 GameObject:
   m_ObjectHideFlags: 0
@@ -20542,6 +20364,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 11
   description: 
+  logId: 0
 --- !u!1 &6289638277051975268
 GameObject:
   m_ObjectHideFlags: 0
@@ -20592,6 +20415,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 7
   description: 
+  logId: 0
 --- !u!1 &6299624109911092022
 GameObject:
   m_ObjectHideFlags: 0
@@ -21216,6 +21040,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 6
   description: 
+  logId: 0
 --- !u!1 &6420403718070554706
 GameObject:
   m_ObjectHideFlags: 0
@@ -22225,7 +22050,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 640
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -23047,7 +22872,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -24496,121 +24321,6 @@ Transform:
   m_Father: {fileID: 3839612939044241228}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
---- !u!1 &6432719337753704269
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6432719337753704266}
-  - component: {fileID: 6432719337753704267}
-  - component: {fileID: 2496266977146107510}
-  m_Layer: 0
-  m_Name: Hallway Light 4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6432719337753704266
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6432719337753704269}
-  m_LocalRotation: {x: 0.5000001, y: -0.49999994, z: -0.49999988, w: -0.5000002}
-  m_LocalPosition: {x: -0.32999167, y: 2.1150022, z: 7.92401}
-  m_LocalScale: {x: 2.22543, y: 2.2254298, z: 2.2254293}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8398514516363143984}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!108 &6432719337753704267
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6432719337753704269}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 2
-  m_Shape: 0
-  m_Color: {r: 0.9622642, g: 0.6007429, b: 0.12255252, a: 1}
-  m_Intensity: 2
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 128
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!114 &2496266977146107510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6432719337753704269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 1
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &6432719337764287499
 GameObject:
   m_ObjectHideFlags: 0
@@ -26869,6 +26579,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 7
   description: 
+  logId: 0
 --- !u!1 &6554449723066386999
 GameObject:
   m_ObjectHideFlags: 0
@@ -27164,6 +26875,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 4
   description: 
+  logId: 0
 --- !u!1 &6631181702745251223
 GameObject:
   m_ObjectHideFlags: 0
@@ -27214,6 +26926,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 6
   description: 
+  logId: 0
 --- !u!1 &6633641555691766545
 GameObject:
   m_ObjectHideFlags: 0
@@ -27471,6 +27184,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &6716895516467501783
 GameObject:
   m_ObjectHideFlags: 0
@@ -27738,6 +27452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 0
   stoppedInteraction: 0
+  id: 0
 --- !u!114 &5104120681274031046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28264,6 +27979,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &6898336294671474547
 GameObject:
   m_ObjectHideFlags: 0
@@ -28346,6 +28062,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &6966094568848446239
 GameObject:
   m_ObjectHideFlags: 0
@@ -28674,6 +28391,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &7027923987812417620
 GameObject:
   m_ObjectHideFlags: 0
@@ -29398,6 +29116,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 7
   description: 
+  logId: 0
 --- !u!1 &7251137019332825854
 GameObject:
   m_ObjectHideFlags: 0
@@ -30273,6 +29992,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &7434257546549692282
 GameObject:
   m_ObjectHideFlags: 0
@@ -30630,6 +30350,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &7502342686687033936
 GameObject:
   m_ObjectHideFlags: 0
@@ -30893,6 +30614,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 6
   description: 
+  logId: 0
 --- !u!1 &7587116631218911215
 GameObject:
   m_ObjectHideFlags: 0
@@ -31816,6 +31538,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &7874004912727004809
 GameObject:
   m_ObjectHideFlags: 0
@@ -32165,6 +31888,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &7941646276997459356
 GameObject:
   m_ObjectHideFlags: 0
@@ -32215,6 +31939,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 4
   description: 
+  logId: 0
 --- !u!1 &7949703466160879075
 GameObject:
   m_ObjectHideFlags: 0
@@ -32298,6 +32023,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &7984063171549197143
 GameObject:
   m_ObjectHideFlags: 0
@@ -32348,6 +32074,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 6
   description: 
+  logId: 0
 --- !u!1 &8104332118853833583
 GameObject:
   m_ObjectHideFlags: 0
@@ -32434,6 +32161,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 4
   description: 
+  logId: 0
 --- !u!1 &8115093113787569191
 GameObject:
   m_ObjectHideFlags: 0
@@ -32561,7 +32289,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6432719336817882493}
-  - {fileID: 2095068567481611493}
   - {fileID: 7662844770901705779}
   m_Father: {fileID: 9128125685081306848}
   m_RootOrder: 2
@@ -32616,6 +32343,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &8188101901627110675
 GameObject:
   m_ObjectHideFlags: 0
@@ -32666,6 +32394,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 14
   description: 
+  logId: 0
 --- !u!1 &8210479994767568951
 GameObject:
   m_ObjectHideFlags: 0
@@ -33138,6 +32867,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 7
   description: 
+  logId: 0
 --- !u!1 &8349979199397634887
 GameObject:
   m_ObjectHideFlags: 0
@@ -33936,6 +33666,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &8591691132580773716
 GameObject:
   m_ObjectHideFlags: 0
@@ -34266,6 +33997,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &8651503736123672175
 GameObject:
   m_ObjectHideFlags: 0
@@ -34529,6 +34261,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 7
   description: 
+  logId: 0
 --- !u!1 &8743413405105149997
 GameObject:
   m_ObjectHideFlags: 0
@@ -34857,6 +34590,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 5
   description: 
+  logId: 0
 --- !u!1 &8832583846943141197
 GameObject:
   m_ObjectHideFlags: 0
@@ -34907,6 +34641,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &8859189927387756477
 GameObject:
   m_ObjectHideFlags: 0
@@ -35054,6 +34789,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 2
   description: 
+  logId: 0
 --- !u!1 &8876478258041197459
 GameObject:
   m_ObjectHideFlags: 0
@@ -35515,6 +35251,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 0
   description: 
+  logId: 0
 --- !u!1 &8974626272092037091
 GameObject:
   m_ObjectHideFlags: 0
@@ -35565,6 +35302,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 3
   description: 
+  logId: 0
 --- !u!1 &9017524908657134032
 GameObject:
   m_ObjectHideFlags: 0
@@ -35726,7 +35464,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9147546724325978295}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &7306584911440057039
 Light:
@@ -35959,6 +35697,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 11
   description: 
+  logId: 0
 --- !u!1 &9076714482513184099
 GameObject:
   m_ObjectHideFlags: 0
@@ -36009,6 +35748,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 6
   description: 
+  logId: 0
 --- !u!1 &9093985673104989611
 GameObject:
   m_ObjectHideFlags: 0
@@ -36124,6 +35864,7 @@ MonoBehaviour:
   isLevel2: 1
   spawnType: 2
   description: 
+  logId: 0
 --- !u!1 &9175790456274381095
 GameObject:
   m_ObjectHideFlags: 0
@@ -36355,6 +36096,7 @@ MonoBehaviour:
   isLevel2: 0
   spawnType: 4
   description: 
+  logId: 0
 --- !u!1 &9220913447897543790
 GameObject:
   m_ObjectHideFlags: 0
@@ -37626,6 +37368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 0
   stoppedInteraction: 0
+  id: 0
 --- !u!1 &2290287756970844885 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7941002527283874134, guid: c59bc9e3675e30648875af7fa55901ca, type: 3}
@@ -37698,6 +37441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 0
   stoppedInteraction: 0
+  id: 0
 --- !u!1 &5293731970346956648 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5148817236446094103, guid: c59bc9e3675e30648875af7fa55901ca, type: 3}
@@ -37788,6 +37532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 0
   stoppedInteraction: 0
+  id: 0
 --- !u!1 &7491172006269813876 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7635472656560525323, guid: c59bc9e3675e30648875af7fa55901ca, type: 3}
@@ -37839,6 +37584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteractable: 0
   stoppedInteraction: 0
+  id: 0
 --- !u!114 &7934496949424212458
 MonoBehaviour:
   m_ObjectHideFlags: 0

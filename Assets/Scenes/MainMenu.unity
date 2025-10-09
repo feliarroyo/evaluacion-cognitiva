@@ -546,7 +546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2951429346694027916, guid: 02f7dc8ad9e04f340ab9b84af4b304df, type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2951429346694027917, guid: 02f7dc8ad9e04f340ab9b84af4b304df, type: 3}
       propertyPath: loadingPanel
@@ -636,8 +636,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lv1Icon
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3149908256286207384, guid: 02f7dc8ad9e04f340ab9b84af4b304df, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02f7dc8ad9e04f340ab9b84af4b304df, type: 3}
 --- !u!224 &268156564 stripped
 RectTransform:
@@ -1232,10 +1231,6 @@ PrefabInstance:
       propertyPath: startingPhase
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 2951429346694027916, guid: 02f7dc8ad9e04f340ab9b84af4b304df, type: 3}
-      propertyPath: m_Interactable
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2951429346694027917, guid: 02f7dc8ad9e04f340ab9b84af4b304df, type: 3}
       propertyPath: loadingPanel
       value: 
@@ -1294,7 +1289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3149908256286207384, guid: 02f7dc8ad9e04f340ab9b84af4b304df, type: 3}
       propertyPath: unlockStatus
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3256020470514993979, guid: 02f7dc8ad9e04f340ab9b84af4b304df, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2789,25 +2784,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091606571}
   m_CullTransparentMesh: 1
---- !u!1 &1117289936 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4765490736207056252, guid: 02f7dc8ad9e04f340ab9b84af4b304df, type: 3}
-  m_PrefabInstance: {fileID: 268156563}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1117289943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1117289936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20a64dccb1c60f44a818c447ddf9dde6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unlockStatus: 2
-  lockStatus: 3
 --- !u!1 &1118395653
 GameObject:
   m_ObjectHideFlags: 0
