@@ -86,7 +86,7 @@ public class Logging : MonoBehaviour
         public override string ToString()
         {
             StringBuilder sb = new();
-            sb.Append(timeStamp).Append(gamePhase).Append(";").Append(movementStatus).Append(";").Append(NoSpaceVector2(movementPosition)).Append(";").Append(NoSpaceVector2(movementDirection)).Append(";").Append(cameraStatus).Append(";").Append(NoSpaceVector2(cameraOrientation)).Append(";").Append(NoSpaceVector2(cameraMovementDirection)).Append(";{");
+            sb.Append(timeStamp).Append(";").Append(gamePhase).Append(";").Append(movementStatus).Append(";").Append(NoSpaceVector2(movementPosition)).Append(";").Append(NoSpaceVector2(movementDirection)).Append(";").Append(cameraStatus).Append(";").Append(NoSpaceVector2(cameraOrientation)).Append(";").Append(NoSpaceVector2(cameraMovementDirection)).Append(";{");
             if (seenItems != null && seenItems.Count > 0)
             {
                 foreach (int item in seenItems.Keys)
