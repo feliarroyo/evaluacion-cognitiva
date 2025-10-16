@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 /// <summary>
 /// This class represents the behavior of interactive elements within the environment, such as items or doors.
 /// </summary>
-public class Interactable : MonoBehaviour
+public class Interactable : TouchControl
 {
     public IElementBehaviour behaviour;
     public static bool allowAllInteractions = true; // used to disable all interactions in certain cases.
@@ -17,6 +17,7 @@ public class Interactable : MonoBehaviour
     public bool stoppedInteraction = false; // used to stop interaction completely
     public static List<Interactable> interactablesInScene = new();
     public int id;
+    private const float tapTime = 0.3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -113,16 +114,27 @@ public class Interactable : MonoBehaviour
         }
         return false;
     }
-    public void OnMouseDown()
+    void OnMouseDown()
     {
         if (OverVirtualJoystick())
         {
             return;
         }
-
-        if (isInteractable && allowAllInteractions)
-            behaviour.ClickBehaviour(gameObject);
+        StartCoroutine(OnTouchDown());
     }
+
+    /// <summary>
+    /// If the item if being held and the time pressing it was short enough, store the item.
+    /// </summary>
+    public override void OnTouchUp()
+    {
+        if (Time.time - heldTime < tapTime && isInteractable && allowAllInteractions)
+        {
+            behaviour.ClickBehaviour(gameObject);
+        }
+    }
+
+
     public string GetName()
     {
         if (GetComponent<OpenDoor>() != null)

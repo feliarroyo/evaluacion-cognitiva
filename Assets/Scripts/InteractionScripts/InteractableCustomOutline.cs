@@ -18,12 +18,6 @@ public class InteractableCustomOutline : Interactable
         behaviour = GetComponent<IElementBehaviour>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /// <summary>
     /// This function defines whether the interactable element should be surrounded by an outline or not.
     /// </summary>

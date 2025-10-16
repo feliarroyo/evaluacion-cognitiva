@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public bool forceStop = false;
     public static Vector3 currentPosition;
     Vector3 lastDirection;
+    private readonly Vector3 gizmo = new(0.74f, 2f, 0.74f);
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.yellow;
 
         // Draw a sphere to indicate spawn points
-        Gizmos.DrawWireCube(orientation.position, new(0.74f, 2f, 0.74f));
+        Gizmos.DrawWireCube(orientation.position, gizmo);
     }
 
     private void FixedUpdate()
@@ -116,11 +117,17 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        if (flatVel.magnitude > moveSpeed)
+        float flatVelX = rb.velocity.x;
+        float flatVelZ = rb.velocity.z;
+        float flatMag = Mathf.Sqrt(flatVelX * flatVelX + flatVelZ * flatVelZ);
+
+        if (flatMag > moveSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            float normX = flatVelX / flatMag;
+            float normZ = flatVelZ / flatMag;
+            float limitedX = normX * moveSpeed;
+            float limitedZ = normZ * moveSpeed;
+            rb.velocity = new Vector3(limitedX, rb.velocity.y, limitedZ);
         }
     }
 }

@@ -14,7 +14,8 @@ public class ItemSpawning : MonoBehaviour
     private readonly List<ItemSpawn> largeSearchSpawns = new();
     public GameConfig gc;
     readonly Dictionary<int, List<int>> spawnsEnabledInHall =
-    new Dictionary<int, List<int>>{
+    new()
+    {
         {0, new() {}},
         {1, new() {2}},
         {2, new() {1, 3}},

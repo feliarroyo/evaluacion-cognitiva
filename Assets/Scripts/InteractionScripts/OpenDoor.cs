@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = System.Object;
 
+[RequireComponent(typeof(Collider))]
+
 /// <summary>
 /// This behaviour is used for the opening of doors. It rotates the interactable gameObject on click.
 /// </summary>
@@ -18,31 +20,25 @@ public class OpenDoor : MonoBehaviour, IElementBehaviour
     private Quaternion openRotation;
     const float threshold = 0.01f; // Tolerance for stopping condition
     public bool isMoving = false;
-    public static List<OpenDoor> allDoors = new List<OpenDoor>();
+    public static List<OpenDoor> allDoors = new();
     public char rotationAxis = 'y';
     public Quaternion testRotation;
     public string id;
+    private Collider col;
+    private Interactable interactable;
 
     void Start()
     {
-        currentRotation = Quaternion.Euler(gameObject.transform.eulerAngles);
-        switch (rotationAxis)
+        col = GetComponent<Collider>();
+        interactable = GetComponent<Interactable>();
+        currentRotation = Quaternion.Euler(gameObject.transform.localEulerAngles);
+        openRotation = rotationAxis switch
         {
-            case 'x':
-                openRotation = Quaternion.Euler(currentRotation.x + openAngle, currentRotation.y, currentRotation.z);
-                break;
-            case 'y':
-                openRotation = Quaternion.Euler(currentRotation.x, currentRotation.y + openAngle, currentRotation.z);
-                break;
-            case 'z':
-                openRotation = Quaternion.Euler(currentRotation.x, currentRotation.y, currentRotation.z + openAngle);
-                break;
-            default:
-                openRotation = Quaternion.Euler(currentRotation.x, currentRotation.y + openAngle, currentRotation.z);
-                break;
-
-        }
-
+            'x' => Quaternion.Euler(currentRotation.x + openAngle, currentRotation.y, currentRotation.z),
+            'y' => Quaternion.Euler(currentRotation.x, currentRotation.y + openAngle, currentRotation.z),
+            'z' => Quaternion.Euler(currentRotation.x, currentRotation.y, currentRotation.z + openAngle),
+            _ => Quaternion.Euler(currentRotation.x, currentRotation.y + openAngle, currentRotation.z),
+        };
         allDoors.Add(this);
     }
 
@@ -61,36 +57,27 @@ public class OpenDoor : MonoBehaviour, IElementBehaviour
 
     void Update()
     {
-        switch (rotationAxis)
+        openRotation = rotationAxis switch
         {
-            case 'x':
-                openRotation = Quaternion.Euler(currentRotation.x + openAngle, currentRotation.y, currentRotation.z);
-                break;
-            case 'y':
-                openRotation = Quaternion.Euler(currentRotation.x, currentRotation.y + openAngle, currentRotation.z);
-                break;
-            case 'z':
-                openRotation = Quaternion.Euler(currentRotation.x, currentRotation.y, currentRotation.z + openAngle);
-                break;
-            default:
-                openRotation = Quaternion.Euler(currentRotation.x, currentRotation.y + openAngle, currentRotation.z);
-                break;
-
-        }
-
+            'x' => Quaternion.Euler(currentRotation.x + openAngle, currentRotation.y, currentRotation.z),
+            'y' => Quaternion.Euler(currentRotation.x, currentRotation.y + openAngle, currentRotation.z),
+            'z' => Quaternion.Euler(currentRotation.x, currentRotation.y, currentRotation.z + openAngle),
+            _ => Quaternion.Euler(currentRotation.x, currentRotation.y + openAngle, currentRotation.z),
+        };
+        
         Quaternion targetRotation = isOpen ? openRotation : currentRotation;
         float currentAngle = Quaternion.Angle(transform.rotation, targetRotation);
         if (currentAngle > threshold)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * speed);
             isMoving = currentAngle > threshold + 10;
         }
         else
         {
-            transform.rotation = targetRotation; // Ensure it snaps to the exact target
+            transform.localRotation = targetRotation; // Ensure it snaps to the exact target
             isMoving = false;
             if (!isOpen){
-                GetComponent<Collider>().enabled = true;
+                col.enabled = true;
             }
         }
     }
@@ -109,7 +96,7 @@ public class OpenDoor : MonoBehaviour, IElementBehaviour
         isOpen = !isOpen;
         if (isOpen){
             if (GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Search)
-                GetComponent<Collider>().enabled = false;
+                col.enabled = false;
             Logging.Log(Logging.EventType.ElementOpen, new[] {(Object) id});
         }
         else
@@ -120,8 +107,8 @@ public class OpenDoor : MonoBehaviour, IElementBehaviour
         }
         if (!canBeClosed && isOpen)
         {
-            GetComponent<Interactable>().EnableInteraction(false);
-            GetComponent<Interactable>().stoppedInteraction = true;
+            interactable.EnableInteraction(false);
+            interactable.stoppedInteraction = true;
         }
     }
 }

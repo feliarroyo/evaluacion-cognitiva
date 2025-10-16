@@ -11,16 +11,17 @@ public class CameraControl : MonoBehaviour
     private float YMove;
     private float XRotation;
     private Vector2 lastMovement = new(0, 0);
+    private float lastLogTime;
     [SerializeField] private Transform PlayerBody;
     public Vector2 LockAxis;
     public float sensitivity = 10f;
     private bool isMoving = false;
+    private bool checkingStillness = false;
+
     void Start()
     {
-
+        lastLogTime = Time.time;
     }
-
-
     void Update()
     {
         XMove = LockAxis.x * sensitivity * Time.deltaTime;
@@ -42,7 +43,6 @@ public class CameraControl : MonoBehaviour
         Vector2 currentCamera = new(Mathf.DeltaAngle(0, PlayerBody.rotation.eulerAngles.y), -Mathf.DeltaAngle(0, transform.rotation.eulerAngles.x));
         Vector2 rawMovement = new(XMove, YMove);
         Vector2 currentMovement = rawMovement.normalized;
-        Debug.Log("currentMovement is " + currentMovement);
         if (!isMoving)
         {
 
@@ -53,15 +53,16 @@ public class CameraControl : MonoBehaviour
         else
         {
             float angle = Vector2.Angle(lastMovement, currentMovement);
-            if (LockAxis.x == 0 && LockAxis.y == 0)
+            if (!checkingStillness && LockAxis.x == 0 && LockAxis.y == 0)
             {
-
+                checkingStillness = true;
                 StartCoroutine(CheckIfStill(currentCamera));
             }
-            else if (angle > 30f)
+            else if (angle > 30f && Time.time - lastLogTime > 0.2f) // Only noticeable angles and within a reasonable time frame are considered changes
             {
                 Logging.Log(Logging.EventType.PlayerRotationChange, new[] { (Object)currentCamera, currentMovement });
                 lastMovement = currentMovement;
+                lastLogTime = Time.time;
             }
         }
 
@@ -74,6 +75,7 @@ public class CameraControl : MonoBehaviour
         {
             if (LockAxis.x != 0 || LockAxis.y != 0)
             {
+                checkingStillness = false;
                 yield break;
             }
             else
@@ -84,30 +86,17 @@ public class CameraControl : MonoBehaviour
                 {
                     Logging.Log(Logging.EventType.PlayerRotationEnd, new[] { (Object)currentCamera });
                     isMoving = false;
+                    checkingStillness = false;
                     yield break; // exit coroutine
                 }
             }
         }
-    }
-
-    public void SetSensitivity(float value)
-    {
-        sensitivity = value;
-    }
-
-    public float GetXRotation()
-    {
-        return XRotation;
-    }
-
-    public Vector2 GetRotationVector()
-    {
-        return new(XRotation, PlayerBody.rotation.y);
+        checkingStillness = false;
     }
 
     // --- ROTATION COROUTINES USING SENSITIVITY ---
 
-    public IEnumerator RotateX(float targetX, float speed = 5f, float tolerance = 0.5f)
+    public IEnumerator CameraMovementY(float targetX, float speed = 3f, float tolerance = 0.5f)
     {
         while (Mathf.Abs(XRotation - targetX) > tolerance)
         {
@@ -117,7 +106,7 @@ public class CameraControl : MonoBehaviour
         XRotation = targetX;
     }
 
-    public IEnumerator RotateY(float targetY, float speed = 5f, float tolerance = 0.5f)
+    public IEnumerator CameraMovementX(float targetY, float speed = 3f, float tolerance = 0.5f)
     {
         while (Mathf.Abs(Mathf.DeltaAngle(PlayerBody.eulerAngles.y, targetY)) > tolerance)
         {
@@ -128,7 +117,7 @@ public class CameraControl : MonoBehaviour
         PlayerBody.rotation = Quaternion.Euler(0f, targetY, 0f);
     }
 
-    public IEnumerator RotateXY(float targetY, float targetX, float speed = 5f, float tolerance = 0.5f)
+    public IEnumerator CameraMovement(float targetY, float targetX, float speed = 3f, float tolerance = 0.5f)
     {
         while (Mathf.Abs(XRotation - targetX) > tolerance ||
                Mathf.Abs(Mathf.DeltaAngle(PlayerBody.eulerAngles.y, targetY)) > tolerance)

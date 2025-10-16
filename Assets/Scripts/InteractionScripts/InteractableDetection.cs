@@ -8,14 +8,7 @@ public class InteractableDetection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<SphereCollider>();
         enableWhenEntering = new();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     /// <summary>
@@ -34,22 +27,8 @@ public class InteractableDetection : MonoBehaviour
             if (GameStatus.currentPhase != GameStatus.GamePhase.Tutorial_BeforeSearch && GameStatus.currentPhase != GameStatus.GamePhase.BeforeSearch)
             {
                 other.gameObject.GetComponent<Interactable>().EnableInteraction(true);
-                if (other.GetComponent<HeldItem>() != null)
-                {
-                    HeldItem hi = other.GetComponent<HeldItem>();
-                    // if (Logging.itemsSeen.Contains(hi))
-                    // {
-                    //     if (Logging.currentLog.seenItems[hi.itemName].isInteractable == false)
-                    //     {
-                    //         Logging.Log(Logging.EventType.SeenObjectInteractivityChange, new[] {
-                    //             hi.itemName
-                    //         });
-                    //     }
-                    // }
-                }
             }
             else enableWhenEntering.Add(other.gameObject.GetComponent<Interactable>());
-            //Debug.Log("TRIGGER ENTERING... " + gameObject);
         }
     }
 

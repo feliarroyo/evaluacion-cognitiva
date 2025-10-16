@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using TMPro;
 using System.Globalization;
+using System.Text;
 
 public class Logging : MonoBehaviour
 {
@@ -84,37 +85,29 @@ public class Logging : MonoBehaviour
         }
         public override string ToString()
         {
-            string result = timeStamp
-            + ";" + gamePhase
-            + ";" + movementStatus
-            + ";" + NoSpaceVector2(movementPosition)
-            + ";" + NoSpaceVector2(movementDirection)
-            + ";" + cameraStatus
-            + ";" + NoSpaceVector2(cameraOrientation)
-            + ";" + NoSpaceVector2(cameraMovementDirection)
-            + ";{";
+            StringBuilder sb = new();
+            sb.Append(timeStamp).Append(gamePhase).Append(";").Append(movementStatus).Append(";").Append(NoSpaceVector2(movementPosition)).Append(";").Append(NoSpaceVector2(movementDirection)).Append(";").Append(cameraStatus).Append(";").Append(NoSpaceVector2(cameraOrientation)).Append(";").Append(NoSpaceVector2(cameraMovementDirection)).Append(";{");
             if (seenItems != null && seenItems.Count > 0)
             {
                 foreach (int item in seenItems.Keys)
                 {
-                    result += seenItems[item].ToString() + ",";
+                    sb.Append(seenItems[item].ToString()).Append(",");
                 }
-                result = result.Substring(0, result.Length - 2) + "}";
+                sb.Length--; // Remove last comma
+                sb.Append("}");
             }
-            else result += "-}";
-            result += ";" + heldItem
-            + ";" + heldItemStatus
-            + ";{";
+            else sb.Append("-}");
+            sb.Append(";").Append(heldItem).Append(";").Append(heldItemStatus).Append(";{");
             if (seenFurniture != null && seenFurniture.Count > 0)
             {
                 foreach (int furniture in seenFurniture.Keys)
                 {
-                    result += seenFurniture[furniture].ToString() + ",";
+                    sb.Append(seenFurniture[furniture].ToString()).Append(",");
                 }
-                result = result.Substring(0, result.Length - 2);
+                sb.Length--; // Remove last comma
             }
-            else result += "-";
-            return result + "}\n";
+            else sb.Append("-");
+            return sb.Append("}\n").ToString();
         }
 
         public static (string logContent, float intermediateFMTime, string memObjectsSerialized, string searchObjectsSerialized, string searchSelectionTimesSerialized, string searchChoiceIntervalsSerialized) GetLog(string fileName = "log.txt")
@@ -131,10 +124,10 @@ public class Logging : MonoBehaviour
                 + "ID;INTERACTUABLE;POSICION" + "\n"
                 + extraFurnitureInfo + "\n"
                 + "FECHA;TIEMPO;FASE;ESTADO MOVIMIENTO;POSICION;DIRECCIÓN MOVIMIENTO;ESTADO CAMARA;ORIENTACION CAMARA;INTENSIDAD MOV. DE CAMARA;OBJETOS VISIBLES;OBJETO SOSTENIDO;ESTADO OBJ SOSTENIDO;INTERACTUABLES VISIBLES\n"
-                + logList;
+                + logList.ToString();
             // Write file
             File.WriteAllText(path, content);
-            logList = "";
+            logList.Clear();
             extraItemInfo = "";
             extraSpawnInfo = "";
             extraFurnitureInfo = "";
@@ -196,7 +189,7 @@ public class Logging : MonoBehaviour
 
     public static LogEvent currentLog = new();
 
-    public static string logList = "";
+    public static StringBuilder logList;
     public static string extraItemInfo = "";
     public static string extraFurnitureInfo = "";
     public static string extraSpawnInfo = "";
@@ -230,7 +223,7 @@ public class Logging : MonoBehaviour
         currentLog.SetTimeStamp();
         itemsSeen = new();
         furnitureSeen = new();
-        logList = currentLog.ToString();
+        logList = new(currentLog.ToString());
         //GameObject.Find("Status").GetComponent<TextMeshProUGUI>().text = currentLog.ToString();
         if (!DoNotLog()) // no refreshing in Tutorial/Practice
             InvokeRepeating(nameof(CheckVisibility), 0f, 0.5f);
@@ -399,26 +392,10 @@ public class Logging : MonoBehaviour
                 currentLog.seenItems[(int)parameters[0]].isInteractable = !currentLog.seenItems[(int)parameters[0]].isInteractable;
                 break;
             case EventType.ObjectUnseen:
-                // currentLog.seenItems.Remove((string)parameters[0]);
-                break;
             case EventType.ElementSeen:
-                // currentLog.seenFurniture.Add((string)parameters[0], new LogEvent.SeenFurniture
-                // {
-                //     objectName = (string)parameters[0],
-                //     isInteractable = (bool)parameters[1],
-                //     isOpen = (bool)parameters[2],
-                //     distance = (float)parameters[3],
-                //     screenPosition = (Vector2)parameters[4]
-                // });
-                break;
             case EventType.ElementUnseen:
-                // currentLog.seenFurniture.Remove((string)parameters[0]);
-                break;
             case EventType.ElementOpen:
-                // currentLog.seenFurniture[(string)parameters[0]].isOpen = true;
-                break;
             case EventType.ElementClose:
-                // currentLog.seenFurniture[(string)parameters[0]].isOpen = false;
                 break;
         }
         currentLog.SetTimeStamp();
@@ -426,7 +403,7 @@ public class Logging : MonoBehaviour
         RefreshStatus();
         Debug.Log(newLog.ToString());
         //GameObject.Find("Status").GetComponent<TextMeshProUGUI>().text = newLog.ToString();
-        logList += newLog.ToString();
+        logList.Append(newLog.ToString());
     }
 
     public static void ItemInfoLog(int id, string itemName, bool isEnvironmentItem, int spawnId, float spawnPositionX, float spawnPositionY, float spawnPositionZ)

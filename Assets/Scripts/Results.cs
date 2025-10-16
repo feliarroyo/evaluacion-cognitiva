@@ -28,19 +28,6 @@ public class Results : MonoBehaviour
 
         // Espera un frame para asegurar la carga del email
         StartCoroutine(WaitForEmailLoad());
-
-        // List<string> keyItemsNames = new List<string>();
-        // List<string> foundItemsNames = new List<string>();
-
-        // foreach (var item in GameStatus.keyItems){
-        //     keyItemsNames.Add(item.itemName);
-        // }
-        // foreach (var item in GameStatus.savedItems){
-        //     foundItemsNames.Add(item.itemName);
-        // }
-        // GameStatus.keyItems.Clear();
-        // Debug.Log("TIMER MEM " + GameStatus.timeUsedMemorizing + "search " + GameStatus.timeUsedSearching);
-        // SaveResults(keyItemsNames, foundItemsNames);
     }
 
     IEnumerator WaitForEmailLoad()
@@ -54,20 +41,19 @@ public class Results : MonoBehaviour
             yield break;
         }
 
-        List<string> keyItemsNames = new List<string>();
-        List<string> decoyItemsNames = new List<string>();
-        List<string> foundItemsNames = new List<string>();
+        List<string> keyItemsNames = new();
+        List<string> decoyItemsNames = new();
+        List<string> foundItemsNames = new();
         
-
-        foreach (var item in GameStatus.keyItems)
+        foreach (HeldItem item in GameStatus.keyItems)
         {
             keyItemsNames.Add(item.itemName);
         }
-        foreach (var item in GameStatus.savedItems)
+        foreach (HeldItem item in GameStatus.savedItems)
         {
             foundItemsNames.Add(item.itemName);
         }
-        foreach (var item in GameStatus.decoyItems)
+        foreach (HeldItem item in GameStatus.decoyItems)
         {
             decoyItemsNames.Add(item.itemName);
         }
@@ -135,7 +121,7 @@ public class Results : MonoBehaviour
 
             string newRecordId = nextRecordId.ToString("D6");
 
-            ResultData newResult = new ResultData
+            ResultData newResult = new()
             {
                 id = nextRecordId,
                 date = System.DateTime.Now.ToString("yyyy-MM-dd"),
@@ -175,7 +161,7 @@ public class Results : MonoBehaviour
             string searchSelectionTimesSerialized = logResult.searchSelectionTimesSerialized;
             string searchChoiceIntervalsSerialized = logResult.searchChoiceIntervalsSerialized;
 
-            Dictionary<string, object> resultData = new Dictionary<string, object>
+            Dictionary<string, object> resultData = new()
             {
                 { "id", newResult.id },
                 { "date", newResult.date },
@@ -231,13 +217,4 @@ public class Results : MonoBehaviour
         });
     });
     }
-
-    // private async System.Threading.Tasks.Task<string> GetNextRecordId()
-    // {
-    //     CollectionReference resultsRef = db.Collection("results");
-    //     QuerySnapshot snapshot = await resultsRef.GetSnapshotAsync();
-    //     //int nextId = snapshot.Count + 1;
-    //     //return "record_" + nextId.ToString("D3");
-    // //}
-
 }

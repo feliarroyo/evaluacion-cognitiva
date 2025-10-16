@@ -57,10 +57,5 @@ public class ItemTester : MonoBehaviour
         GameObject go = Instantiate(item, spawn.transform);
         return go;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 }

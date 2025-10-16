@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
+public class HeldItem : TouchControl, IElementBehaviour, IEquatable
 {
     public string itemName; // Used to identify item in results.
     public bool isBeingHeld = false; // an item being currently held shouldn't be interactable.
@@ -21,7 +21,6 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
     public bool isLargeItem; // large items cannot spawn in small spawn points.
     public static HeldItem currentlyHeldItem = null;
     private const float tapTime = 0.3f; // time within a tap is considered as a click for storing items.
-    private float heldTime = 0.0f; // time holding a press, used to determine if there's tapping or holding.
     public Sprite uiIcon;
     public Sprite uiIconNoBG;
     private LayerMask groundLayer;
@@ -33,6 +32,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
     public static List<HeldItem> itemsInScene = new();
     public Interactable interactable;
     public int logId;
+    private Renderer itemRenderer;
 
     protected virtual void Start()
     {
@@ -41,9 +41,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
         // Initialize layer to be detected
         groundLayer = LayerMask.GetMask("Furniture", "Drawer");
         itemLayer = LayerMask.GetMask("Items");
-        //if (validSpawnTypes[(int) ItemSpawning.SpawnType.wall].isValid && isEnvironmentItem){
-        //  transform.Rotate(90f, 0f, -90f); // place over wall
-        //  SnapObjectBack(transform.position + Vector3.back * 0.05f);
+        itemRenderer = GetComponentInChildren<Renderer>();
 
         // Shoot raycast to position item over surface, unless it's a rack item
         if (pushBackItem)
@@ -53,11 +51,6 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
         if (!validSpawnTypes[(int)ItemSpawning.SpawnType.rack].isValid)
         {
             SnapObjectDown(transform.position + Vector3.up * 0.05f);
-        }
-        // Caso de prueba libros, después generalizar de algún modo
-        if (itemName == "Libro The Art of Netting")
-        {
-            SnapObjectLeft(transform.position + Vector3.left * 0.05f);
         }
         originalPosition = transform.position;
         originalRotation = transform.rotation;
@@ -71,7 +64,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
 
     public bool CheckVisibility()
     {
-        return IsActuallyVisible(GetComponentInChildren<Renderer>(), Camera.main);
+        return IsActuallyVisible(itemRenderer, Camera.main);
     }
 
     bool IsActuallyVisible(Renderer rend, Camera cam)
@@ -130,8 +123,7 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
             if (Physics.Raycast(coord, Vector3.down, out RaycastHit hit, Mathf.Infinity, groundLayer))
             {
                 float objectHeight = GetComponent<Collider>().bounds.extents.y;
-                transform.position = new Vector3(coord.x, hit.point.y + objectHeight, coord.z);
-                transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+                transform.SetPositionAndRotation(new Vector3(coord.x, hit.point.y + objectHeight, coord.z), Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation);
                 originalPosition = transform.position;
                 originalRotation = transform.rotation;
             }
@@ -155,37 +147,32 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
                 originalRotation = transform.rotation;
             }
         }
-        catch (System.Exception e)
+        catch (Exception e)
         {
             Debug.LogError("Raycast crash prevented: " + e);
         }
     }
 
 
+
     void Update()
     {
+        if (isHeld)
+        {   // Control tap time
 #if UNITY_EDITOR || UNITY_STANDALONE
-        if (Input.GetMouseButtonDown(0))
-        {
-            OnTouchDown();
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            OnTouchUp();
-        }
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartCoroutine(OnTouchDown());
+            }
 #elif UNITY_ANDROID
             if (Input.touchCount > 0) {
                 Touch touch = Input.GetTouch(0);
                 if (touch.phase == TouchPhase.Began) {
-                    OnTouchDown();
-                }
-                else if (touch.phase == TouchPhase.Ended) {
-                    OnTouchUp();
+                    StartCoroutine(OnTouchDown());
                 }
             }
 #endif
-        if (isHeld)
-        { // Allow rotation controls
+            // Allow rotation controls
             if (GameStatus.currentPhase < GameStatus.GamePhase.Waiting) //TUTORIAL
             {
                 float rotX = TutorialManager.rotationX * ROTATION_STRENGTH;
@@ -241,10 +228,8 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
             currentlyHeldItem = this;
             isMoving = true;
             GetComponent<Outline>().OutlineWidth = 0;
-            PlayerMovement.allowPlayerMovement = false; // disable player movement while holding an item.
-            TouchController.allowCameraMovement = false; // disable camera movement while holding an item.
+            EnablePlayerInteraction(false);
             Interactable.allowAllInteractions = false; // disable all interactions while the item is active.
-            ItemInteraction.EnableButton(true); // Allow item to be left.
             // Log item
             Logging.Log(Logging.EventType.ItemGrab, new[] { gameObject.GetComponent<HeldItem>().logId.ToString() });
             // Move to the center of the screen.
@@ -291,28 +276,16 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
     }
 
     /// <summary>
-    /// Tracks press time to identify if it's a touch or a hold.
-    /// </summary>
-    public void OnTouchDown()
-    {
-        heldTime = Time.time;
-    }
-
-    /// <summary>
     /// If the item if being held and the time pressing it was short enough, store the item.
     /// </summary>
-    public void OnTouchUp()
+    public override void OnTouchUp()
     {
-        // Debug.Log("Held TIME: " + heldTime + " Current Time: " + Time.time);
         if ((Time.time - heldTime < tapTime) && isHeld && !isMoving && AllowToStoreItems())
         {
-            Debug.Log("Enters if STORE");
-            PlayerMovement.allowPlayerMovement = true;
-            TouchController.allowCameraMovement = true;
+            EnablePlayerInteraction(true);
             StoreItem();
-            ItemInteraction.EnableButton(false);
-        }
-        ;
+        };
+        heldTime = 0.0f;
     }
 
     /// <summary>
@@ -353,6 +326,13 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
         }
     }
 
+    private void EnablePlayerInteraction(bool enable)
+    {
+        PlayerMovement.allowPlayerMovement = enable;
+        TouchController.allowCameraMovement = enable;
+        ItemInteraction.EnableButton(!enable);
+    }
+
     /// <summary>
     /// Stores the currently held item.
     /// </summary>
@@ -364,7 +344,6 @@ public class HeldItem : MonoBehaviour, IElementBehaviour, IEquatable
             Logging.Log(Logging.EventType.NoItem);
             GameStatus.SaveItem(currentlyHeldItem.GetComponent<HeldItem>());
             // Destroys the gameObject in the scene.
-            // StoredItemCoroutine.instance.CheckNoItem(currentlyHeldItem.itemName);
             currentlyHeldItem.gameObject.SetActive(false);
             currentlyHeldItem = null;
             if (GameStatus.currentPhase > GameStatus.GamePhase.Waiting)

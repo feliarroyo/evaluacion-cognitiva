@@ -16,12 +16,8 @@ public class FixedTouchField : MonoBehaviour , IPointerDownHandler, IPointerUpHa
     protected int PointerId;
     [HideInInspector]
     public bool Pressed;
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
+    [HideInInspector]
+    public static FixedTouchField instance;
 
     // Update is called once per frame
     void Update()
@@ -43,9 +39,26 @@ public class FixedTouchField : MonoBehaviour , IPointerDownHandler, IPointerUpHa
         {
             TouchDist = new Vector2();
         }
-        //Debug.Log(TouchDist);
     }
 
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+    void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
         Pressed = true;

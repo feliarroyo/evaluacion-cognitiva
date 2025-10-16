@@ -69,12 +69,4 @@ public class MenuUIController : MonoBehaviour
             lv.SetInteractivity();
         }
     }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
