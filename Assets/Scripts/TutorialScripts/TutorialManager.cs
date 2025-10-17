@@ -64,12 +64,12 @@ public class TutorialManager : MonoBehaviour
     {
         // In the tutorial, certain objects must spawn, and user control is disabled
         bool inTutorial = GameStatus.currentPhase == GameStatus.GamePhase.Tutorial_Start;
+        bool startingDialog = inTutorial || (GameStatus.currentPhase == GameStatus.GamePhase.Waiting && Settings.currentDifficulty == Settings.Difficulty.Preevaluación);
         if (!inTutorial)
         {
             Destroy(tutorialElements);
         }
-        PlayerMovement.allowPlayerMovement = !inTutorial;
-        TouchController.allowCameraMovement = !inTutorial;
+        PlayerMovement.AllowMovement(!startingDialog);
         cam = player.GetComponentInChildren<CameraControl>();
         if (inTutorial)
         {
@@ -83,12 +83,6 @@ public class TutorialManager : MonoBehaviour
         {
             instance = this;
         }
-    }
-
-    private void DisablePlayerInput()
-    {
-        TouchController.allowCameraMovement = false;
-        PlayerMovement.allowPlayerMovement = false;
     }
 
     private void MovePlayerVertical(bool isForwardMovement = true)
@@ -552,7 +546,7 @@ public class TutorialManager : MonoBehaviour
     {
         Interactable.allowAllInteractions = false;
         PopUpManager popups = PopUpManager.instance;
-        DisablePlayerInput();
+        PlayerMovement.AllowMovement(false);
         yield return WalkToHouse(popups);
         yield return EnterHouse(popups);
         yield return PlayerMovementDemonstration(popups);

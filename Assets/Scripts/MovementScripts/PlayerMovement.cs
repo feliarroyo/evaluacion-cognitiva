@@ -130,4 +130,10 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(limitedX, rb.velocity.y, limitedZ);
         }
     }
+
+    public static void AllowMovement(bool allow)
+    {
+        allowPlayerMovement = allow;
+        TouchController.allowCameraMovement = allow;
+    }
 }

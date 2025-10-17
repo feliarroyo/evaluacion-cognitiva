@@ -28,8 +28,7 @@ public class ItemInteraction : MonoBehaviour
         if (GameStatus.currentPhase < GameStatus.GamePhase.Waiting){
             return;
         }
-        PlayerMovement.allowPlayerMovement = true;
-        TouchController.allowCameraMovement = true;
+        PlayerMovement.AllowMovement(true);
         HeldItem.ReturnItem();
         button.interactable = false;
     }

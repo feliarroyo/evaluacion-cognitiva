@@ -328,8 +328,7 @@ public class HeldItem : TouchControl, IElementBehaviour, IEquatable
 
     private void EnablePlayerInteraction(bool enable)
     {
-        PlayerMovement.allowPlayerMovement = enable;
-        TouchController.allowCameraMovement = enable;
+        PlayerMovement.AllowMovement(enable);
         ItemInteraction.EnableButton(!enable);
     }
 

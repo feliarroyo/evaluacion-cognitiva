@@ -8,6 +8,7 @@ using System.Linq;
 
 public class GameStatus : MonoBehaviour
 {
+    private static WaitForSeconds _waitForSeconds2 = new WaitForSeconds(2f);
     private static GameStatus instance;
 
     public enum GamePhase
@@ -147,8 +148,7 @@ public class GameStatus : MonoBehaviour
                 //if (Timer.timerOn) eliminado para que funcione el tiempo de memorización cuando se llega a 0
                 Timer.StopTimer();
                 timeUsedMemorizing = Timer.spentTime;
-                PlayerMovement.allowPlayerMovement = true;
-                TouchController.allowCameraMovement = true;
+                PlayerMovement.AllowMovement(true);
                 if (GameConfig.memorizeTime != 0)
                 {
                     if (HeldItem.currentlyHeldItem != null)
@@ -284,7 +284,8 @@ public class GameStatus : MonoBehaviour
 
     public static IEnumerator WaitAndExitWithoutSaving()
     {
-        yield return new WaitForSeconds(2f);
+        PlayerMovement.AllowMovement(false);
+        yield return _waitForSeconds2;
         ExitWithoutSaving();
     }
 
@@ -292,13 +293,8 @@ public class GameStatus : MonoBehaviour
     {
         PopUpManager popups = PopUpManager.instance;
 
-        PlayerMovement.allowPlayerMovement = false;
-        TouchController.allowCameraMovement = false;
-
         yield return popups.ShowPopups("En esta práctica, es posible recorrer\n el ambiente en el que se desarrolla el juego,\n y experimentar las tareas descriptas en el tutorial.");
-
-        PlayerMovement.allowPlayerMovement = true;
-        TouchController.allowCameraMovement = true;
+        PlayerMovement.AllowMovement(true);
     }
 
     public static bool IsKeyItem(string itemName)
