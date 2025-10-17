@@ -285,6 +285,7 @@ public class GameStatus : MonoBehaviour
     public static IEnumerator WaitAndExitWithoutSaving()
     {
         PlayerMovement.AllowMovement(false);
+        TutorialManager.instance.ForcePlayerStop();
         yield return _waitForSeconds2;
         ExitWithoutSaving();
     }

@@ -568,4 +568,9 @@ public class TutorialManager : MonoBehaviour
     {
         instance = null;
     }
+
+    public void ForcePlayerStop()
+    {
+        player.GetComponent<PlayerMovement>().forceStop = true;
+    }
 }

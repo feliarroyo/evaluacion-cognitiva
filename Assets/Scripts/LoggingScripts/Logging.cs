@@ -224,7 +224,6 @@ public class Logging : MonoBehaviour
         itemsSeen = new();
         furnitureSeen = new();
         logList = new(currentLog.ToString());
-        //GameObject.Find("Status").GetComponent<TextMeshProUGUI>().text = currentLog.ToString();
         if (!DoNotLog()) // no refreshing in Tutorial/Practice
             InvokeRepeating(nameof(CheckVisibility), 0f, 0.5f);
     }
@@ -408,18 +407,30 @@ public class Logging : MonoBehaviour
 
     public static void ItemInfoLog(int id, string itemName, bool isEnvironmentItem, int spawnId, float spawnPositionX, float spawnPositionY, float spawnPositionZ)
     {
+        if (DoNotLog())
+        {
+            return;
+        }
         string itemInfo = id + ";" + itemName + ";" + (isEnvironmentItem ? "L" : "H") + ";" + spawnId + ";(" + Math.Round(spawnPositionX, 2).ToString("F2", CultureInfo.InvariantCulture) + "," + Math.Round(spawnPositionY, 2).ToString("F2", CultureInfo.InvariantCulture) + "," + Math.Round(spawnPositionZ, 2).ToString("F2", CultureInfo.InvariantCulture) + ")" + "\n";
         extraItemInfo += itemInfo;
     }
 
     public static void FurnitureInfoLog(int id, string furnitureName, float posX, float posY, float posZ)
     {
+        if (DoNotLog())
+        {
+            return;
+        }
         string furnitureInfo = id + ";" + furnitureName + ";(" + Math.Round(posX, 2).ToString("F2", CultureInfo.InvariantCulture) + "," + Math.Round(posY, 2).ToString("F2", CultureInfo.InvariantCulture) + "," + Math.Round(posZ, 2).ToString("F2", CultureInfo.InvariantCulture) + ")\n";
         extraFurnitureInfo += furnitureInfo;
     }
 
     public static void SpawnInfoLog(List<ItemSpawn> startSpawns, List<ItemSpawn> searchSpawns)
     {
+        if (DoNotLog())
+        {
+            return;
+        }
         int id = 0;
         string spawnInfo = "";
         foreach (ItemSpawn sp in startSpawns)
