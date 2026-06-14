@@ -1,3 +1,6 @@
+# Proyecto relacionado:
+[Aplicación web para la administración](https://github.com/feliarroyo/evaluacion-cognitiva-web)
+
 # Aplicación móvil que presenta un juego diseño para facilitar la evaluación de la memoria visual a corto plazo
 - Utilizar Unity 2021 LTS (2021.3.9f1)
 - Utilizar Git LFS para clonar modelos y otros archivos de gran tamaño
